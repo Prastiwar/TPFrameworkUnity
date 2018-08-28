@@ -26,7 +26,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RunCoroutine(IEnumerator routine)
         {
             // TODO: Implementation

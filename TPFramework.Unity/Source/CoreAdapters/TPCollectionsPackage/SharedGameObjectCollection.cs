@@ -22,7 +22,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Returns shared object if exists, if no, instantiate it and return </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public GameObject ShareObject(GameObject gameObject, Transform parent = null)
         {
             int id = gameObject.GetInstanceID();

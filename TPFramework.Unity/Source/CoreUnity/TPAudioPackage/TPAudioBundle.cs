@@ -4,6 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity 
 */
 
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace TPFramework.Unity
@@ -22,6 +23,7 @@ namespace TPFramework.Unity
         private UnityEditorInternal.ReorderableList list;
         private bool isValid;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void OnEnable()
         {
             list = new UnityEditorInternal.ReorderableList(serializedObject, serializedObject.FindProperty("AudioObjects"), true, true, true, true) {
@@ -31,6 +33,7 @@ namespace TPFramework.Unity
             };
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void OnAdd(UnityEditorInternal.ReorderableList reList)
         {
             var index = reList.serializedProperty.arraySize;
@@ -41,6 +44,7 @@ namespace TPFramework.Unity
             element.FindPropertyRelative("Clip").objectReferenceValue = null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             var element = list.serializedProperty.GetArrayElementAtIndex(index);
@@ -74,6 +78,7 @@ namespace TPFramework.Unity
             isValid = true;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void OnInspectorGUI()
         {
             serializedObject.UpdateIfRequiredOrScript();

@@ -21,13 +21,13 @@ namespace TPFramework.Unity
         public static Action<TPTooltip> OnObserverEnter = delegate { observer.TooltipLayout.SetActive(true); };
         public static Action<TPTooltip> OnObserverExit = delegate { observer.TooltipLayout.SetActive(false); };
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GameObject ShareLayout(GameObject layout, Transform parent = null)
         {
             return sharedLayouts.ShareObject(layout, parent);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void OnPointerClick(PointerEventData eventData)
         {
             observer = eventData.pointerEnter.GetComponent<TPTooltip>();
@@ -45,7 +45,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void OnPointerEnter(PointerEventData eventData)
         {
             observer = eventData.pointerEnter.GetComponent<TPTooltip>();
@@ -57,7 +57,7 @@ namespace TPFramework.Unity
                 observer.StartCoroutine(ToolTipPositioning());
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void OnPointerExit(PointerEventData eventData)
         {
             if (!observer)
@@ -68,7 +68,7 @@ namespace TPFramework.Unity
             _eventData = null;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static IEnumerator ToolTipPositioning()
         {
             while (_eventData != null)
@@ -81,13 +81,13 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsClickable(this TPTooltipType tooltipType)
         {
             return tooltipType == TPTooltipType.DynamicClick || tooltipType == TPTooltipType.StaticClick;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsDynamic(this TPTooltipType tooltipType)
         {
             return tooltipType == TPTooltipType.DynamicClick || tooltipType == TPTooltipType.DynamicEnter;

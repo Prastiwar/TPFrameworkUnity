@@ -5,6 +5,7 @@
 */
 
 #if UNITY_EDITOR
+using System.Runtime.CompilerServices;
 using TPFramework.Core;
 using UnityEditor;
 using UnityEngine;
@@ -112,6 +113,7 @@ namespace TPFramework.Unity
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GUIContent GetIcon(UnityEditorIcons icon)
         {
             string iconText = icon.ToString();

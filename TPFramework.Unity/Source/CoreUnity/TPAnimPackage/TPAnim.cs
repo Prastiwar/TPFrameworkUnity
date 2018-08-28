@@ -27,7 +27,7 @@ namespace TPFramework.Unity
         public delegate void OnAnimActivationHandler(float time, Transform transform);
 
         /// <summary> Returns normalized value (0 to 1) when evaluatedTime is 0 - 0,5 and normalized value (1 to 0) when 0,5 - 1 </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float ReflectNormalizedCurveTime(float evaluatedTime)
         {
             return evaluatedTime <= 0.5f
@@ -36,20 +36,20 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Returns reversed normalized value - in: 1, return: 0 </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float ReversedNormalizedCurveTime(float evaluatedTime)
         {
             return 1 - evaluatedTime;
         }
 
         /// <summary> Runs coroutine that will call onAnimation every frame till evaluated time of anim.Curve will be 1.0f </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Animate(TPAnimation anim, Action<float> onAnimation, Action onStart = null, Action onEnd = null)
         {
             TPCoroutine.RunCoroutine(IEAnimate(anim, onAnimation, onStart, onEnd));
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static IEnumerator IEAnimate(TPAnimation anim, Action<float> onAnimation, Action onStart = null, Action onEnd = null)
         {
             onStart.SafeInvoke();

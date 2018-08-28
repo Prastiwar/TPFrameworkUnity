@@ -5,6 +5,7 @@
 */
 
 using System;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,10 +28,12 @@ namespace TPFramework.Unity
         public bool LoadingAnyKeyToStart;
         public KeyCode LoadingKeyToStart;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitializeFade(TPFadeLayout state)
         {
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Fade(float time, TPFadeInfo fadeInfo, TPFadeLayout state)
         {
         }

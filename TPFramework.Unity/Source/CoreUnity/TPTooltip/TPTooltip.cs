@@ -24,7 +24,7 @@ namespace TPFramework.Unity
         public bool IsObserving = true;
         public TPTooltipLayout TooltipLayout;
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!CanRaycast(eventData))
@@ -37,7 +37,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (!CanRaycast(eventData))
@@ -50,7 +50,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnPointerExit(PointerEventData eventData)
         {
             if (!CanRaycast(eventData))
@@ -62,7 +62,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool CanRaycast(PointerEventData eventData)
         {
             return IsObserving && eventData != null;

@@ -12,7 +12,7 @@ namespace TPFramework.Unity
     public static partial class TPRandom
     {
         /// <summary> Returns a random point inside a box with radius 1 </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 InsideUnitBox()
         {
             float randX = Random.Range(-1f, 1f);
@@ -22,7 +22,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Returns a random point inside a square with radius 1 </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 InsideUnitSquare()
         {
             float randX = Random.Range(-1f, 1f);

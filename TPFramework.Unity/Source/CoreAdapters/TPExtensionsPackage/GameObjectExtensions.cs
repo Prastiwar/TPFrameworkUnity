@@ -11,7 +11,7 @@ namespace TPFramework.Unity
 {
     public static partial class GameObjectExtensions
     {
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GameObject FindObjectWithLayer(this Object obj, int layer)
         {
             GameObject[] objects = Object.FindObjectsOfType(typeof(GameObject)) as GameObject[];

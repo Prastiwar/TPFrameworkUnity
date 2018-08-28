@@ -29,11 +29,11 @@ namespace TPFramework.Unity
             typeof(bool)
         };
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override HashSet<Type> GetSupportedTypes() { return supportedTypes; }
 
         /// <summary> Called on Load() for field with PersistantAttribute </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override object LoadValue(PersistantAttribute attribute, Type objectType)
         {
             string decrypt = Decrypt(PlayerPrefs.GetString(attribute.Key));
@@ -45,20 +45,20 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Called on Save() for field with PersistantAttribute </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void SaveValue(PersistantAttribute attribute, object saveValue)
         {
             PlayerPrefs.SetString(attribute.Key, Encrypt(saveValue.ToString()));
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string Encrypt(string value)
         {
             byte[] encryptBytes = provider.Encrypt(Encoding.UTF8.GetBytes(value), true);
             return Convert.ToBase64String(encryptBytes);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string Decrypt(string cryptedValue)
         {
             return string.IsNullOrEmpty(cryptedValue) 

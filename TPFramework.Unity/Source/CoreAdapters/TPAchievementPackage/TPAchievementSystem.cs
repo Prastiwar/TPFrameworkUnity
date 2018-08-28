@@ -37,7 +37,7 @@ namespace TPFramework.Unity
             }
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GameObject ShareLayout(GameObject layout, Transform parent = null)
         {
             return sharedLayouts.ShareObject(layout, parent);

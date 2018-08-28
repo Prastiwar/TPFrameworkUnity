@@ -8,6 +8,7 @@
 using System;
 using UnityEngine;
 using UnityEditor;
+using System.Runtime.CompilerServices;
 
 namespace TPFramework.Unity.Source.CoreUnity.TPEditor
 {
@@ -15,6 +16,7 @@ namespace TPFramework.Unity.Source.CoreUnity.TPEditor
     {
         private string[] excluders = new string[] { TPEditorHelper.InspectorScriptField };
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ExcludeProperty(string property)
         {
             int newIndex = excluders.Length;
@@ -22,6 +24,7 @@ namespace TPFramework.Unity.Source.CoreUnity.TPEditor
             excluders[newIndex] = property;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ExcludeProperties(params string[] properties)
         {
             int firstNewIndex = excluders.Length;
@@ -35,6 +38,7 @@ namespace TPFramework.Unity.Source.CoreUnity.TPEditor
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void OnInspectorGUI()
         {
             serializedObject.UpdateIfRequiredOrScript();

@@ -6,6 +6,7 @@
 
 #if UNITY_EDITOR
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace TPFramework.Unity
     {
         public const string InspectorScriptField = "m_Script";
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T[] FindAssetsByType<T>() where T : Object
         {
             List<T> assets = new List<T>();

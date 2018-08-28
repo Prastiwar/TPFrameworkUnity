@@ -5,6 +5,7 @@
 */
 
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,12 +17,14 @@ namespace TPFramework.Unity
         public Sprite FadeTexture;
         public Color FadeColor;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitializeFade(TPFadeLayout state)
         {
             state.Image.sprite = FadeTexture;
             state.Image.color = FadeColor;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Fade(float time, TPFadeInfo fadeInfo, TPFadeLayout state)
         {
             state.CanvasGrouup.alpha = TPAnim.ReflectNormalizedCurveTime(time);

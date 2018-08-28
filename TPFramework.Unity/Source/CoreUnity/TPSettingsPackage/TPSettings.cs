@@ -60,7 +60,7 @@ namespace TPFramework.Unity
         private static Action onCustomQualitySet = delegate { };
 
         /// <summary> Adds listener to onValueChange that will change exposedParam in audioMixer to un-/mute </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetMusicToggler(Toggle toggle, AudioMixer audioMixer, string exposedParam, bool startValue = true)
         {
             toggle.onValueChanged.AddListener((value) => {
@@ -75,7 +75,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChange that will change exposedParam in audioMixer to un-/mute </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetSoundFXToggler(Toggle toggle, AudioMixer audioMixer, string exposedParam, bool startValue = true)
         {
             toggle.onValueChanged.AddListener((value) => {
@@ -90,7 +90,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onClick that will change exposedParam in audioMixer to un-/mute and will change image to music-off/on </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetMusicToggler(Button button, Image image, Sprite musicOff, Sprite musicOn, AudioMixer audioMixer, string exposedParam, bool startValue = true)
         {
             AudioSettings.IsMusicOn = !startValue;
@@ -106,7 +106,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onClick that will change exposedParam in audioMixer to un-/mute and will change image to sfx-off/on </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetSoundFXToggler(Button button, Image image, Sprite sfxOff, Sprite sfxOn, AudioMixer audioMixer, string exposedParam, bool startValue = true)
         {
             AudioSettings.IsSfxOn = !startValue;
@@ -122,7 +122,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change volume of exposedParam in audioMixer </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetMusicVolumeSlider(Slider slider, AudioMixer audioMixer, string exposedParam, float startValue = 1, float minValue = -60, float maxValue = 25)
         {
             slider.onValueChanged.AddListener((value) => {
@@ -133,7 +133,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change volume of exposedParam in audioMixer </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetSoundFXVolumeSlider(Slider slider, AudioMixer audioMixer, string exposedParam, float startValue = 1, float minValue = -60, float maxValue = 25)
         {
             slider.onValueChanged.AddListener((value) => {
@@ -144,7 +144,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will turn on/off Fullscreen  </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetFullScreenToggler(Toggle toggle, bool startValue = false)
         {
             toggle.onValueChanged.AddListener(SetFullScreen);
@@ -152,7 +152,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will turn on/off VSync  </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetVSyncToggler(Toggle toggle, bool startValue = false)
         {
             toggle.onValueChanged.AddListener(SetVSync);
@@ -160,7 +160,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will turn on/off Anisotropic  </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetAnisotropicToggler(Toggle toggle, bool startValue = false)
         {
             toggle.onValueChanged.AddListener(SetAnisotropic);
@@ -168,7 +168,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change Screen Resolution  </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetResolutionDropdown(Dropdown dropdown, int startIndex = 0, List<string> options = null)
         {
             AddDropdownOptions(dropdown, startIndex, options ?? resolutionOptions);
@@ -179,7 +179,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change masterTextureLimit (sets quality to 'Custom') </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetTextureDropdown(Dropdown dropdown, int startIndex = 0, List<string> options = null)
         {
             AddDropdownOptions(dropdown, startIndex, options ?? textureOptions);
@@ -189,7 +189,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change Shadow Quality (sets quality to 'Custom') </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetShadowQualityDropdown(Dropdown dropdown, int startIndex = 0)
         {
             AddDropdownOptions(dropdown, startIndex, shadowQualityOptions);
@@ -199,7 +199,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change Shadow Resolution (sets quality to 'Custom') </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetShadowResolutionDropdown(Dropdown dropdown, int startIndex = 0)
         {
             AddDropdownOptions(dropdown, startIndex, shadowResolutionOptions);
@@ -209,7 +209,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change AntiAliasing (sets quality to 'Custom') </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetAntialiasingDropdown(Dropdown dropdown, int startIndex = 0)
         {
             AddDropdownOptions(dropdown, startIndex, antialiasingOptions);
@@ -219,7 +219,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Adds listener to onValueChanged that will change Quality Level </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetQualityDropdown(Dropdown dropdown, int startIndex = 0)
         {
             AddDropdownOptions(dropdown, startIndex, qualityOptions);
@@ -237,7 +237,7 @@ namespace TPFramework.Unity
             refreshSettings();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static TPQualityLevel GetCurrentQualityLevel()
         {
             return new TPQualityLevel() {
@@ -253,7 +253,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Change Quality Level and refresh affected settings </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetQualityLevel(TPQualityLevel level)
         {
             QualitySettings.masterTextureLimit = level.MasterTextureLimit;
@@ -267,7 +267,7 @@ namespace TPFramework.Unity
             refreshSettings();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetQuality(int index)
         {
             int wasVSync = QualitySettings.vSyncCount;
@@ -279,43 +279,43 @@ namespace TPFramework.Unity
             QualitySettings.vSyncCount = wasVSync;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetFullScreen(bool boolean)
         {
             Screen.fullScreen = boolean;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetVSync(bool boolean)
         {
             QualitySettings.vSyncCount = boolean.ToInt();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetAnisotropic(bool value)
         {
             QualitySettings.anisotropicFiltering = (AnisotropicFiltering)(value ? 2 : 0);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetTexture(int index)
         {
             QualitySettings.masterTextureLimit = index;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetShadowQuality(int index)
         {
             QualitySettings.shadows = (ShadowQuality)index;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetShadowResolution(int index)
         {
             QualitySettings.shadowResolution = (ShadowResolution)index;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         public static void SetAntialiasing(int index)
         {
             // antiAliasing is 0, 2, 4, 8
@@ -324,7 +324,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> Change to Custom Quality Level, changes Qualit yDropdown value and saves other setting values </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         private static void SetToCustomLevel(int unusedParam)
         {
             if (customQuality.CustomQualityIndex < 0)
@@ -338,7 +338,7 @@ namespace TPFramework.Unity
             onCustomQualitySet();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         private static void AddDropdownOptions(Dropdown dropdown, int startIndex, List<string> options)
         {
             dropdown.ClearOptions();
@@ -347,7 +347,7 @@ namespace TPFramework.Unity
             dropdown.RefreshShownValue();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         private static void DropdownRefresher(Dropdown dropdown, Action action)
         {
             dropdown.onValueChanged.RemoveListener(SetToCustomLevel);
@@ -355,7 +355,7 @@ namespace TPFramework.Unity
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)] 
         private static void SetSliderValues(Slider slider, float startValue, float minValue, float maxValue)
         {
             slider.minValue = minValue;

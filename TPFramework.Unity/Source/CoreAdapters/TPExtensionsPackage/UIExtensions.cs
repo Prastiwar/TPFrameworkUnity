@@ -12,7 +12,7 @@ namespace TPFramework.Unity
 {
     public static partial class GameObjectExtensions
     {
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAlpha(this Image image, float alpha)
         {
             Color color = image.color;
@@ -20,7 +20,7 @@ namespace TPFramework.Unity
             image.color = color;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInside(this Rect thisRect, Rect rect)
         {
             return thisRect.xMin <= rect.xMin

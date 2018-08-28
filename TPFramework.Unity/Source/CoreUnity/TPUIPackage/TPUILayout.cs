@@ -46,14 +46,14 @@ namespace TPFramework.Unity
         protected virtual bool LayoutSpawn(Transform parent = null) { return IsInitialized; }
 
         /// <summary> If IsInitialized is false - instantiate LayoutPrefab to TPLayout and get Images & Buttons & Texts </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Initialize()
         {
             Initialize(null);
         }
 
         /// <summary> If IsInitialized is false - instantiate LayoutPrefab to TPLayout and get Images & Buttons & Texts </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Initialize(Transform parent)
         {
             if (IsInitialized)
@@ -68,20 +68,20 @@ namespace TPFramework.Unity
         }
 
         /// <summary> If you set activation frequently, you'll want to avoid GC from eventsystem, use it instead of TPLayout.SetActive(..) </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetActive(bool enable)
         {
             CanvasGroup.alpha = enable ? 1 : 0;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsActive()
         {
             return CanvasGroup.alpha == 1 && TPLayout.activeSelf;
         }
 
         /// <summary> Get Image & Buttons & Texts components from childs of parents </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InitializeLayout()
         {
             LayoutTransform = TPLayout.transform.GetChild(0);
@@ -112,7 +112,7 @@ namespace TPFramework.Unity
 
 #endif
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private T[] Initialize<T>(Transform child, T[] array)
         {
             int length = child.childCount;

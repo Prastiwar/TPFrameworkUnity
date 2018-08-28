@@ -21,6 +21,7 @@ namespace TPFramework.Unity
         public bool UseSharedLayout;
         [SerializeField] private Transform staticPosition;
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnInitialized()
         {
 #if TPTooltipSafeChecks
@@ -34,6 +35,7 @@ namespace TPFramework.Unity
             panelHalfHeight = panelRect.height / 2;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override bool LayoutSpawn(Transform parent = null)
         {
             if (UseSharedLayout)
@@ -44,6 +46,7 @@ namespace TPFramework.Unity
             return false;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Prepare(TPTooltipType type)
         {
             Initialize();
@@ -65,7 +68,7 @@ namespace TPFramework.Unity
         }
 
 #if TPTooltipSafeChecks
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SafeCheck(GameObject layout)
         {
             if (!layout.transform.GetComponent<CanvasGroup>())
@@ -75,13 +78,13 @@ namespace TPFramework.Unity
         }
 #endif
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPosition(Vector2 position)
         {
             LayoutTransform.position = position;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPositionToStatic()
         {
             LayoutTransform.position = staticPosition.position;

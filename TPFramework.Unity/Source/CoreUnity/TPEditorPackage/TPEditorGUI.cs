@@ -6,6 +6,7 @@
 
 #if UNITY_EDITOR
 using System;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace TPFramework.Unity
         public static readonly Vector2 Space  = new Vector2(10, 20);
         public static readonly GUILayoutOption[] Fixed150Width = new GUILayoutOption[] { GUILayout.Width(150), GUILayout.MaxWidth(150), GUILayout.MinWidth(150) };
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string SearchField(string searchString)
         {
             GUILayout.BeginHorizontal(TPEditorStyles.Toolbar);
@@ -30,6 +32,7 @@ namespace TPFramework.Unity
             return searchString;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool OnButton(string buttonText, Action onClick, GUIStyle buttonStyle = null, params GUILayoutOption[] buttonOptions)
         {
             buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
@@ -41,6 +44,7 @@ namespace TPFramework.Unity
             return false;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool OnButton(Rect rect, string buttonText, Action onClick, GUIStyle buttonStyle = null)
         {
             buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
@@ -52,6 +56,7 @@ namespace TPFramework.Unity
             return false;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ToggleButton(string buttonText, bool value, Action onToggle, GUIStyle buttonStyle = null, params GUILayoutOption[] buttonOptions)
         {
             buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
@@ -66,6 +71,7 @@ namespace TPFramework.Unity
             return value;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ToggleButton(Rect rect, string buttonText, bool value, Action onToggle, GUIStyle buttonStyle = null)
         {
             buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
@@ -80,16 +86,19 @@ namespace TPFramework.Unity
             return value;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DrawField(this SerializedObject serializedObject, string fieldName, bool includeChildren = true)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), includeChildren);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DrawField(this SerializedObject serializedObject, string fieldName, GUIContent guiContent, bool includeChildren = true)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), guiContent, includeChildren);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void StartBox(Color c)
         {
             var existing = GUI.color;
@@ -98,11 +107,13 @@ namespace TPFramework.Unity
             GUI.color = existing;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void StartBox()
         {
             EditorGUILayout.BeginVertical(GUI.skin.box);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void EndBox()
         {
             EditorGUILayout.EndVertical();

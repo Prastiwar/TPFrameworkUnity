@@ -15,25 +15,25 @@ namespace TPFramework.Unity
     {
         private static readonly ReusableList<Transform> reusableTransform = new ReusableList<Transform>();
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosX(this Transform transform, float x)
         {
             transform.position.Set(x, transform.position.y, transform.position.z);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosY(this Transform transform, float y)
         {
             transform.position.Set(transform.position.x, y, transform.position.z);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosZ(this Transform transform, float z)
         {
             transform.position.Set(transform.position.x, transform.position.y, z);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3[] GetChildrenPositions(this Transform parent)
         {
             int length = parent.childCount;
@@ -43,7 +43,7 @@ namespace TPFramework.Unity
             return positions.ToArray();
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Transform[] GetChilds(this Transform parent)
         {
             int length = parent.childCount;

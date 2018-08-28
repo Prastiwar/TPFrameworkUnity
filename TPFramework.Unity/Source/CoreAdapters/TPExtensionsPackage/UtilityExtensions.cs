@@ -12,19 +12,19 @@ namespace TPFramework.Unity
 {
     public static partial class GameObjectExtensions
     {
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsFrame(this int frameModulo)
         {
             return Time.frameCount % frameModulo == 0;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ToLog(this object obj, string label = null)
         {
             Debug.Log(label != null ? label + ": " + obj : obj);
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float GetFloat(this AudioMixer audioMixer, string paramName)
         {
             bool result = audioMixer.GetFloat(paramName, out float value);

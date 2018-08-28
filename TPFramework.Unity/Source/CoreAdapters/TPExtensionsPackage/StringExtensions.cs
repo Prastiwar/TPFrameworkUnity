@@ -14,13 +14,13 @@ namespace TPFramework.Unity
     {
         private static readonly char[] resolutionSeparators = new char[] { ' ', 'x', '@', 'H', 'z' };
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToStringWithoutHZ(this Resolution resolution)
         {
             return resolution.width + " x " + resolution.height;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] ToStringWithoutHZ(this Resolution[] resolutions)
         {
             int length = resolutions.Length;
@@ -30,7 +30,7 @@ namespace TPFramework.Unity
             return resolutionsString;
         }
 
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string[] ToStringWithHZ(this Resolution[] resolutions)
         {
             int length = resolutions.Length;
@@ -41,7 +41,7 @@ namespace TPFramework.Unity
         }
 
         /// <summary> resolutionText should be formatted as: "320 x 200 @ 60Hz" or "320 x 200" </summary>
-        [MethodImpl((MethodImplOptions)0x100)] // agressive inline        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]        
         public static Resolution ToResolution(this string resolutionText)
         {
             string[] strings = resolutionText.Split(resolutionSeparators, StringSplitOptions.RemoveEmptyEntries);

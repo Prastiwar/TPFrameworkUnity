@@ -5,6 +5,7 @@
 */
 
 using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,32 +59,40 @@ namespace TPFramework.Unity
             UnityEngine.Object.DontDestroyOnLoad(fader);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade(TPFadeInfo info)
         {
             if (!isFading)
+            {
                 TPAnim.Animate(info.FadeAnim, (time) => info.TPFade.Fade(time, info, fadeLayout), () => isFading = true, () => isFading = false);
+            }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readAnyKey, AsyncOperation asyncLoad)
         {
             return CanLoadScene(readAnyKey, true, KeyCode.None, asyncLoad);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readAnyKey, KeyCode keyToRead, AsyncOperation asyncLoad)
         {
             return CanLoadScene(readAnyKey, false, keyToRead, asyncLoad);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readAnyKey)
         {
             return CanLoadScene(readAnyKey, true, KeyCode.None);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readAnyKey, KeyCode keyToRead)
         {
             return CanLoadScene(readAnyKey, false, keyToRead);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readKey, bool readAnyKey, KeyCode keyToRead)
         {
             return !readKey
@@ -91,6 +100,7 @@ namespace TPFramework.Unity
                 || !readAnyKey && Input.GetKeyDown(keyToRead);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool CanLoadScene(bool readKey, bool readAnyKey, KeyCode keyToRead, AsyncOperation asyncLoad)
         {
             if (CanLoadScene(readKey, readAnyKey, keyToRead))
