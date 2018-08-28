@@ -2,7 +2,7 @@
 
 namespace TPFramework.Unity
 {
-    public enum UnityEditorIcon
+    public enum UnityEditorIcons
     {
         [StringValue("ScriptableObject Icon")]
         ScriptableObjectIcon,
