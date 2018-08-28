@@ -1,0 +1,117 @@
+﻿#if UNITY_EDITOR
+using TPFramework.Core;
+using UnityEditor;
+using UnityEngine;
+
+namespace TPFramework.Unity
+{
+    public static class TPEditorStyles
+    {
+        public static GUIStyle Toolbar { get { return GUI.skin.FindStyle("Toolbar"); } }
+        public static GUIStyle ToolbarSerachField { get { return GUI.skin.FindStyle("ToolbarSeachTextField"); } }
+        public static GUIStyle ToolbarSearchCancel { get { return GUI.skin.FindStyle("ToolbarSeachCancelButton"); } }
+
+        private static GUIStyle textWrap;
+        public static GUIStyle TextWrap {
+            get {
+                if (textWrap == null)
+                {
+                    textWrap = new GUIStyle(GUI.skin.textField) {
+                        wordWrap = true
+                    };
+                }
+                return textWrap;
+            }
+        }
+
+        private static GUIStyle richTextWrap;
+        public static GUIStyle RichTextWrap {
+            get {
+                if (richTextWrap == null)
+                {
+                    richTextWrap = new GUIStyle(EditorStyles.textField) {
+                        richText = true,
+                        wordWrap = true
+                    };
+                }
+                return richTextWrap;
+            }
+        }
+
+        private static GUIStyle richText;
+        public static GUIStyle RichText {
+            get {
+                if (richText == null)
+                {
+                    richText = new GUIStyle(EditorStyles.textField) {
+                        richText = true
+                    };
+                }
+                return richText;
+            }
+        }
+
+        private static GUIStyle richLabel;
+        public static GUIStyle RichLabel {
+            get {
+                if (richLabel == null)
+                {
+                    richLabel = new GUIStyle(EditorStyles.label) {
+                        richText = true
+                    };
+                }
+                return richLabel;
+            }
+        }
+
+        private static GUIStyle richLeftButton;
+        public static GUIStyle RichLeftButton {
+            get {
+                if (richLeftButton == null)
+                {
+                    richLeftButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                        alignment = TextAnchor.MiddleLeft,
+                        richText = true
+                    };
+                }
+                return richLeftButton;
+            }
+        }
+
+        private static GUIStyle richMidButton;
+        public static GUIStyle RichMidButton {
+            get {
+                if (richMidButton == null)
+                {
+                    richMidButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                        alignment = TextAnchor.MiddleCenter,
+                        richText = true
+                    };
+                }
+                return richMidButton;
+            }
+        }
+
+        private static GUIStyle richRightButton;
+        public static GUIStyle RichRightButton {
+            get {
+                if (richRightButton == null)
+                {
+                    richRightButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                        alignment = TextAnchor.MiddleRight,
+                        richText = true
+                    };
+                }
+                return richRightButton;
+            }
+        }
+
+        public static GUIContent GetIcon(UnityEditorIcon icon)
+        {
+            string iconText = icon.ToString();
+            bool hasAtt = GameObjectExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
+            return EditorGUIUtility.IconContent(hasAtt ? att.StringValue : iconText);
+        }
+    }
+}
+#endif

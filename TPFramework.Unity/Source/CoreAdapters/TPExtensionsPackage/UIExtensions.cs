@@ -1,0 +1,26 @@
+﻿using System.Runtime.CompilerServices;
+using UnityEngine.UI;
+using UnityEngine;
+
+namespace TPFramework.Unity
+{
+    public static partial class GameObjectExtensions
+    {
+        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        public static void SetAlpha(this Image image, float alpha)
+        {
+            Color color = image.color;
+            color.a = alpha;
+            image.color = color;
+        }
+
+        [MethodImpl((MethodImplOptions)0x100)] // agressive inline
+        public static bool IsInside(this Rect thisRect, Rect rect)
+        {
+            return thisRect.xMin <= rect.xMin
+                && thisRect.xMax >= rect.xMax
+                && thisRect.yMin <= rect.yMin
+                && thisRect.yMax >= rect.yMax;
+        }
+    }
+}
