@@ -44,6 +44,7 @@
 ## Before start
 
 - [x] Make sure you have **Unity 2017+** (Lower versions weren't tested)
+- [x] Make sure you use **.NET 4.x** (Core is built in .Net Framework 4.6)
 
 
 ## Getting Started

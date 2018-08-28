@@ -1,6 +1,6 @@
 ﻿/**
 *   Authored by Tomasz Piowczyk
-*   License: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
+*   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity 
 */
 

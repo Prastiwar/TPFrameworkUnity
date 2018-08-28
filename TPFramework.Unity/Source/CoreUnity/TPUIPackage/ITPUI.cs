@@ -1,7 +1,7 @@
 ﻿/**
 *   Authored by Tomasz Piowczyk
-*   License: https://github.com/Prastiwar/TPFramework/blob/master/LICENSE
-*   Repository: https://github.com/Prastiwar/TPFramework 
+*   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
+*   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
 namespace TPFramework.Unity
