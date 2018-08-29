@@ -14,12 +14,13 @@ namespace TPFramework.Unity
         [SerializeField] private ITPItemSlot[] itemSlots;
         [SerializeField] private ITPEquipSlot[] equipSlots;
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        public TPInventory()
         {
-            equipSlots = EquipSlots;
-            itemSlots = ItemSlots;
+            EquipSlots = equipSlots;
+            ItemSlots = itemSlots;
         }
 
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             EquipSlots = equipSlots;

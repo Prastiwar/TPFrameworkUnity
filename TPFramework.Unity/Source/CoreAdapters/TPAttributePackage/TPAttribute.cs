@@ -13,23 +13,19 @@ namespace TPFramework.Unity
     [Serializable]
     public class TPAttribute : TPAttribute<TPModifierList, TPModifier>, ISerializationCallbackReceiver
     {
-        [SerializeField] private float baseValue;
+        [SerializeField] private float startValue;
         [SerializeField] private TPModifierList modifiers;
-        
+
         public TPAttribute()
         {
-            Modifiers = new TPModifierList(Recalculate); // we need to assign attribute to its modifier list
+            modifiers = new TPModifierList(Recalculate);
+            Modifiers = modifiers;
         }
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
-        {
-            baseValue = BaseValue;
-            modifiers = Modifiers;
-        }
-
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            BaseValue = baseValue;
+            BaseValue = startValue;
             Modifiers = modifiers;
         }
     }

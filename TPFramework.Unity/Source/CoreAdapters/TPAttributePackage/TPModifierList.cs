@@ -16,12 +16,13 @@ namespace TPFramework.Unity
     {
         [SerializeField] private List<TPModifier> modifiers;
 
-        public TPModifierList(Action onChanged, int capacity = 10) : base(onChanged, capacity) { }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        public TPModifierList(Action onChanged, int capacity = 10) : base(onChanged, capacity)
         {
+            modifiers = new List<TPModifier>();
+            Modifiers = modifiers;
         }
 
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             Modifiers = modifiers;

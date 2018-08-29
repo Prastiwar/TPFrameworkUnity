@@ -12,47 +12,18 @@ namespace TPFramework.Unity
 {
     public static class TPFade
     {
+        private static GameObject fader = null;
         private static TPFadeLayout fadeLayout;
         private static bool isFading;
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnSceneLoad()
-        {
-            GameObject fader = new GameObject("TPFader");
-            Canvas canvas = fader.AddComponent<Canvas>();
-
-            fadeLayout = new TPFadeLayout {
-                Image = fader.AddComponent<Image>(),
-                CanvasGrouup = fader.AddComponent<CanvasGroup>()
-            };
-
-            fadeLayout.Image.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-            fadeLayout.Image.raycastTarget = false;
-
-            fadeLayout.CanvasGrouup.interactable = false;
-            fadeLayout.CanvasGrouup.blocksRaycasts = false;
-            fadeLayout.CanvasGrouup.ignoreParentGroups = true;
-            fadeLayout.CanvasGrouup.alpha = 0;
-
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            if (canvas.sortingOrder <= 1)
-            {
-                canvas.sortingOrder = 16;
-            }
-            UnityEngine.Object.DontDestroyOnLoad(fader);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void ChangeFadeState(bool start)
-        {
-            isFading = !start;
-            fadeLayout.Image.enabled = !start;
-            fadeLayout.CanvasGrouup.alpha = start ? 1 : 0;
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade<T>(TPFader<T> fader) where T : ITPFade
         {
+            if (fader is null)
+            {
+                Init();
+            }
+
             if (!isFading)
             {
                 fader.Fader.InitializeFade(fader.Info, fadeLayout);
@@ -96,6 +67,41 @@ namespace TPFramework.Unity
                 asyncLoad.allowSceneActivation = true;
             }
             return asyncLoad.allowSceneActivation;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void Init()
+        {
+            fader = new GameObject("TPFader");
+            Canvas canvas = fader.AddComponent<Canvas>();
+
+            fadeLayout = new TPFadeLayout {
+                Image = fader.AddComponent<Image>(),
+                CanvasGrouup = fader.AddComponent<CanvasGroup>()
+            };
+
+            fadeLayout.Image.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+            fadeLayout.Image.raycastTarget = false;
+
+            fadeLayout.CanvasGrouup.interactable = false;
+            fadeLayout.CanvasGrouup.blocksRaycasts = false;
+            fadeLayout.CanvasGrouup.ignoreParentGroups = true;
+            fadeLayout.CanvasGrouup.alpha = 0;
+
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            if (canvas.sortingOrder <= 1)
+            {
+                canvas.sortingOrder = 16;
+            }
+            Object.DontDestroyOnLoad(fader);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ChangeFadeState(bool start)
+        {
+            isFading = !start;
+            fadeLayout.Image.enabled = !start;
+            fadeLayout.CanvasGrouup.alpha = start ? 1 : 0;
         }
     }
 }

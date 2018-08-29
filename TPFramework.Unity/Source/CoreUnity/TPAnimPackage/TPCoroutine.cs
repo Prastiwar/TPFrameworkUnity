@@ -16,21 +16,22 @@ namespace TPFramework.Unity
 
         public static YieldInstruction WaitOneFrame { get { return null; } }
 
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnScene()
-        {
-            if (instance == null)
-            {
-                instance = new GameObject("TPCoroutineDispatcher").AddComponent<TPCoroutine>();
-                DontDestroyOnLoad(instance);
-            }
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RunCoroutine(IEnumerator routine)
         {
+            if (instance is null)
+            {
+                Init();
+            }
             // TODO: Implementation
             instance.StartCoroutine(routine); // temporary use Unity's solution
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void Init()
+        {
+            instance = new GameObject("TPCoroutineDispatcher").AddComponent<TPCoroutine>();
+            DontDestroyOnLoad(instance);
         }
     }
 }
