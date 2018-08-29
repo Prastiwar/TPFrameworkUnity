@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class ImportDLL : EditorWindow
     private static string repoPath;
     private static string dllPath;
     private static string pluginsPath;
-    
+
     [MenuItem("ImportDLL/Reimport")]
     private static void Import()
     {
@@ -43,20 +44,11 @@ public class ImportDLL : EditorWindow
 
     private static void RemoveFiles(string[] files)
     {
-        int length = files.Length;
-        for (int i = 0; i < length; i++)
-        {
-            File.Delete(files[i]);
-        }
+        Parallel.ForEach(files, x => File.Delete(x));
     }
 
     private static void CopyFiles(string[] files, string destinationPath)
     {
-        int length = files.Length;
-        for (int i = 0; i < length; i++)
-        {
-            string destFileName = Path.Combine(destinationPath, Path.GetFileName(files[i]));
-            File.Copy(files[i], destFileName);
-        }
+        Parallel.ForEach(files, x => File.Copy(x, Path.Combine(destinationPath, Path.GetFileName(x))));
     }
 }

@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class ObjectPoolExample : MonoBehaviour
 {
+    private TPGameObjectPool gameObjectPool;
+    private bool isRunning;
+
     [SerializeField] private GameObject prefab;
     [SerializeField] private int poolCount = 10;
-    [SerializeField] private float last = 20;
+    [SerializeField] private bool run = true;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
-        TPUnityPool<GameObject> gameObjectPool = new TPUnityPool<GameObject>(prefab, poolCount);
+        gameObjectPool = new TPGameObjectPool(prefab, poolCount);
         gameObjectPool.Grow(poolCount);
-        StartCoroutine(TPObjectPoolSpawnObjects(gameObjectPool, last));
     }
 
-    private IEnumerator TPObjectPoolSpawnObjects(TPUnityPool<GameObject> pool, float last)
+    private void Update()
     {
-        while (last >= 0)
+        if (run && !isRunning)
         {
-            GameObject obj = pool.Get();
-            obj.transform.position = TPRandom.InsideUnitSquare() * 5;
-            obj.SetActive(true);
-            last--;
-            yield return ExampleHelper.WaitSecond;
+            StartCoroutine(TPObjectPoolSpawnObjects(gameObjectPool));
         }
+    }
+
+    private IEnumerator TPObjectPoolSpawnObjects(TPUnityPool<GameObject> pool)
+    {
+        isRunning = true;
+        GameObject prevObj = pool.Get();
+        prevObj.transform.position = TPRandom.InsideUnitSquare() * 5;
+        while (run)
+        {
+            yield return ExampleHelper.WaitSecond;
+            pool.Push(prevObj);
+
+            prevObj = pool.Get();
+            prevObj.transform.position = TPRandom.InsideUnitSquare() * 5;
+            prevObj.SetActive(true);
+        }
+        isRunning = false;
     }
 }

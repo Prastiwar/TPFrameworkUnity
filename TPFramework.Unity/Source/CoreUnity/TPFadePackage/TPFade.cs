@@ -12,14 +12,14 @@ namespace TPFramework.Unity
 {
     public static class TPFade
     {
-        private static GameObject fader = null;
+        private static GameObject dispatcher = null;
         private static TPFadeLayout fadeLayout;
         private static bool isFading;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade<T>(TPFader<T> fader) where T : ITPFade
         {
-            if (fader is null)
+            if (dispatcher is null)
             {
                 Init();
             }
@@ -72,12 +72,12 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void Init()
         {
-            fader = new GameObject("TPFader");
-            Canvas canvas = fader.AddComponent<Canvas>();
+            dispatcher = new GameObject("TPFader");
+            Canvas canvas = dispatcher.AddComponent<Canvas>();
 
             fadeLayout = new TPFadeLayout {
-                Image = fader.AddComponent<Image>(),
-                CanvasGrouup = fader.AddComponent<CanvasGroup>()
+                Image = dispatcher.AddComponent<Image>(),
+                CanvasGrouup = dispatcher.AddComponent<CanvasGroup>()
             };
 
             fadeLayout.Image.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
@@ -93,15 +93,15 @@ namespace TPFramework.Unity
             {
                 canvas.sortingOrder = 16;
             }
-            Object.DontDestroyOnLoad(fader);
+            Object.DontDestroyOnLoad(dispatcher);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ChangeFadeState(bool start)
         {
-            isFading = !start;
-            fadeLayout.Image.enabled = !start;
-            fadeLayout.CanvasGrouup.alpha = start ? 1 : 0;
+            isFading = start;
+            fadeLayout.Image.enabled = start;
+            fadeLayout.CanvasGrouup.alpha = 0;
         }
     }
 }

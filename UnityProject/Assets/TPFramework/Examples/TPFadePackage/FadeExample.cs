@@ -8,14 +8,14 @@ public class AlphaFader : TPFader<TPAlphaFade> { }
 
 public class FadeExample : MonoBehaviour
 {
-    [SerializeField] private Button FadeButton;
-    [SerializeField] private AlphaFader Fader;
+    [SerializeField] private Button fadeButton;
+    [SerializeField] private AlphaFader fader;
 
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
-        FadeButton.onClick.AddListener(() => {
-            TPFade.Fade(Fader);
+        fadeButton.onClick.AddListener(() => {
+            TPFade.Fade(fader);
         });
     }
 }

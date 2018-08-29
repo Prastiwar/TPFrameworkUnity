@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9486e09ca15d2643974f17e22f8a32d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1305344482396002, guid: c1f4137168e15aa438d4011a761b178d, type: 2}
   poolCount: 10
   last: 20
 --- !u!4 &1817255676

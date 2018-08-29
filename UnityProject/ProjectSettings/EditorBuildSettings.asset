@@ -4,4 +4,46 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/GameName/Scene/Game.unity
+    guid: 75882c54c69c7b44ea05bdf50004b0d6
+  - enabled: 1
+    path: Assets/GameName/Scene/MainMenu.unity
+    guid: 2040baf2eddeb6a4ebcc72bd153f1179
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPAchievementPackage/AchievementScene.unity
+    guid: 0fc7ed912b5ed9447bef4dfe8bfba4a8
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPAnimPackage/AnimScene.unity
+    guid: 374ae8a0d20b63d4d9e5a532b38a6119
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPAttributePackage/AttributeScene.unity
+    guid: 1422003662a7fa640bc64c555a349b8e
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPAudioPackage/AudioScene.unity
+    guid: bdea289940712f14aa0012b301df54a7
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPFadePackage/FadeScene.unity
+    guid: 8ff905d2168f93044a5546275a0a1309
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPInventoryPackage/InventoryScene.unity
+    guid: 1b59202ba69560640a9f17e593089c63
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPObjectPoolPackage/ObjectPoolScene.unity
+    guid: 0d45d4c3505aada45987227bfc3c495e
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPPersistencePackage/PersistenceScene.unity
+    guid: 89853135dcf12d2468fe290e716341d2
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPRandomPackage/RandomScene.unity
+    guid: a7edd30ea838f7445bbf690c988a2e4d
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPSettingsPackage/SettingsScene.unity
+    guid: ea850ee5731d7814d9980063e4baa2bc
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPTooltipPackage/TooltipScene.unity
+    guid: b0cfd7a9da5db3f4c803fc119d38f148
+  - enabled: 1
+    path: Assets/TPFramework/Examples/TPUIPackage/UIScene.unity
+    guid: 5a15b95ae3890fc46be99cfd888e0a19

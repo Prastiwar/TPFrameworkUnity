@@ -9,18 +9,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
-using UnityEngine;
 using TPFramework.Core;
+using UnityEngine;
 
 namespace TPFramework.Unity
 {
     public class TPPersistPrefs : TPPersistSystem<TPPersistPrefs>
     {
-        private static readonly RSACryptoServiceProvider provider = new RSACryptoServiceProvider(crpyter);
-
-        private static readonly CspParameters crpyter = new CspParameters {
-            KeyContainerName = "ThisIsAKey"  // This is the key used to encrypt and decrypt can be anything
-        };
+        private static readonly RSACryptoServiceProvider provider = GetOrSetProvider();
 
         private static readonly HashSet<Type> supportedTypes = new HashSet<Type>() {
             typeof(int),
@@ -39,7 +35,9 @@ namespace TPFramework.Unity
             string decrypt = Decrypt(PlayerPrefs.GetString(attribute.Key));
             if (string.IsNullOrEmpty(decrypt))
             {
-                return attribute.DefaultValue ?? null;
+                decrypt = null;
+                Debug.Log(attribute.DefaultValue ?? decrypt);
+                return Convert.ChangeType(attribute.DefaultValue ?? decrypt, objectType);
             }
             return Convert.ChangeType(decrypt, objectType);
         }
@@ -54,16 +52,40 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string Encrypt(string value)
         {
-            byte[] encryptBytes = provider.Encrypt(Encoding.UTF8.GetBytes(value), true);
+            byte[] encryptBytes = provider.Encrypt(Encoding.UTF8.GetBytes(value), false);
             return Convert.ToBase64String(encryptBytes);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private string Decrypt(string cryptedValue)
         {
-            return string.IsNullOrEmpty(cryptedValue) 
-                ? string.Empty 
-                : Encoding.UTF8.GetString(provider.Decrypt(Convert.FromBase64String(cryptedValue), true));
+            string decrypted = string.Empty;
+            if (string.IsNullOrEmpty(cryptedValue))
+            {
+                return decrypted;
+            }
+            decrypted = Encoding.UTF8.GetString(provider.Decrypt(Convert.FromBase64String(cryptedValue), false));
+            return decrypted;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static RSACryptoServiceProvider GetOrSetProvider()
+        {
+            // This is the key used to encrypt and decrypt can be anything
+            string importantKey = "80D30A1C969CB772B1FDF7F077304D486AEE15541CA78DF7E7DE24F412FBB97C";
+
+            CspParameters crpyter = new CspParameters { KeyContainerName = importantKey, };
+            RSACryptoServiceProvider provider = new RSACryptoServiceProvider(crpyter) { PersistKeyInCsp = true };
+
+            if (PlayerPrefs.HasKey(importantKey))
+            {
+                provider.FromXmlString(PlayerPrefs.GetString(importantKey));
+            }
+            else
+            {
+                PlayerPrefs.SetString(importantKey, provider.ToXmlString(true));
+            }
+            return provider;
         }
     }
 }
