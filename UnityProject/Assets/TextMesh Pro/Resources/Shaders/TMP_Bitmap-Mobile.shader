@@ -94,7 +94,7 @@ SubShader {
 			o.color.rgb *= _DiffusePower;
 			o.texcoord0 = v.texcoord0;
 
-			float2 pixelSize = o.vertex.w;
+			float2 pixelSize = o.vert w;
 			//pixelSize /= abs(float2(_ScreenParams.x * UNITY_MATRIX_P[0][0], _ScreenParams.y * UNITY_MATRIX_P[1][1]));
 
 			// Clamp _ClipRect to 16bit.

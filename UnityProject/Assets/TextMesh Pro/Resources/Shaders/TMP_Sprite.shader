@@ -87,7 +87,7 @@ Shader "TextMeshPro/Sprite"
 				OUT.texcoord = IN.texcoord;
 				
 				#ifdef UNITY_HALF_TEXEL_OFFSET
-				OUT.vertex.xy += (_ScreenParams.zw-1.0)*float2(-1,1);
+				OUT.vert xy += (_ScreenParams.zw-1.0)*float2(-1,1);
 				#endif
 				
 				OUT.color = IN.color * _Color;

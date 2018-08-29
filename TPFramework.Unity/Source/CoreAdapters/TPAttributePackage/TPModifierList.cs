@@ -20,7 +20,6 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            modifiers = Modifiers;
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()

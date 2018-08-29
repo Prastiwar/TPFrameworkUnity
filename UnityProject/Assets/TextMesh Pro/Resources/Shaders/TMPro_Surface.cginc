@@ -2,8 +2,8 @@
 
 void VertShader(inout appdata_full v, out Input data)
 {
-	v.vertex.x += _VertexOffsetX;
-	v.vertex.y += _VertexOffsetY;
+	v.vert x += _VertexOffsetX;
+	v.vert y += _VertexOffsetY;
 
 	UNITY_INITIALIZE_OUTPUT(Input, data);
 
@@ -73,8 +73,8 @@ void PixShader(Input input, inout SurfaceOutput o)
 	float4 outlineColor = _OutlineColor;
 	faceColor *= input.color;
 	outlineColor.a *= input.color.a;
-	faceColor *= tex2D(_FaceTex, float2(input.uv2_FaceTex.x + _FaceUVSpeedX * _Time.y, input.uv2_FaceTex.y + _FaceUVSpeedY * _Time.y));
-	outlineColor *= tex2D(_OutlineTex, float2(input.uv2_OutlineTex.x + _OutlineUVSpeedX * _Time.y, input.uv2_OutlineTex.y + _OutlineUVSpeedY * _Time.y));
+	faceColor *= tex2D(_FaceTex, float2(input.uv2_FaceT x + _FaceUVSpeedX * _Time.y, input.uv2_FaceT y + _FaceUVSpeedY * _Time.y));
+	outlineColor *= tex2D(_OutlineTex, float2(input.uv2_OutlineT x + _OutlineUVSpeedX * _Time.y, input.uv2_OutlineT y + _OutlineUVSpeedY * _Time.y));
 	faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
 	faceColor.rgb /= max(faceColor.a, 0.0001);
 
@@ -84,7 +84,7 @@ void PixShader(Input input, inout SurfaceOutput o)
 	float3 n = GetSurfaceNormal(smp4x, input.param.x);
 
 	// Bumpmap
-	float3 bump = UnpackNormal(tex2D(_BumpMap, input.uv2_FaceTex.xy)).xyz;
+	float3 bump = UnpackNormal(tex2D(_BumpMap, input.uv2_FaceT xy)).xyz;
 	bump *= lerp(_BumpFace, _BumpOutline, saturate(sd + outline * 0.5));
 	bump = lerp(float3(0, 0, 1), bump, faceColor.a);
 	n = normalize(n - bump);

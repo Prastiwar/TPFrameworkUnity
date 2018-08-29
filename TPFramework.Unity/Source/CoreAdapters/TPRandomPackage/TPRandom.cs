@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
-    public static partial class TPRandom
+    public static class TPRandom
     {
         /// <summary> Returns a random point inside a box with radius 1 </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

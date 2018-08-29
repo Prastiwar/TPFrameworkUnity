@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity.Source.CoreUnity.TPUIPackage
+namespace TPFramework.Unity
 {
     [Serializable]
     public class TPModalWindow : TPUILayout
