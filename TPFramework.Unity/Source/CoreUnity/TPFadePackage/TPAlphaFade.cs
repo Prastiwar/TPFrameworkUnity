@@ -18,7 +18,7 @@ namespace TPFramework.Unity
         public Color FadeColor;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void InitializeFade(TPFadeLayout state)
+        public void InitializeFade(TPFadeInfo fadeInfo, TPFadeLayout state)
         {
             state.Image.sprite = FadeTexture;
             state.Image.color = FadeColor;
@@ -28,11 +28,14 @@ namespace TPFramework.Unity
         public void Fade(float time, TPFadeInfo fadeInfo, TPFadeLayout state)
         {
             state.CanvasGrouup.alpha = TPAnim.ReflectNormalizedCurveTime(time);
+            //= TPMath.PingPong(time * 2, 1f);
 
             if (time >= 0.5f && !string.IsNullOrEmpty(fadeInfo.FadeToScene))
             {
                 SceneManager.LoadScene(fadeInfo.FadeToScene);
             }
         }
+
+        public void CleanUp(TPFadeInfo fadeInfo, TPFadeLayout state) { }
     }
 }

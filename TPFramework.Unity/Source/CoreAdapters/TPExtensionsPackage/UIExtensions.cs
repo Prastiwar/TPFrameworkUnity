@@ -21,6 +21,18 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetFill(this Image image, float fillAmount)
+        {
+            image.fillAmount = fillAmount;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetValue(this Slider slider, float value)
+        {
+            slider.value = value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInside(this Rect thisRect, Rect rect)
         {
             return thisRect.xMin <= rect.xMin

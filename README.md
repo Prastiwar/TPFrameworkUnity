@@ -1,7 +1,7 @@
 # TPFrameworkUnity
 
 ***TPFrameworkUnity allows you to easily start with your new game in Unity***<br> 
-***It's adapter of [Core TPFramework](https://github.com/Prastiwar/TPFramework) based on clean C#***
+***It's adapter of [Core TPFramework](https://github.com/Prastiwar/TPFramework) written in C# & .NET Framework 4.6 ***
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/Prastiwar/TPFrameworkUnity.svg?label=Updated&style=flat-square&longCache=true)](https://github.com/Prastiwar/TPFrameworkUnity/commits/master)
 [![license](https://img.shields.io/github/license/Prastiwar/TPFrameworkUnity.svg?style=flat-square&longCache=true)](https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE)
