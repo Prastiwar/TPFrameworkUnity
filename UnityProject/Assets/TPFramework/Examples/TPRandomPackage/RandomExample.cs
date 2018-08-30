@@ -8,19 +8,21 @@ public class RandomExample : MonoBehaviour
 
     [SerializeField] private GameObject[] gameObjects;
     [SerializeField] private int repeatCount = 5;
-
+    
     // Use this for initialization
     private void Start()
     {
         int elLength = gameObjects.Length;
         probabilityElements = new ProbabilityElementInt<GameObject>[elLength];
-        int[] randomProbabilities = TPRandom.RandomProbabilities(elLength);
+        int[] randomProbabilities = TPRandom.RandomProbabilities(elLength, 20, 70);
 
         ExampleHelper.DrawLine();
         for (int i = 0; i < elLength; i++)
         {
-            probabilityElements[i] = new ProbabilityElementInt<GameObject>(gameObjects[i], randomProbabilities[i]);
-            Debug.Log("Random probability: " + probabilityElements[i].Probability);
+            probabilityElements[i] = new ProbabilityElementInt<GameObject>(
+                Instantiate(gameObjects[i], TPFramework.Unity.TPRandom.InsideUnitSquare() * 5, Quaternion.identity),
+                randomProbabilities[i]);
+            Debug.Log("Random probability of object: " + probabilityElements[i].Probability);
         }
         ExampleHelper.DrawLine();
 
@@ -31,7 +33,7 @@ public class RandomExample : MonoBehaviour
     {
         while (repeat >= 0)
         {
-            GameObject selectedObject = TPRandom.PickWithProbability(probabilityElements);
+            GameObject selectedObject = TPRandom.PickObjectWithProbability(probabilityElements);
             selectedObject.SetActive(!selectedObject.activeSelf);
             repeat--;
             yield return ExampleHelper.WaitSecond;

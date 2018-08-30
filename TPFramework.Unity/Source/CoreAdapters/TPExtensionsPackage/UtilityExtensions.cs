@@ -25,6 +25,33 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void AllToLog(this object[] objs, string label = null)
+        {
+            int length = objs.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Debug.Log(label != null ? label + ": " + objs[i] : objs[i]);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void AllToLog<T>(this T[] objs, string label = null)
+        {
+            int length = objs.Length;
+            for (int i = 0; i < length; i++)
+            {
+                if (label != null)
+                {
+                    Debug.Log(label + ": " + objs[i]);
+                }
+                else
+                {
+                    Debug.Log(objs[i]);
+                }
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float GetFloat(this AudioMixer audioMixer, string paramName)
         {
             bool result = audioMixer.GetFloat(paramName, out float value);

@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using TPFramework.Core;
 using UnityEditor;
@@ -19,7 +20,7 @@ namespace TPFramework.Internal
         internal const string MENU = "TPFramework/";
 
         private static readonly IOverridePackage[] overridePackages = new IOverridePackage[]{
-            new TPSettingsPackage()
+            new TPSettingsPackage(),
         };
 
         private static bool HasTMPro {
@@ -28,18 +29,32 @@ namespace TPFramework.Internal
             }
         }
 
+        public static string[] GetAllTPPackageNames {
+            get {
+                List<string> names = new List<string>(TPFrameworkInfo.GetTPPackageNames);
+                names.AddRange(TPUnityFrameworkInfo.GetTPPackageNames);
+                return names.ToArray();
+            }
+        }
+
+        public TPUnityPackageManager(ITPDefineManager defineManager, TPPackage[] packages) : base(defineManager, packages) { }
+
         static TPUnityPackageManager()
         {
+            Init();
+        }
+
+        [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReloadManager, priority = 0)]
+        private static void Init()
+        {
             Manager = new TPPackageManager(new TPDefineManager(), null);
-            Manager.InitializePackages(TPFrameworkInfo.GetExistingPackagePaths, false);
+            Manager.InitializePackages(GetAllTPPackageNames, false);
             OverridePackages();
             Reload();
             ((TPDefineManager)Manager.DefineManager).OnLoad();
         }
 
-        public TPUnityPackageManager(ITPDefineManager defineManager, TPPackage[] packages) : base(defineManager, packages) { }
-
-        [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReload, priority = 0)]
+        [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReloadPackages, priority = 0)]
         private static void Reload()
         {
             if (!HasTMPro)
@@ -51,15 +66,22 @@ namespace TPFramework.Internal
 
         private static void OverridePackages()
         {
+            List<TPPackage> packagesList = new List<TPPackage>(Manager.Packages);
             int length = overridePackages.Length;
             for (int i = 0; i < length; i++)
             {
-                int index = Manager.Packages.FindIndex(x => x.FileName.Contains(overridePackages[i].Name));
+                TPPackage package = new TPPackage(overridePackages[i].Name, overridePackages[i].OnReload);
+                int index = packagesList.FindIndex(x => x.FileName.Contains(overridePackages[i].Name));
                 if (index >= 0)
                 {
-                    Manager.Packages[index] = new TPPackage(Manager.Packages[index].FileName, overridePackages[i].OnReload);
+                    packagesList[index] = package;
+                }
+                else
+                {
+                    packagesList.Add(package);
                 }
             }
+            Manager.SetPackages(packagesList.ToArray());
         }
     }
 

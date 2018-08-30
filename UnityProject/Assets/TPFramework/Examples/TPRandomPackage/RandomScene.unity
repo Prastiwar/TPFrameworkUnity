@@ -232,7 +232,7 @@ MonoBehaviour:
   - {fileID: 1921268027540964, guid: 1e8fcda15d4db074eb3b98cf7c754f0c, type: 2}
   - {fileID: 1921268027540964, guid: 1e8fcda15d4db074eb3b98cf7c754f0c, type: 2}
   - {fileID: 1921268027540964, guid: 1e8fcda15d4db074eb3b98cf7c754f0c, type: 2}
-  repeatCount: 5
+  repeatCount: 15
 --- !u!4 &1817255676
 Transform:
   m_ObjectHideFlags: 0

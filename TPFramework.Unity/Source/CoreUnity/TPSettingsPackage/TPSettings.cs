@@ -17,12 +17,6 @@ namespace TPFramework.Unity
 {
     public static class TPSettings
     {
-        static TPSettings()
-        {
-            customQuality.CustomOption = new Dropdown.OptionData("Custom");
-            customQuality.CustomQualityIndex = QualitySettings.names.ToList().IndexOf(customQuality.CustomOption.text);
-        }
-
         [Serializable]
         public struct AudioParameters
         {
@@ -56,8 +50,21 @@ namespace TPFramework.Unity
             }
         }
 
-        private static Action refreshSettings = delegate { };
+        private static Action onRefreshSettings = delegate { };
         private static Action onCustomQualitySet = delegate { };
+
+        static TPSettings()
+        {
+            customQuality.CustomOption = new Dropdown.OptionData("Custom");
+            customQuality.CustomQualityIndex = QualitySettings.names.ToList().IndexOf(customQuality.CustomOption.text);
+        }
+
+        /// <summary> Manually refreshes all UI settings values </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Refresh()
+        {
+            onRefreshSettings();
+        }
 
         /// <summary> Adds listener to onValueChange that will change exposedParam in audioMixer to un-/mute </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] 
@@ -185,7 +192,7 @@ namespace TPFramework.Unity
             AddDropdownOptions(dropdown, startIndex, options ?? textureOptions);
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
             dropdown.onValueChanged.AddListener(SetTexture);
-            refreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.masterTextureLimit);
+            onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.masterTextureLimit);
         }
 
         /// <summary> Adds listener to onValueChanged that will change Shadow Quality (sets quality to 'Custom') </summary>
@@ -195,7 +202,7 @@ namespace TPFramework.Unity
             AddDropdownOptions(dropdown, startIndex, shadowQualityOptions);
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
             dropdown.onValueChanged.AddListener(SetShadowQuality);
-            refreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadows);
+            onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadows);
         }
 
         /// <summary> Adds listener to onValueChanged that will change Shadow Resolution (sets quality to 'Custom') </summary>
@@ -205,7 +212,7 @@ namespace TPFramework.Unity
             AddDropdownOptions(dropdown, startIndex, shadowResolutionOptions);
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
             dropdown.onValueChanged.AddListener(SetShadowResolution);
-            refreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadowResolution);
+            onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadowResolution);
         }
 
         /// <summary> Adds listener to onValueChanged that will change AntiAliasing (sets quality to 'Custom') </summary>
@@ -215,7 +222,7 @@ namespace TPFramework.Unity
             AddDropdownOptions(dropdown, startIndex, antialiasingOptions);
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
             dropdown.onValueChanged.AddListener(SetAntialiasing);
-            refreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.antiAliasing == 8 ? 3 : QualitySettings.antiAliasing >> 1);
+            onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.antiAliasing == 8 ? 3 : QualitySettings.antiAliasing >> 1);
         }
 
         /// <summary> Adds listener to onValueChanged that will change Quality Level </summary>
@@ -225,7 +232,7 @@ namespace TPFramework.Unity
             AddDropdownOptions(dropdown, startIndex, qualityOptions);
             dropdown.onValueChanged.AddListener((index) => {
                 SetQuality(index);
-                refreshSettings();
+                onRefreshSettings();
             });
 
             onCustomQualitySet = () => {
@@ -234,7 +241,7 @@ namespace TPFramework.Unity
                 dropdown.options.Remove(customQuality.CustomOption);
             };
 
-            refreshSettings();
+            onRefreshSettings();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] 
@@ -264,7 +271,7 @@ namespace TPFramework.Unity
             QualitySettings.vSyncCount = level.VSync.ToInt();
             Screen.fullScreen = level.FullScreen;
             Screen.SetResolution(level.Resolution.width, level.Resolution.height, Screen.fullScreen);
-            refreshSettings();
+            onRefreshSettings();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] 

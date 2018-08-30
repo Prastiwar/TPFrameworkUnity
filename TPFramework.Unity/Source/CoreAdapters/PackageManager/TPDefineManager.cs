@@ -11,7 +11,8 @@ namespace TPFramework.Internal
 
         internal struct MenuMessage
         {
-            public const string TPReload = "Reload Packages";
+            public const string TPReloadManager = "Reload Framework Manager";
+            public const string TPReloadPackages = "Reload Packages";
 #if TPTooltipSafeChecks
             public const string TPTooltipSafeChecks = "Disable TPTooltip Safe Checks";
 #else

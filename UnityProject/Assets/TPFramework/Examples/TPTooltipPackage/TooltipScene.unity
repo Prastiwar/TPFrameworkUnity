@@ -218,11 +218,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1817255674}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a80d451e3819ec47b4fa3a968917ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ca7ff7a32e98af468ee3d9667f51184, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioBundle: {fileID: 0}
-  repeatCount: 5
 --- !u!4 &1817255676
 Transform:
   m_ObjectHideFlags: 0

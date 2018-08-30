@@ -44,6 +44,7 @@ public class SettingsExample : MonoBehaviour
         TPSettings.SetShadowQualityDropdown(shadowQuality);
         TPSettings.SetShadowResolutionDropdown(shadowResolution);
         TPSettings.SetTextureDropdown(texture);
-        TPSettings.SetQualityDropdown(quality);
+        TPSettings.SetQualityDropdown(quality, QualitySettings.GetQualityLevel());
+        TPSettings.Refresh();
     }
 }
