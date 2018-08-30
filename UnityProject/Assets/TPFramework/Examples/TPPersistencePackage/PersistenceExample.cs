@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PersistenceExample : MonoBehaviour
 {
-    [SerializeField] private Button saveButton;
     [SerializeField] private Button loadButton;
+    [SerializeField] private Button saveButton;
 
     [Persistant("SomeKey", "default")]
     [SerializeField] private string someString = "Text";
