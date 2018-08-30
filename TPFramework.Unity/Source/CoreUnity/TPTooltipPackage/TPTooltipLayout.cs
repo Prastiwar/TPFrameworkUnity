@@ -17,9 +17,9 @@ namespace TPFramework.Unity
         internal float panelHalfHeight;
         internal float panelHalfWidth;
 
-        public Vector2 DynamicOffset;
         public bool UseSharedLayout;
-        [SerializeField] private Transform staticPosition;
+        public Vector2 DynamicOffset;
+        public Transform StaticPosition;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnInitialized()
@@ -87,7 +87,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPositionToStatic()
         {
-            LayoutTransform.position = staticPosition.position;
+            LayoutTransform.position = StaticPosition.position;
         }
     }
 }

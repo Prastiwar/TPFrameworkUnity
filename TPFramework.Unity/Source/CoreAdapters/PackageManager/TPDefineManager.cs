@@ -16,7 +16,7 @@ namespace TPFramework.Internal
 #if TPTooltipSafeChecks
             public const string TPTooltipSafeChecks = "Disable TPTooltip Safe Checks";
 #else
-            public const string TPTooltipSafeChecks = "Enable Package Logs";
+            public const string TPTooltipSafeChecks = "Enable TPTooltip Safe Checks";
 #endif
 #if TPUISafeChecks
             public const string TPUISafeChecks = "Disable TPUI Safe Checks";

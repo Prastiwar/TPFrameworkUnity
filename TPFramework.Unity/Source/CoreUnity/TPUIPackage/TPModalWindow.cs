@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TPFramework.Unity
@@ -21,10 +22,13 @@ namespace TPFramework.Unity
         private Button acceptButton;
         private Button cancelButton;
 
+        [SerializeField] private TPAnimation showAnim;
+        [SerializeField] private TPAnimation hideAnim;
+
         public Action OnAccept = delegate { };
         public Action OnCancel = delegate { };
-        public Action OnShow = delegate { };
-        public Action OnHide = delegate { };
+        public Action<float, Transform> OnShow = delegate { };
+        public Action<float, Transform> OnHide = delegate { };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnInitialized()
@@ -38,8 +42,6 @@ namespace TPFramework.Unity
 
             OnAccept = Hide;
             OnCancel = Hide;
-            OnShow = () => LayoutTransform.gameObject.SetActive(true);
-            OnHide = () => LayoutTransform.gameObject.SetActive(false);
             acceptButton.onClick.AddListener(() => OnAccept());
             cancelButton.onClick.AddListener(() => OnCancel());
         }
@@ -71,13 +73,13 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Show()
         {
-            OnShow();
+            TPAnim.Animate(showAnim, (time) => OnShow(time, LayoutTransform), () => SetActive(true));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Hide()
         {
-            OnHide();
+            TPAnim.Animate(hideAnim, (time) => OnHide(time, LayoutTransform), null, () => SetActive(false));
         }
     }
 }

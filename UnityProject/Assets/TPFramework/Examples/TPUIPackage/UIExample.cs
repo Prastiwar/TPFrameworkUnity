@@ -4,8 +4,6 @@ using UnityEngine.UI;
 
 public class UIExample : MonoBehaviour
 {
-    private bool windowEnabled;
-
     [SerializeField] private Button toggleWindowBtn;
     [SerializeField] private TPModalWindow modalWindow;
 
@@ -13,21 +11,19 @@ public class UIExample : MonoBehaviour
     private void Start()
     {
         modalWindow.Initialize();
-        windowEnabled = false;
-        modalWindow.OnShow = () => CustomModalWindowPop();
-        modalWindow.OnHide = () => CustomModalWindowPop();
+        modalWindow.OnShow += CustomModalWindowPop;
+        modalWindow.OnHide = CustomModalWindowPop;
 
         toggleWindowBtn.onClick.AddListener(() => {
-            windowEnabled = !windowEnabled;
-            if (windowEnabled)
+            if (!modalWindow.IsActive())
                 modalWindow.Show();
             else
                 modalWindow.Hide();
         });
     }
 
-    private void CustomModalWindowPop(/*float evaluatedTime, Transform window*/)
+    private void CustomModalWindowPop(float evaluatedTime, Transform window)
     {
-        //window.localScale = window.localScale.Equal(TPAnim.ReflectNormalizedCurveTime(evaluatedTime));
+        window.localScale = window.localScale.Set(evaluatedTime);
     }
 }

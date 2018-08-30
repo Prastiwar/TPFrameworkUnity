@@ -22,7 +22,7 @@ public class AchievementExample : MonoBehaviour
 
     private void CustomNotifyActive(float evaluatedTime, Transform notify)
     {
-        notify.localScale = notify.localScale.Set(TPAnim.ReflectNormalizedCurveTime(evaluatedTime));
+        notify.localScale = notify.localScale.Set(evaluatedTime);
     }
 }
 

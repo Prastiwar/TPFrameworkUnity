@@ -29,15 +29,16 @@ namespace TPFramework.Unity
     [Serializable]
     public class TPUILayout : ITPUI
     {
+        protected Image[] Images { get; private set; }           // All Image components got from all childs of Image parent
+        protected Button[] Buttons { get; private set; }         // All Button components got from all childs of Button parent
+        protected TextMeshProUGUI[] Texts { get; private set; }  // All TextMeshProUGUI components got from all childs of Text parent
+
         public GameObject LayoutPrefab;                         // Prefab to be isntantiated and assigned to TPLayout
+
         public GameObject TPLayout { get; set; }                // Instantiated prefab
         public Transform LayoutTransform { get; private set; }  // Child of TPLayout, have Image & Button & Text parents
-        public CanvasGroup CanvasGroup { get; private set; }
+        public CanvasGroup CanvasGroup { get; private set; }    // CanvasGroup component attached to TPLayout
         public bool IsInitialized { get { return TPLayout; } }
-
-        protected Image[] Images { get; private set; }            // All Image components got from all childs of Image parent
-        protected Button[] Buttons { get; private set; }          // All Button components got from all childs of Button parent
-        protected TextMeshProUGUI[] Texts { get; private set; }   // All TextMeshProUGUI components got from all childs of Text parent
 
         /// <summary> Is called after Initialize </summary>
         protected virtual void OnInitialized() { }
@@ -64,7 +65,8 @@ namespace TPFramework.Unity
                 TPLayout = UnityEngine.Object.Instantiate(LayoutPrefab, parent);
             }
             InitializeLayout();
-            OnInitialized();
+            SetActive(false);
+            OnInitialized();            
         }
 
         /// <summary> If you set activation frequently, you'll want to avoid GC from eventsystem, use it instead of TPLayout.SetActive(..) </summary>
@@ -77,7 +79,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsActive()
         {
-            return CanvasGroup.alpha == 1 && TPLayout.activeSelf;
+            return CanvasGroup.alpha >= 1 && TPLayout.activeSelf;
         }
 
         /// <summary> Get Image & Buttons & Texts components from childs of parents </summary>
