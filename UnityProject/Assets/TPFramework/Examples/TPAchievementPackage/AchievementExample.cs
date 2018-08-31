@@ -16,7 +16,7 @@ public class AchievementExample : MonoBehaviour
 
         for (int i = 0; i < Achievement.Data.ReachPoints; i++)
         {
-            Achievement.AddPoints(1);
+            Achievement.AddPoints();
         }
     }
 

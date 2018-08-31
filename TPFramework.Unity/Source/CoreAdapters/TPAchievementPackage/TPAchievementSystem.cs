@@ -38,7 +38,7 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static GameObject ShareLayout(GameObject layout, Transform parent = null)
+        internal static GameObject ShareLayout(GameObject layout, Transform parent = null)
         {
             return sharedLayouts.ShareObject(layout, parent);
         }
@@ -49,8 +49,8 @@ namespace TPFramework.Unity
             isBusy = false;
             if (notificationQueue.Count > 0)
             {
-                var pair = notificationQueue.Dequeue();
-                ShowNotification(pair.Key, pair.Value);
+                KeyValuePair<TPAchievementNotify, TPAchievementData> kvp = notificationQueue.Dequeue();
+                ShowNotification(kvp.Key, kvp.Value);
             }
         }
     }

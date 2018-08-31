@@ -37,7 +37,9 @@ namespace TPFramework.Unity
             {
                 OnObserverEnter(observer);
                 if (observer.TooltipType.IsDynamic())
+                {
                     observer.StartCoroutine(ToolTipPositioning());
+                }
             }
             else
             {
@@ -54,7 +56,9 @@ namespace TPFramework.Unity
             OnObserverEnter(observer);
 
             if (observer.TooltipType.IsDynamic())
+            {
                 observer.StartCoroutine(ToolTipPositioning());
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -73,10 +77,17 @@ namespace TPFramework.Unity
         {
             while (_eventData != null)
             {
-                Vector2 panelHalfVector = _eventData.position + observer.TooltipLayout.DynamicOffset;
-                panelHalfVector.Set(Mathf.Clamp(panelHalfVector.x, observer.TooltipLayout.panelHalfWidth, Screen.width - observer.TooltipLayout.panelHalfWidth),
-                                    Mathf.Clamp(panelHalfVector.y, observer.TooltipLayout.panelHalfHeight, Screen.height - observer.TooltipLayout.panelHalfHeight));
-                observer.TooltipLayout.SetPosition(panelHalfVector);
+                Vector2 pointPos = _eventData.position + observer.TooltipLayout.DynamicOffset;
+                //pointPos.Set(Mathf.Clamp(pointPos.x, observer.TooltipLayout.panelHalfWidth, Screen.width - observer.TooltipLayout.panelHalfWidth),
+                //             Mathf.Clamp(pointPos.y, observer.TooltipLayout.panelHalfHeight, Screen.height - observer.TooltipLayout.panelHalfHeight));
+                observer.TooltipLayout.SetPosition(pointPos);
+                RectTransform t = observer.TooltipLayout.LayoutTransform.GetComponent<RectTransform>();
+                t.anchorMin = new Vector2(0, 0);
+                t.anchorMax = new Vector2(1, 1);
+                Transform tra = observer.TooltipLayout.LayoutTransform;
+                tra.localPosition = new Vector3(
+                Mathf.Clamp(tra.localPosition.x, -t.sizeDelta.x, t.sizeDelta.x),
+                Mathf.Clamp(tra.localPosition.y, -t.sizeDelta.y, t.sizeDelta.y));
                 yield return null;
             }
         }

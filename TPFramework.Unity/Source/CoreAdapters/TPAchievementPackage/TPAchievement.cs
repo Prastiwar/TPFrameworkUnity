@@ -27,10 +27,13 @@ namespace TPFramework.Unity
         public TPAchievementNotify TPNotify;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AddPoints(float points)
+        public void AddPoints(float points = 1)
         {
             if (data.IsCompleted)
+            {
                 return;
+            }
+
             data.Points += points;
 
             if (data.Points >= data.ReachPoints)

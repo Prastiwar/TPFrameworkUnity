@@ -7,7 +7,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using TMPro;
-using TPFramework.Core;
 using UnityEngine;
 using UnityEngine.UI;
 

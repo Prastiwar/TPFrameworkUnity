@@ -24,7 +24,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnInitialized()
         {
-#if TPTooltipSafeChecks
+#if TPUISafeChecks
             SafeCheck(TPLayout);
 #endif
             CanvasGroup.alpha = 0;
@@ -67,7 +67,7 @@ namespace TPFramework.Unity
 
         }
 
-#if TPTooltipSafeChecks
+#if TPUISafeChecks
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SafeCheck(GameObject layout)
         {

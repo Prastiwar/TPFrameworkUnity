@@ -103,12 +103,6 @@ namespace TPFramework.Internal
         }
     }
 
-    internal class TPTooltipPackage
-    {
-        [MenuItem(TPUnityPackageManager.MENU + TPDefineInfo.MenuMessage.TPTooltipSafeChecks, priority = 120)]
-        private static void ToggleSafeChecks() { TPUnityPackageManager.Manager.DefineManager.ToggleDefine(TPDefineInfo.TPTooltipSafety); }
-    }
-
     internal class TPUIPackage
     {
         [MenuItem(TPUnityPackageManager.MENU + TPDefineInfo.MenuMessage.TPUISafeChecks, priority = 160)]

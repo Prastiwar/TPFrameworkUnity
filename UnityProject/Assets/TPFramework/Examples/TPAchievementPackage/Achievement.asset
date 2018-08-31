@@ -11,6 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: -1160778776, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
   m_Name: Achievement
   m_EditorClassIdentifier: 
+  data:
+    title: Some Title
+    description: Some descriptive description
+    points: 0
+    reachPoints: 5
+    isCompleted: 0
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   ShowNotifyOnComplete: 1
   ShowNotifyOnProgress: 1

@@ -6,18 +6,12 @@ namespace TPFramework.Internal
 {
     internal struct TPDefineInfo
     {
-        public const string TPTooltipSafety = "TPTooltipSafeChecks";
         public const string TPUISafety = "TPUISafeChecks";
 
         internal struct MenuMessage
         {
             public const string TPReloadManager = "Reload Framework Manager";
             public const string TPReloadPackages = "Reload Packages";
-#if TPTooltipSafeChecks
-            public const string TPTooltipSafeChecks = "Disable TPTooltip Safe Checks";
-#else
-            public const string TPTooltipSafeChecks = "Enable TPTooltip Safe Checks";
-#endif
 #if TPUISafeChecks
             public const string TPUISafeChecks = "Disable TPUI Safe Checks";
 #else
@@ -34,7 +28,6 @@ namespace TPFramework.Internal
         {
             if (EditorPrefs.GetBool("TP_IsFirstRun", true))
             {
-                SetDefine(TPDefineInfo.TPTooltipSafety, true);
                 SetDefine(TPDefineInfo.TPUISafety, true);
                 EditorPrefs.SetBool("TP_IsFirstRun", false);
             }

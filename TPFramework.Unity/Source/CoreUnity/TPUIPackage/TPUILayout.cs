@@ -5,6 +5,7 @@
 */
 
 using System;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -33,7 +34,7 @@ namespace TPFramework.Unity
         protected Button[] Buttons { get; private set; }         // All Button components got from all childs of Button parent
         protected TextMeshProUGUI[] Texts { get; private set; }  // All TextMeshProUGUI components got from all childs of Text parent
 
-        public GameObject LayoutPrefab;                         // Prefab to be isntantiated and assigned to TPLayout
+        public GameObject LayoutPrefab;                         // Prefab to be instantiated and assigned to TPLayout
 
         public GameObject TPLayout { get; set; }                // Instantiated prefab
         public Transform LayoutTransform { get; private set; }  // Child of TPLayout, have Image & Button & Text parents
@@ -86,9 +87,18 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InitializeLayout()
         {
-            LayoutTransform = TPLayout.transform.GetChild(0);
 #if TPUISafeChecks
+            try
+            {
+                LayoutTransform = TPLayout.transform.GetChild(0);
+            }
+            catch (Exception)
+            {
+                Debug.LogError("You should have child transform on your prefab!");
+            }
             SafeCheck(LayoutTransform);
+#else
+            LayoutTransform = TPLayout.transform.GetChild(0);
 #endif
             CanvasGroup = TPLayout.GetComponent<CanvasGroup>();
             Images = Initialize(LayoutTransform.GetChild(0), Images);

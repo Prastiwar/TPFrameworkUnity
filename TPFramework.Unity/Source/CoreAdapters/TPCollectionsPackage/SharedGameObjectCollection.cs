@@ -26,7 +26,7 @@ namespace TPFramework.Unity
         public GameObject ShareObject(GameObject gameObject, Transform parent = null)
         {
             int id = gameObject.GetInstanceID();
-            if (SharedObjects.TryGetValue(id, out GameObject sharedObject))
+            if (!SharedObjects.TryGetValue(id, out GameObject sharedObject))
             {
                 sharedObject = UnityEngine.Object.Instantiate(gameObject, parent);
                 SharedObjects[id] = sharedObject;
