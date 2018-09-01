@@ -25,12 +25,12 @@ namespace TPFramework.Unity
         protected override void OnInitialized()
         {
 #if TPUISafeChecks
-            SafeCheck(TPLayout);
+            SafeCheck(UIWindow);
 #endif
             CanvasGroup.alpha = 0;
             CanvasGroup.blocksRaycasts = false;
 
-            Rect panelRect = LayoutTransform.GetComponent<Image>().rectTransform.rect;
+            Rect panelRect = LayoutRectTransform.rect;
             panelHalfWidth = panelRect.width / 2;
             panelHalfHeight = panelRect.height / 2;
         }
@@ -40,7 +40,7 @@ namespace TPFramework.Unity
         {
             if (UseSharedLayout)
             {
-                TPLayout = TPTooltipSystem.ShareLayout(LayoutPrefab, parent);
+                UIWindow = TPTooltipSystem.ShareLayout(UIWindowPrefab, parent);
                 return true;
             }
             return false;
@@ -79,9 +79,14 @@ namespace TPFramework.Unity
 #endif
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetPosition(Vector2 position)
+        public void SetPosition(Vector2 position, bool clampToScreen = true)
         {
             LayoutTransform.position = position;
+
+            if (clampToScreen)
+            {
+                LayoutRectTransform.ClampToWindow(UIWindowRectTransform);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

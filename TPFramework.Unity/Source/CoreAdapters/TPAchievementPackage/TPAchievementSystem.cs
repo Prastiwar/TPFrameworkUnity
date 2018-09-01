@@ -27,7 +27,7 @@ namespace TPFramework.Unity
                 isBusy = true;
                 notification.FillNotify(notifyInfo);
                 TPAnim.Animate(notification.NotifyAnim,
-                    (time) => OnNotifyActivation(time, notification.LayoutTransform),
+                    (time) => OnNotifyActivation(time, notification.GetTransform()),
                     () => notification.SetActive(true),
                     () => OnEndShowNotification(notification));
             }

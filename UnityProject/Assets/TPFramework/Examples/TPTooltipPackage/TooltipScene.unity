@@ -407,7 +407,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937858702
 GameObject:
@@ -420,6 +420,7 @@ GameObject:
   - component: {fileID: 937858706}
   - component: {fileID: 937858705}
   - component: {fileID: 937858704}
+  - component: {fileID: 937858707}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -460,7 +461,7 @@ MonoBehaviour:
   TooltipType: 2
   IsObserving: 1
   TooltipLayout:
-    LayoutPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
+    UIWindowPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
       type: 2}
     UseSharedLayout: 1
     DynamicOffset: {x: 0, y: 0}
@@ -498,6 +499,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 937858702}
+--- !u!114 &937858707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937858702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702737d7a2383d94cb3747377ca48e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Header: Static Enter
+  Description: This is static enter item
 --- !u!1 &1126056890
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,6 +676,7 @@ GameObject:
   - component: {fileID: 1145800197}
   - component: {fileID: 1145800196}
   - component: {fileID: 1145800195}
+  - component: {fileID: 1145800198}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -702,7 +717,7 @@ MonoBehaviour:
   TooltipType: 3
   IsObserving: 1
   TooltipLayout:
-    LayoutPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
+    UIWindowPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
       type: 2}
     UseSharedLayout: 1
     DynamicOffset: {x: 0, y: 0}
@@ -740,6 +755,19 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1145800193}
+--- !u!114 &1145800198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1145800193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702737d7a2383d94cb3747377ca48e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Header: Static Click
+  Description: This is static click item
 --- !u!1 &1458509005
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,6 +1005,7 @@ GameObject:
   - component: {fileID: 1631833273}
   - component: {fileID: 1631833272}
   - component: {fileID: 1631833274}
+  - component: {fileID: 1631833275}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1050,11 +1079,24 @@ MonoBehaviour:
   TooltipType: 0
   IsObserving: 1
   TooltipLayout:
-    LayoutPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
+    UIWindowPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
       type: 2}
     UseSharedLayout: 1
     DynamicOffset: {x: 0, y: 0}
     StaticPosition: {fileID: 0}
+--- !u!114 &1631833275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1631833270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702737d7a2383d94cb3747377ca48e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Header: Dynamic Enter
+  Description: This is dynamic enter item
 --- !u!1 &1669686007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,6 +1108,7 @@ GameObject:
   - component: {fileID: 1669686011}
   - component: {fileID: 1669686010}
   - component: {fileID: 1669686009}
+  - component: {fileID: 1669686012}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -1106,7 +1149,7 @@ MonoBehaviour:
   TooltipType: 1
   IsObserving: 1
   TooltipLayout:
-    LayoutPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
+    UIWindowPrefab: {fileID: 1159490331124468, guid: 8fc4494fe9714294c9b35dd7403d8fa6,
       type: 2}
     UseSharedLayout: 1
     DynamicOffset: {x: 0, y: 0}
@@ -1144,6 +1187,60 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1669686007}
+--- !u!114 &1669686012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1669686007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702737d7a2383d94cb3747377ca48e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Header: Dynamic Click
+  Description: This is dynamic click item
+--- !u!1 &1740768535
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1740768536}
+  - component: {fileID: 1740768537}
+  m_Layer: 0
+  m_Name: Script
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 4294967295
+  m_IsActive: 1
+--- !u!4 &1740768536
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1740768535}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1740768537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1740768535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4fca56ed936f9948ac022b2917fb731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 6
 --- !u!1 &1766054183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
+  m_ScaleFactor: 0.35
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
@@ -1264,7 +1361,7 @@ RectTransform:
   m_Children:
   - {fileID: 1559335200}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

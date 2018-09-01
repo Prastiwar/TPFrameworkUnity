@@ -37,7 +37,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override bool LayoutSpawn(Transform parent = null)
         {
-            TPLayout = TPAchievementSystem.ShareLayout(LayoutPrefab, parent);
+            UIWindow = TPAchievementSystem.ShareLayout(UIWindowPrefab, parent);
             return true;
         }
 

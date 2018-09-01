@@ -5,8 +5,8 @@
 */
 
 using System.Runtime.CompilerServices;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TPFramework.Unity
 {
@@ -39,6 +39,22 @@ namespace TPFramework.Unity
                 && thisRect.xMax >= rect.xMax
                 && thisRect.yMin <= rect.yMin
                 && thisRect.yMax >= rect.yMax;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ClampToWindow(this RectTransform panelRectTransform, RectTransform parentRectTransform)
+        {
+            Vector3 pos = panelRectTransform.localPosition;
+
+            Vector2 halfScreen = new Vector2(parentRectTransform.rect.width / 2, parentRectTransform.rect.height / 2);
+            Vector2 halfPanel = panelRectTransform.sizeDelta / 2;
+            Vector2 maxPos = new Vector2(halfScreen.x - halfPanel.x, halfScreen.y - halfPanel.y);
+            Vector2 minPos = -maxPos;
+            
+            pos.x = Mathf.Clamp(pos.x, minPos.x, maxPos.x);
+            pos.y = Mathf.Clamp(pos.y, minPos.y, maxPos.y);
+
+            panelRectTransform.localPosition = pos;
         }
     }
 }

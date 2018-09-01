@@ -33,7 +33,7 @@ namespace TPFramework.Unity
             if (TooltipType.IsClickable())
             {
                 TooltipLayout.Prepare(TooltipType);
-                TPTooltipSystem.OnPointerClick(eventData);
+                TPTooltipSystem.OnTooltipPointerClick(eventData);
             }
         }
 
@@ -46,7 +46,7 @@ namespace TPFramework.Unity
             if (!TooltipType.IsClickable())
             {
                 TooltipLayout.Prepare(TooltipType);
-                TPTooltipSystem.OnPointerEnter(eventData);
+                TPTooltipSystem.OnTooltipPointerEnter(eventData);
             }
         }
 
@@ -58,7 +58,7 @@ namespace TPFramework.Unity
 
             if (TooltipType != TPTooltipType.StaticClick)
             {
-                TPTooltipSystem.OnPointerExit(eventData);
+                TPTooltipSystem.OnTooltipPointerExit(eventData);
             }
         }
 

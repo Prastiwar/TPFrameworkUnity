@@ -21,7 +21,7 @@ MonoBehaviour:
   ShowNotifyOnComplete: 1
   ShowNotifyOnProgress: 1
   TPNotify:
-    LayoutPrefab: {fileID: 1615438841108636, guid: 964c2d79850772b4a866d25a75bfba29,
+    UIWindowPrefab: {fileID: 1615438841108636, guid: 964c2d79850772b4a866d25a75bfba29,
       type: 2}
     NotifyAnim:
       Curve:

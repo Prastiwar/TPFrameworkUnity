@@ -15,7 +15,7 @@ namespace TPFramework.Unity
 {
     /// <summary>
     /// Layout Hierarchy:
-    /// (TPLayout)
+    /// (UIWindow)
     ///     - (LayoutTransform)
     ///         - (Images parent)
     ///             - Image
@@ -34,27 +34,30 @@ namespace TPFramework.Unity
         protected Button[] Buttons { get; private set; }         // All Button components got from all childs of Button parent
         protected TextMeshProUGUI[] Texts { get; private set; }  // All TextMeshProUGUI components got from all childs of Text parent
 
-        public GameObject LayoutPrefab;                         // Prefab to be instantiated and assigned to TPLayout
+        protected CanvasGroup CanvasGroup { get; private set; }             // CanvasGroup component attached to UIWindow
+        protected Transform LayoutTransform { get; private set; }           // Child of UIWindow, have Image & Button & Text parents
+        protected RectTransform LayoutRectTransform { get; private set; }   // Child of UIWindow, have Image & Button & Text parents
+        protected RectTransform UIWindowRectTransform { get; private set; } // Child of UIWindow, have Image & Button & Text parents
+        protected GameObject UIWindow { get; set; }                         // Instantiated prefab
 
-        public GameObject TPLayout { get; set; }                // Instantiated prefab
-        public Transform LayoutTransform { get; private set; }  // Child of TPLayout, have Image & Button & Text parents
-        public CanvasGroup CanvasGroup { get; private set; }    // CanvasGroup component attached to TPLayout
-        public bool IsInitialized { get { return TPLayout; } }
+        public GameObject UIWindowPrefab; // Prefab to be instantiated and assigned to UIWindow
+
+        public bool IsInitialized { get { return UIWindow; } }
 
         /// <summary> Is called after Initialize </summary>
         protected virtual void OnInitialized() { }
 
-        /// <summary> Returns if TPLayout is already spawned - if returns false, instantiate prefab on InitializeIfIsNot() </summary>
+        /// <summary> Returns if UIWindow is already spawned - if returns false, instantiate prefab on InitializeIfIsNot() </summary>
         protected virtual bool LayoutSpawn(Transform parent = null) { return IsInitialized; }
 
-        /// <summary> If IsInitialized is false - instantiate LayoutPrefab to TPLayout and get Images & Buttons & Texts </summary>
+        /// <summary> If IsInitialized is false - instantiate LayoutPrefab to UIWindow and get Images & Buttons & Texts </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Initialize()
         {
             Initialize(null);
         }
 
-        /// <summary> If IsInitialized is false - instantiate LayoutPrefab to TPLayout and get Images & Buttons & Texts </summary>
+        /// <summary> If IsInitialized is false - instantiate LayoutPrefab to UIWindow and get Images & Buttons & Texts </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Initialize(Transform parent)
         {
@@ -63,14 +66,14 @@ namespace TPFramework.Unity
 
             if (!LayoutSpawn(parent))
             {
-                TPLayout = UnityEngine.Object.Instantiate(LayoutPrefab, parent);
+                UIWindow = UnityEngine.Object.Instantiate(UIWindowPrefab, parent);
             }
             InitializeLayout();
             SetActive(false);
-            OnInitialized();            
+            OnInitialized();
         }
 
-        /// <summary> If you set activation frequently, you'll want to avoid GC from eventsystem, use it instead of TPLayout.SetActive(..) </summary>
+        /// <summary> If you set activation frequently, you'll want to avoid GC from eventsystem, use it instead of UIWindow.SetActive(..) </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetActive(bool enable)
         {
@@ -80,7 +83,67 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool IsActive()
         {
-            return CanvasGroup.alpha >= 1 && TPLayout.activeSelf;
+            return CanvasGroup.alpha >= 1 && UIWindow.activeSelf;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetInteractable(bool interactable)
+        {
+            CanvasGroup.interactable = interactable;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool IsInteractable()
+        {
+            return CanvasGroup.interactable;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetBlocksRaycasts(bool blocksRaycast)
+        {
+            CanvasGroup.blocksRaycasts = blocksRaycast;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool BlocksRaycasts()
+        {
+            return CanvasGroup.blocksRaycasts;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void SetAlpha(float alpha)
+        {
+            CanvasGroup.alpha = alpha;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public float GetAlpha()
+        {
+            return CanvasGroup.alpha;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Transform GetTransform()
+        {
+            return LayoutTransform;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TextMeshProUGUI GetText(int index)
+        {
+            return Texts[index];
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Image GetImage(int index)
+        {
+            return Images[index];
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Button GetButton(int index)
+        {
+            return Buttons[index];
         }
 
         /// <summary> Get Image & Buttons & Texts components from childs of parents </summary>
@@ -90,7 +153,7 @@ namespace TPFramework.Unity
 #if TPUISafeChecks
             try
             {
-                LayoutTransform = TPLayout.transform.GetChild(0);
+                LayoutTransform = UIWindow.transform.GetChild(0);
             }
             catch (Exception)
             {
@@ -98,9 +161,11 @@ namespace TPFramework.Unity
             }
             SafeCheck(LayoutTransform);
 #else
-            LayoutTransform = TPLayout.transform.GetChild(0);
+            LayoutTransform = UIWindow.transform.GetChild(0);
 #endif
-            CanvasGroup = TPLayout.GetComponent<CanvasGroup>();
+            LayoutRectTransform = LayoutTransform.GetComponent<RectTransform>();
+            UIWindowRectTransform = UIWindow.GetComponent<RectTransform>();
+            CanvasGroup = UIWindow.GetComponent<CanvasGroup>();
             Images = Initialize(LayoutTransform.GetChild(0), Images);
             Buttons = Initialize(LayoutTransform.GetChild(1), Buttons);
             Texts = Initialize(LayoutTransform.GetChild(2), Texts);
@@ -113,7 +178,7 @@ namespace TPFramework.Unity
             if (transform.childCount < 3)
                 throw new Exception("Invalid TPUILayout! LayoutTransform needs to have Child 0: Parent of Images, Child 1: Parent of Buttons, Child 2: Parent of Texts");
             else if (transform.parent.GetComponent<CanvasGroup>() == null)
-                throw new Exception("Invalid TPUILayout! TPLayout needs CanvasGroup component");
+                throw new Exception("Invalid TPUILayout! UIWindow needs CanvasGroup component");
             else if (transform.GetChild(0).GetChilds().Any(x => x.GetComponent<Image>() == null))
                 throw new Exception("Invalid TPUILayout! Child 0: Parent of Images must contain only Images as childs");
             else if (transform.GetChild(1).GetChilds().Any(x => x.GetComponent<Button>() == null))

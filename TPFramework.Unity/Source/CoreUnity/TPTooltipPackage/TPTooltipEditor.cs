@@ -40,8 +40,8 @@ namespace TPFramework.Unity
             foldoutLayout = EditorGUILayout.Foldout(foldoutLayout, "Layout Settings");
             if (foldoutLayout)
             {
-                Target.TooltipLayout.LayoutPrefab =
-                    (GameObject)EditorGUILayout.ObjectField(GUIContent("Prefab Layout"), Target.TooltipLayout.LayoutPrefab, typeof(GameObject), false);
+                Target.TooltipLayout.UIWindowPrefab =
+                    (GameObject)EditorGUILayout.ObjectField(GUIContent("Prefab Layout"), Target.TooltipLayout.UIWindowPrefab, typeof(GameObject), false);
 
                 Target.TooltipLayout.UseSharedLayout = EditorGUILayout.Toggle(GUIContent("Should share layout?"), Target.TooltipLayout.UseSharedLayout);
 

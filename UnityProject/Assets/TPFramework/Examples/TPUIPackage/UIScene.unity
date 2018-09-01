@@ -465,7 +465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggleWindowBtn: {fileID: 544448070}
   modalWindow:
-    LayoutPrefab: {fileID: 1328557604312396, guid: 995a1b2e45c970f4a948ca2749bef354,
+    UIWindowPrefab: {fileID: 1328557604312396, guid: 995a1b2e45c970f4a948ca2749bef354,
       type: 2}
     showAnim:
       Curve:
