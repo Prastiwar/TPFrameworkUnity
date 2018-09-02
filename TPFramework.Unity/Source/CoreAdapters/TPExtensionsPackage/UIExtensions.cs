@@ -10,8 +10,13 @@ using UnityEngine.UI;
 
 namespace TPFramework.Unity
 {
-    public static partial class GameObjectExtensions
+    public static partial class TPExtensions
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetSprite(this Image image, Sprite sprite)
+        {
+            image.sprite = sprite;
+        }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAlpha(this Image image, float alpha)
         {

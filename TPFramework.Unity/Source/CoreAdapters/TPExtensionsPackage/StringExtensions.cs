@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
-    public static partial class GameObjectExtensions
+    public static partial class TPExtensions
     {
         private static readonly char[] resolutionSeparators = new char[] { ' ', 'x', '@', 'H', 'z' };
 

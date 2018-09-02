@@ -117,7 +117,7 @@ namespace TPFramework.Unity
         public static GUIContent GetIcon(UnityEditorIcons icon)
         {
             string iconText = icon.ToString();
-            bool hasAtt = TPExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
+            bool hasAtt = Core.TPExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
             return EditorGUIUtility.IconContent(hasAtt ? att.StringValue : iconText);
         }
     }

@@ -5,19 +5,17 @@
 */
 
 using System;
-using System.Linq;
-using TPFramework.Core;
 using UnityEngine;
 
 namespace TPFramework.Unity
 {
     [Serializable]
-    public class TPInventory : Core.TPInventory, ISerializationCallbackReceiver
+    public class TPInventory : Core.TPInventory<TPItemSlot, TPEquipSlot, Core.TPItem>, ISerializationCallbackReceiver
     {
-        [SerializeField] private TPEquipSlot[] equipSlots;
         [SerializeField] private TPItemSlot[] itemSlots;
+        [SerializeField] private TPEquipSlot[] equipSlots;
 
-        public TPInventory(ITPEquipSlot[] equipSlots, ITPItemSlot[] itemSlots)
+        public TPInventory(TPEquipSlot[] equipSlots, TPItemSlot[] itemSlots)
         {
             EquipSlots = equipSlots;
             ItemSlots = itemSlots;
@@ -25,26 +23,20 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (EquipSlots?.Length > equipSlots.Length)
+            if (EquipSlots?.Length > equipSlots?.Length)
             {
-                equipSlots = EquipSlots.Cast<TPEquipSlot>().ToArray();
+                equipSlots = EquipSlots;
             }
-            if (ItemSlots?.Length > itemSlots.Length)
+            if (ItemSlots?.Length > itemSlots?.Length)
             {
-                itemSlots = ItemSlots.Cast<TPItemSlot>().ToArray();
+                itemSlots = ItemSlots;
             }
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (equipSlots != null)
-            {
-                EquipSlots = equipSlots.Cast<ITPEquipSlot>().ToArray();
-            }
-            if (itemSlots != null)
-            {
-                ItemSlots = itemSlots.Cast<ITPItemSlot>().ToArray();
-            }
+            EquipSlots = equipSlots;
+            ItemSlots = itemSlots;
         }
     }
 }

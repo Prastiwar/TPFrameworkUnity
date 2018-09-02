@@ -5,15 +5,39 @@
 */
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using TPFramework.Core;
 using UnityEngine;
 
 namespace TPFramework.Unity
 {
-    public static partial class GameObjectExtensions
+    public static partial class TPExtensions
     {
         private static readonly ReusableList<Transform> reusableTransform = new ReusableList<Transform>();
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T[] GetComponentsOnlyInChildren<T>(this GameObject gameObject)
+        {
+            var components = new HashSet<T>(gameObject.GetComponentsInChildren<T>());
+            components.Remove(gameObject.GetComponent<T>());
+            return components.ToArray();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T GetComponentOnlyInChildren<T>(this GameObject gameObject)
+        {
+            int length = gameObject.transform.childCount;
+            for (int i = 0; i < length; i++)
+            {
+                T comp = gameObject.transform.GetChild(i).GetComponent<T>();
+                if (comp != null)
+                {
+                    return comp;
+                }
+            }
+            return default(T);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosX(this Transform transform, float x)

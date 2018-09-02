@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
-    public static partial class GameObjectExtensions
+    public static partial class TPExtensions
     {
         private static readonly ReusableList<Vector3> reusableVector3 = new ReusableList<Vector3>();
 
