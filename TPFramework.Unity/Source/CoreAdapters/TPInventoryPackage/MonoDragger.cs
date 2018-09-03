@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using TPFramework.Core;
 /**
 *   Authored by Tomasz Piowczyk
 *   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
@@ -21,6 +20,7 @@ namespace TPFramework.Unity
         private void Awake()
         {
             DragTransform = GetDragTransform();
+            cachePosition = DragTransform.position;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -68,6 +68,10 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnEndDrag(PointerEventData eventData)
         {
+            if (!CanDrag())
+            {
+                return;
+            }
             TTarget slotEntered = eventData.pointerEnter?.GetComponent<TTarget>();
             if (slotEntered != null && slotEntered != this)
             {
@@ -83,7 +87,10 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected virtual bool CanDrag() { return true; }
+        protected virtual bool CanDrag()
+        {
+            return true;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void OnDragStarted() { }

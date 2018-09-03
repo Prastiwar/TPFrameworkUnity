@@ -15,7 +15,10 @@ namespace TPFramework.Unity
     [Serializable]
     public class TPItemSlotHolder : MonoDragger<TPItemSlotHolder>, ISerializationCallbackReceiver
     {
-        public TPItemSlot Slot;
+        [SerializeField] private int type;
+        [SerializeField] private TPItemHolder itemHolder;
+
+        [HideInInspector] public TPItemSlot Slot;
 
         protected Image slotImage;
         protected Image itemImage;
@@ -55,7 +58,7 @@ namespace TPFramework.Unity
             itemImage.enabled = Slot.HasItem();
             if (Slot.HasItem())
             {
-                //itemImage.SetSprite((Slot as ITPItemSlot<TPItemHolder>).StoredItem.Icon);
+                itemImage.SetSprite(itemHolder.Icon);
             }
         }
 
@@ -81,25 +84,24 @@ namespace TPFramework.Unity
         protected override void OnEndDragTarget(TPItemSlotHolder slotholder)
         {
             itemCanvas.overrideSorting = false;
-            Slot.MoveItem(slotholder.Slot);
+            if (Slot.MoveItem(slotholder.Slot))
+            {
+                TPItemHolder hold = slotholder.itemHolder;
+                slotholder.itemHolder = itemHolder;
+                itemHolder = hold;
+                slotholder.RefreshUI();
+                RefreshUI();
+            }
         }
 
-        [SerializeField, HideInInspector] private int type;
-        [SerializeField, HideInInspector] public TPItemHolder ItemHolder;
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (Slot != null)
-            {
-                type = Slot.Type;
-                //item = Slot.;
-            }
+            type = Slot == null ? 0 : Slot.Type;
         }
+
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (Slot != null)
-            {
-                Slot = new TPItemSlot(type, ItemHolder?.Item);
-            }
+            Slot = new TPItemSlot(type, itemHolder?.Item);
         }
     }
 }
