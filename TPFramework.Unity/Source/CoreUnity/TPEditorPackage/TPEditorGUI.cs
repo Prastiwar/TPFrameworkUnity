@@ -14,6 +14,7 @@ namespace TPFramework.Unity
 {
     public static class TPEditorGUI
     {
+        public static readonly float fieldHeight = 18;
         public static readonly Vector2 Space  = new Vector2(10, 20);
         public static readonly GUILayoutOption[] Fixed150Width = new GUILayoutOption[] { GUILayout.Width(150), GUILayout.MaxWidth(150), GUILayout.MinWidth(150) };
 

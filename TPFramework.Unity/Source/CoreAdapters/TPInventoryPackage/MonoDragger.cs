@@ -11,7 +11,8 @@ using UnityEngine.EventSystems;
 
 namespace TPFramework.Unity
 {
-    public abstract class MonoDragger : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
+    public abstract class MonoDragger<TTarget> : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
+        where TTarget : MonoBehaviour
     {
         private Vector2 cachePosition;
 
@@ -67,7 +68,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnEndDrag(PointerEventData eventData)
         {
-            ITPItemSlot<Core.TPItem> slotEntered = eventData.pointerEnter?.GetComponent<ITPItemSlot<Core.TPItem>>();
+            TTarget slotEntered = eventData.pointerEnter?.GetComponent<TTarget>();
             if (slotEntered != null && slotEntered != this)
             {
                 OnEndDragTarget(slotEntered);
@@ -88,6 +89,6 @@ namespace TPFramework.Unity
         protected virtual void OnDragStarted() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected abstract void OnEndDragTarget(ITPItemSlot<Core.TPItem> slot);
+        protected abstract void OnEndDragTarget(TTarget slot);
     }
 }

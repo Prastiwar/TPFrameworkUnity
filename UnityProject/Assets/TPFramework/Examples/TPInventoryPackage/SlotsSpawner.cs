@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TPFramework.Core;
 using TPFramework.Unity;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class SlotsSpawner : MonoBehaviour
     [SerializeField] private GameObject equipSlotPrefab;
     [SerializeField] private GameObject itemSlotPrefab;
 
-    public void Spawn(List<TPEquipSlot> equipSlots, List<TPItemSlot> itemSlots)
+    public void Spawn(List<TPEquipSlotHolder> equipSlots, List<TPItemSlotHolder> itemSlots)
     {
         if (inventoryPanel == null || equipSlotPrefab == null || itemSlotPrefab == null)
             return;
@@ -22,14 +23,14 @@ public class SlotsSpawner : MonoBehaviour
         for (int i = 0; i < equipSlotsCount; i++)
         {
             GameObject slotObject = Instantiate(equipSlotPrefab, inventoryPanel);
-            TPEquipSlot slotComponent = slotObject.GetComponent<TPEquipSlot>();
+            TPEquipSlotHolder slotComponent = slotObject.GetComponent<TPEquipSlotHolder>();
             equipSlots.Add(slotComponent);
         }
 
         for (int i = 0; i < itemSlotsCount; i++)
         {
             GameObject slotObject = Instantiate(itemSlotPrefab, inventoryPanel);
-            TPItemSlot slotComponent = slotObject.GetComponent<TPItemSlot>();
+            TPItemSlotHolder slotComponent = slotObject.GetComponent<TPItemSlotHolder>();
             itemSlots.Add(slotComponent);
         }
     }

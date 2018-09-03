@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 222975648649725970}
   - component: {fileID: 114539332629195470}
   - component: {fileID: 114539821236657680}
-  - component: {fileID: 114739275424473374}
+  - component: {fileID: 114822240306367786}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114739275424473374
+--- !u!114 &114822240306367786
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -129,11 +129,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1903729848396974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -581566368, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: 59259603, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  storedItem: {fileID: 0}
+  item: {fileID: 0}
 --- !u!222 &222874337848123594
 CanvasRenderer:
   m_ObjectHideFlags: 1

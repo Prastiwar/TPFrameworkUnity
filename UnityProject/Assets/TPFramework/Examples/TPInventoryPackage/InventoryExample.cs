@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class InventoryExample : MonoBehaviour
 {
-    [SerializeField] private TPFramework.Unity.TPInventory inventory;
+    [SerializeField] private TPInventory inventory;
 
     private void Reset()
     {
         SlotsSpawner spawner = GetComponent<SlotsSpawner>();
         if (spawner != null)
         {
-            List<TPEquipSlot> equipSlots = new List<TPEquipSlot>(4);
-            List<TPItemSlot> itemSlots = new List<TPItemSlot>(8);
+            List<TPEquipSlotHolder> equipSlotsList = new List<TPEquipSlotHolder>(4);
+            List<TPItemSlotHolder> itemSlotsList = new List<TPItemSlotHolder>(8);
 
-            spawner.Spawn(equipSlots, itemSlots);
-            inventory.SetEquipSlots(equipSlots.ToArray());
-            inventory.SetItemSlots(itemSlots.ToArray());
+            spawner.Spawn(equipSlotsList, itemSlotsList);
+            inventory = new TPInventory();
+            inventory.InitEquipSlots(equipSlotsList.ToArray());
+            inventory.InitItemSlots(itemSlotsList.ToArray());
         }
     }
 
