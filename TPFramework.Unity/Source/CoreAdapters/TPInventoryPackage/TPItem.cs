@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using TPFramework.Core;
 using UnityEngine;
 
@@ -38,18 +39,20 @@ namespace TPFramework.Unity
         public int ID { get { return id; } }
         public int Type { get { return type; } }
         public string Name { get { return name; } }
-        public string Description { get { throw new NotImplementedException(); } }
-        public double Worth { get { throw new NotImplementedException(); } }
-        public int AmountStack { get { throw new NotImplementedException(); } }
-        public int MaxStack { get { throw new NotImplementedException(); } }
-        public float Weight { get { throw new NotImplementedException(); } }
-        public ITPModifier[] Modifiers { get { throw new NotImplementedException(); } }
+        public string Description { get { return Description; } }
+        public double Worth { get { return worth; } }
+        public int AmountStack { get { return amountStack; } }
+        public int MaxStack { get { return maxStack; } }
+        public float Weight { get { return weight; } }
+        public ITPModifier[] Modifiers { get { return null; } }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Use()
         {
             return item.Use();
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Stack(int count = 1)
         {
             return item.Stack(count);
@@ -70,13 +73,20 @@ namespace TPFramework.Unity
                 AmountStack = itemSO.amountStack,
                 MaxStack = itemSO.maxStack,
                 Weight = itemSO.weight,
-                Modifiers = itemSO.modifiers.Cast<ITPModifier>().ToArray()
+                Modifiers = itemSO.modifiers?.Cast<ITPModifier>().ToArray()
             };
         }
 
-        public static implicit operator TPItem(Core.TPItem item)
+        public void Set(Core.TPItem item)
         {
-            return item ?? null;
+            id = item.ID;
+            type = item.Type;
+            name = item.Name;
+            description = item.Description;
+            worth = item.Worth;
+            amountStack = item.AmountStack;
+            maxStack = item.MaxStack;
+            weight = item.Weight;
         }
     }
 }
