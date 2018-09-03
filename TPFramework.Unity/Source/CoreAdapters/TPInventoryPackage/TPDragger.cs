@@ -1,47 +1,21 @@
-﻿using System.Runtime.CompilerServices;
-/**
+﻿/**
 *   Authored by Tomasz Piowczyk
 *   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace TPFramework.Unity
 {
-    public abstract class MonoDragger<TTarget> : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
+    public abstract class TPDragger<TTarget> : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
         where TTarget : MonoBehaviour
     {
-        private Vector2 cachePosition;
+        private Vector2 cachedPosition;
 
         protected Transform DragTransform;
-
-        private void Awake()
-        {
-            DragTransform = GetDragTransform();
-            cachePosition = DragTransform.position;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void DisableDrag()
-        {
-            //canvasGroup.blocksRaycasts = true;
-            DragTransform.position = cachePosition;
-            //cachePosition = Vector2.zero;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void OnPointerClick(PointerEventData eventData)
-        {
-
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void OnBeginDrag(PointerEventData eventData)
@@ -50,9 +24,8 @@ namespace TPFramework.Unity
             {
                 return;
             }
-            cachePosition = DragTransform.position;
+            cachedPosition = DragTransform.position;
             OnDragStarted();
-            //canvasGroup.blocksRaycast = false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -91,6 +64,24 @@ namespace TPFramework.Unity
         {
             return true;
         }
+
+        private void Awake()
+        {
+            DragTransform = GetDragTransform();
+            cachedPosition = DragTransform.position;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void DisableDrag()
+        {
+            DragTransform.position = cachedPosition;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void OnPointerEnter(PointerEventData eventData) { }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public virtual void OnPointerClick(PointerEventData eventData) { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected virtual void OnDragStarted() { }

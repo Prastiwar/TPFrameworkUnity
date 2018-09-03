@@ -48,7 +48,7 @@ namespace TPFramework.Unity
                 amountStack = save.AmountStack,
                 maxStack = save.MaxStack,
                 weight = save.Weight,
-                //modifiers = save.Modifiers
+                modifiers = save.Modifiers?.Cast<TPModifier>().ToArray()
             };
         }
     }

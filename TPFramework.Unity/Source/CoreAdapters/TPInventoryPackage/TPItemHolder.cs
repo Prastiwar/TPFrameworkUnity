@@ -26,10 +26,5 @@ namespace TPFramework.Unity
         {
             Item = item;
         }
-
-        public static implicit operator TPItem(TPItemHolder itemSO)
-        {
-            return itemSO?.Item;
-        }
     }
 }

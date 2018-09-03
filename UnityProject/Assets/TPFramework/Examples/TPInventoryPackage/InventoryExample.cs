@@ -24,6 +24,6 @@ public class InventoryExample : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-
+        inventory.AddItem(inventory.ItemDatabase.GetItemHolder(0).Item);
     }
 }

@@ -13,60 +13,15 @@ using UnityEngine.UI;
 namespace TPFramework.Unity
 {
     [Serializable]
-    public class TPItemSlotHolder : MonoDragger<TPItemSlotHolder>, ISerializationCallbackReceiver
+    public class TPItemSlotHolder : TPDragger<TPItemSlotHolder>, ISerializationCallbackReceiver
     {
+        private Image itemImage;
+        private Canvas itemCanvas;
+
         [SerializeField] private int type;
-        [SerializeField] private TPItemHolder itemHolder;
+        [SerializeField] internal TPItemHolder itemHolder;
 
         [HideInInspector] public TPItemSlot Slot;
-
-        protected Image slotImage;
-        protected Image itemImage;
-        protected Canvas itemCanvas;
-
-        private void OnValidate()
-        {
-            Reset();
-        }
-
-        private void Reset()
-        {
-#if TPUISafeChecks
-            SafeCheck();
-#endif
-            slotImage = transform.GetComponent<Image>();
-            itemImage = transform.GetChild(0).GetComponent<Image>();
-            itemCanvas = itemImage.GetComponent<Canvas>();
-            RefreshUI();
-        }
-
-#if TPUISafeChecks
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void SafeCheck()
-        {
-            if (transform.childCount <= 0 || transform.GetChild(0).GetComponent<Image>() == null)
-                throw new Exception("Slot need to have first child image for Item usage");
-            else if (transform.GetChild(0).GetComponent<Canvas>() == null)
-                throw new Exception("Item image need to have Canvas component to override sorting while dragging");
-        }
-#endif
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void RefreshUI()
-        {
-            itemImage.enabled = Slot.HasItem();
-            if (Slot.HasItem())
-            {
-                itemImage.SetSprite(itemHolder.Icon);
-            }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        protected override void OnDragStarted()
-        {
-            itemCanvas.overrideSorting = true;
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override Transform GetDragTransform()
@@ -81,22 +36,57 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected override void OnDragStarted()
+        {
+            itemCanvas.overrideSorting = true;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnEndDragTarget(TPItemSlotHolder slotholder)
         {
             itemCanvas.overrideSorting = false;
             if (Slot.MoveItem(slotholder.Slot))
             {
-                TPItemHolder hold = slotholder.itemHolder;
+                TPItemHolder slotHolderShuffle = slotholder.itemHolder;
                 slotholder.itemHolder = itemHolder;
-                itemHolder = hold;
+                itemHolder = slotHolderShuffle;
                 slotholder.RefreshUI();
                 RefreshUI();
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void RefreshUI()
+        {
+            itemImage.enabled = Slot.HasItem();
+            if (Slot.HasItem())
+            {
+                itemImage.SetSprite(itemHolder.Icon);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void OnValidate()
+        {
+            if (transform.childCount <= 0)
+            {
+                throw new ArgumentNullException("Child image with canvas component not found " + Slot);
+            }
+            else
+            {
+                itemImage = transform.GetChild(0).GetComponent<Image>();
+                itemCanvas = itemImage.GetComponent<Canvas>();
+                if (itemImage == null || itemCanvas == null)
+                {
+                    throw new ArgumentNullException("Child image with canvas component not found " + Slot);
+                }
+            }
+            RefreshUI();
+        }
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            type = Slot == null ? 0 : Slot.Type;
+            type = Slot != null ? Slot.Type : 0;
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()

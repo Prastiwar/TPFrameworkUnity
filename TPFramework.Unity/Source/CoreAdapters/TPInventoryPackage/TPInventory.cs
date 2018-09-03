@@ -17,19 +17,16 @@ namespace TPFramework.Unity
         [SerializeField] private TPItemSlotHolder[] itemSlotHolders;
         [SerializeField] private TPEquipSlotHolder[] equipSlotsHolders;
 
+        public TPItemDatabase ItemDatabase;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitItemSlots(TPItemSlotHolder[] slotHolders)
         {
             itemSlotHolders = slotHolders;
             if (itemSlotHolders != null)
             {
-                int length = slotHolders.Length;
-                TPItemSlot[] slots = new TPItemSlot[length];
-                for (int i = 0; i < length; i++)
-                {
-                    slots[i] = slotHolders[i].Slot;
-                }
-                SetItemSlots(slots);
+                ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
+                SetItemSlots(ItemSlots);
             }
         }
 
@@ -39,13 +36,8 @@ namespace TPFramework.Unity
             equipSlotsHolders = slotHolders;
             if (equipSlotsHolders != null)
             {
-                int length = slotHolders.Length;
-                TPEquipSlot[] slots = new TPEquipSlot[length];
-                for (int i = 0; i < length; i++)
-                {
-                    slots[i] = slotHolders[i].Slot as TPEquipSlot;
-                }
-                SetEquipSlots(slots);
+                EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
+                SetEquipSlots(EquipSlots);
             }
         }
 
@@ -54,22 +46,48 @@ namespace TPFramework.Unity
         {
             if (equipSlotsHolders != null)
             {
-                int length = equipSlotsHolders.Length;
-                EquipSlots = new TPEquipSlot[length];
-                for (int i = 0; i < length; i++)
-                {
-                    EquipSlots[i] = equipSlotsHolders[i].Slot as TPEquipSlot;
-                }
+                equipSlotsHolders = AddOnItemChangedAction(equipSlotsHolders);
+                EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
             }
             if (itemSlotHolders != null)
             {
-                int length = itemSlotHolders.Length;
-                ItemSlots = new TPItemSlot[length];
-                for (int i = 0; i < length; i++)
+                itemSlotHolders = AddOnItemChangedAction(itemSlotHolders);
+                ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private T[] AddOnItemChangedAction<T>(T[] holder)
+            where T : TPItemSlotHolder
+        {
+            int length = holder.Length;
+            for (int i = 0; i < length; i++)
+            {
+                Debug.Log(holder[i].Slot); // null
+                Debug.Log(holder[i].Slot as ITPItemSlot<TPItem>); // null because of null
+                TPItem item = (holder[i].Slot as ITPItemSlot<TPItem>).StoredItem;
+                if (item != null)
                 {
-                    ItemSlots[i] = itemSlotHolders[i].Slot;
+                    holder[i].Slot.OnItemChanged += () => {
+                        holder[i].itemHolder = ItemDatabase.GetItemHolder(item.ID);
+                    };
                 }
             }
+            return holder;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private T[] LoadSlots<T, U>(T[] slots, U[] holder)
+            where T : TPItemSlot
+            where U : TPItemSlotHolder
+        {
+            int length = holder.Length;
+            slots = new T[length];
+            for (int i = 0; i < length; i++)
+            {
+                slots[i] = holder[i].Slot as T;
+            }
+            return slots;
         }
     }
 }
