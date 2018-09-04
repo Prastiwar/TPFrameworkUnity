@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Runtime.CompilerServices;
 
-namespace TPFramework.Unity.Source.CoreUnity.TPEditor
+namespace TPFramework.Unity.Editor
 {
     public class TPScriptlessEditor<T> : TPEditor<T> where T : MonoBehaviour
     {

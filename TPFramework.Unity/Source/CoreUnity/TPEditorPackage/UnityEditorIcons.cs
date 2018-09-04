@@ -6,7 +6,7 @@
 
 using TPFramework.Core;
 
-namespace TPFramework.Unity
+namespace TPFramework.Unity.Editor
 {
     public enum UnityEditorIcons
     {

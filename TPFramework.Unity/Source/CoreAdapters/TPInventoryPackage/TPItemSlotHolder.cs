@@ -15,13 +15,13 @@ namespace TPFramework.Unity
     [Serializable]
     public class TPItemSlotHolder : TPDragger<TPItemSlotHolder>, ISerializationCallbackReceiver
     {
-        private Image itemImage;
-        private Canvas itemCanvas;
+        protected Image itemImage;
+        protected Canvas itemCanvas;
 
-        [SerializeField] private int type;
+        [SerializeField] protected int type;
         [SerializeField] internal TPItemHolder itemHolder;
 
-        [HideInInspector] public TPItemSlot Slot;
+        [NonSerialized] public TPItemSlot Slot;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override Transform GetDragTransform()
@@ -47,16 +47,20 @@ namespace TPFramework.Unity
             itemCanvas.overrideSorting = false;
             if (Slot.MoveItem(slotholder.Slot))
             {
-                TPItemHolder slotHolderShuffle = slotholder.itemHolder;
-                slotholder.itemHolder = itemHolder;
-                itemHolder = slotHolderShuffle;
+                //TPItemHolder slotHolderShuffle = slotholder.itemHolder;
+                //slotholder.itemHolder = itemHolder;
+                //itemHolder = slotHolderShuffle;
+                Debug.Log(Slot.OnItemChanged);
+                Debug.Log(slotholder.Slot.OnItemChanged);
+                Slot.OnItemChanged();
+                slotholder.Slot.OnItemChanged();
                 slotholder.RefreshUI();
                 RefreshUI();
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void RefreshUI()
+        internal void RefreshUI()
         {
             itemImage.enabled = Slot.HasItem();
             if (Slot.HasItem())
@@ -91,6 +95,7 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
+            (itemHolder as ISerializationCallbackReceiver)?.OnAfterDeserialize();
             Slot = new TPItemSlot(type, itemHolder?.Item);
         }
     }

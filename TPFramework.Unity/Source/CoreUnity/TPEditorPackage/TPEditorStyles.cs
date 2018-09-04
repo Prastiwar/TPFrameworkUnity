@@ -10,7 +10,7 @@ using TPFramework.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TPFramework.Unity.Editor
 {
     public static class TPEditorStyles
     {

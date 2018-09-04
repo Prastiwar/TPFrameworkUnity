@@ -1,10 +1,10 @@
 ﻿/**
 *   Authored by Tomasz Piowczyk
-*   License: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
-*   Repository: https://github.com/Prastiwar/TPFrameworkUnity 
+*   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
+*   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-
+#if UNITY_EDITOR
 namespace TPFramework.Internal
 {
     public struct TPUnityFrameworkInfo
@@ -27,3 +27,4 @@ namespace TPFramework.Internal
         }
     }
 }
+#endif

@@ -8,6 +8,12 @@ public class InventoryExample : MonoBehaviour
 
     private void Reset()
     {
+        inventory = new TPInventory();
+        SpawnSlots();
+    }
+
+    public void SpawnSlots()
+    {
         SlotsSpawner spawner = GetComponent<SlotsSpawner>();
         if (spawner != null)
         {
@@ -15,10 +21,18 @@ public class InventoryExample : MonoBehaviour
             List<TPItemSlotHolder> itemSlotsList = new List<TPItemSlotHolder>(8);
 
             spawner.Spawn(equipSlotsList, itemSlotsList);
-            inventory = new TPInventory();
             inventory.InitEquipSlots(equipSlotsList.ToArray());
             inventory.InitItemSlots(itemSlotsList.ToArray());
         }
+        else
+        {
+            throw new System.ArgumentNullException("There is no SlotsSpawner component attached to gameObject " + gameObject);
+        }
+    }
+
+    public void InitializeDatabase(TPItemHolder[] itemHolders)
+    {
+        inventory.ItemDatabase.InitDatabase(itemHolders);
     }
 
     // Use this for initialization

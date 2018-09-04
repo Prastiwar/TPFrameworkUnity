@@ -19,14 +19,36 @@ namespace TPFramework.Unity
         [SerializeField] private TPItemHolder[] itemDatabase;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void InitDatabase(TPItemHolder[] itemHolders)
+        {
+            itemDatabase = itemHolders;
+            InitializeMap();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TPItemHolder GetItemHolder(int id)
         {
             return itemDatabaseMap[id];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void InitializeMap()
+        {
+            int length = itemDatabase.Length;
+            itemDatabaseMap = new Dictionary<int, TPItemHolder>(length);
+            for (int i = 0; i < length; i++)
+            {
+                if (itemDatabase[i] != null)
+                {
+                    (itemDatabase[i] as ISerializationCallbackReceiver).OnAfterDeserialize();
+                    itemDatabaseMap.Add(itemDatabase[i].Item.ID, itemDatabase[i]);
+                }
+            }
+        }
+
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (itemDatabaseMap != null)
+            if (itemDatabaseMap != null && itemDatabase == null)
             {
                 int i = 0;
                 int length = itemDatabaseMap.Count;
@@ -41,25 +63,9 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            if (itemDatabase != null)
+            if (itemDatabase != null && itemDatabaseMap == null)
             {
-                int length = itemDatabase.Length;
-                itemDatabaseMap = new Dictionary<int, TPItemHolder>(length);
-                for (int i = 0; i < length; i++)
-                {
-                    if (itemDatabase[i] != null)
-                    {
-                        try
-                        {
-                            itemDatabaseMap.Add(itemDatabase[i].Item.ID, itemDatabase[i]);
-                        }
-                        catch (Exception)
-                        {
-                            throw new Exception("" +itemDatabase[i].Item.ID);
-                            throw;
-                        }
-                    }
-                }
+                InitializeMap();
             }
         }
     }

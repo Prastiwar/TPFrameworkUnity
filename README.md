@@ -40,6 +40,9 @@
 * ***TPFade*** - *Fade between scenes*
 * ***TPUI*** - *Generic UI Layout and much more*
 
+***Others***
+* ***[UDictionary](https://github.com/Prastiwar/UnitySerializedDictionary)*** - Serialized and editable in inspector Dictionary
+
 
 ## Before start
 

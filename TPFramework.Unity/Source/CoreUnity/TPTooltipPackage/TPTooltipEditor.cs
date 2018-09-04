@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TPFramework.Unity.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(TPTooltip))]

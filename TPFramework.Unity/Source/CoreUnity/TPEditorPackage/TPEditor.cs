@@ -5,12 +5,11 @@
 */
 
 #if UNITY_EDITOR
-using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TPFramework.Unity.Editor
 {
-    public class TPEditor<T> : Editor where T : MonoBehaviour
+    public class TPEditor<T> : UnityEditor.Editor where T : MonoBehaviour
     {
         private GUIContent tempContent = new GUIContent();
 

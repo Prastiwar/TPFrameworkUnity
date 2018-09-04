@@ -25,6 +25,7 @@ namespace TPFramework.Unity
             itemSlotHolders = slotHolders;
             if (itemSlotHolders != null)
             {
+                itemSlotHolders = AddOnItemChangedAction(itemSlotHolders);
                 ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
                 SetItemSlots(ItemSlots);
             }
@@ -36,23 +37,9 @@ namespace TPFramework.Unity
             equipSlotsHolders = slotHolders;
             if (equipSlotsHolders != null)
             {
-                EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
-                SetEquipSlots(EquipSlots);
-            }
-        }
-
-        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
-        {
-            if (equipSlotsHolders != null)
-            {
                 equipSlotsHolders = AddOnItemChangedAction(equipSlotsHolders);
                 EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
-            }
-            if (itemSlotHolders != null)
-            {
-                itemSlotHolders = AddOnItemChangedAction(itemSlotHolders);
-                ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
+                SetEquipSlots(EquipSlots);
             }
         }
 
@@ -63,15 +50,12 @@ namespace TPFramework.Unity
             int length = holder.Length;
             for (int i = 0; i < length; i++)
             {
-                Debug.Log(holder[i].Slot); // null
-                Debug.Log(holder[i].Slot as ITPItemSlot<TPItem>); // null because of null
-                TPItem item = (holder[i].Slot as ITPItemSlot<TPItem>).StoredItem;
-                if (item != null)
-                {
-                    holder[i].Slot.OnItemChanged += () => {
-                        holder[i].itemHolder = ItemDatabase.GetItemHolder(item.ID);
-                    };
-                }
+                int index = i;
+                (holder[index] as ISerializationCallbackReceiver).OnAfterDeserialize();
+                holder[index].Slot.OnItemChanged += () => {
+                    holder[index].itemHolder = holder[index].Slot.HasItem() ? ItemDatabase.GetItemHolder(holder[index].Slot.StoredItem.ID) : null;
+                    holder[index].RefreshUI();
+                };
             }
             return holder;
         }
@@ -88,6 +72,13 @@ namespace TPFramework.Unity
                 slots[i] = holder[i].Slot as T;
             }
             return slots;
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            InitEquipSlots(equipSlotsHolders);
+            InitItemSlots(itemSlotHolders);
         }
     }
 }

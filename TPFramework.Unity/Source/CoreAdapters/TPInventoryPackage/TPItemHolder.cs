@@ -20,11 +20,21 @@ namespace TPFramework.Unity
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             item = Item;
+            PreventNull();
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
+            PreventNull();
             Item = item;
+        }
+
+        private void PreventNull()
+        {
+            if (item == null)
+            {
+                item = new TPItem(0, 0);
+            }
         }
     }
 }
