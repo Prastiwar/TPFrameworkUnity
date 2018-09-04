@@ -4,7 +4,6 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 using System.Runtime.CompilerServices;
 using TPFramework.Core;
 using UnityEditor;
@@ -122,4 +121,3 @@ namespace TPFramework.Unity.Editor
         }
     }
 }
-#endif

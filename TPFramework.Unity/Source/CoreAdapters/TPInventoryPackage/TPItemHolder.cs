@@ -4,6 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System;
 using TPFramework.Core;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ namespace TPFramework.Unity
     public class TPItemHolder : ScriptableObject, ISerializationCallbackReceiver
     {
         public Sprite Icon;
-        [HideInInspector] public TPItem Item;
+        [NonSerialized] public TPItem Item;
 
         [SerializeField] private TPSerializedItem item;
 

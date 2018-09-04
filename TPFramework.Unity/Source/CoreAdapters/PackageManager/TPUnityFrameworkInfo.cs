@@ -4,7 +4,6 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 namespace TPFramework.Internal
 {
     public struct TPUnityFrameworkInfo
@@ -27,4 +26,3 @@ namespace TPFramework.Internal
         }
     }
 }
-#endif

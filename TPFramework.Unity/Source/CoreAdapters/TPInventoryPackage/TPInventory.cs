@@ -14,10 +14,27 @@ namespace TPFramework.Unity
     [Serializable]
     public class TPInventory : TPInventory<TPItemSlot, TPEquipSlot, TPItem>, ISerializationCallbackReceiver
     {
+        [SerializeField] private TPItemDatabase itemDatabase;
         [SerializeField] private TPItemSlotHolder[] itemSlotHolders;
         [SerializeField] private TPEquipSlotHolder[] equipSlotsHolders;
 
-        public TPItemDatabase ItemDatabase;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TPItemHolder GetItemHolder(int itemID)
+        {
+            return itemDatabase.GetItemHolder(itemID);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TPItemHolder GetItemHolder(Predicate<TPItemHolder> match)
+        {
+            return itemDatabase.GetItemHolder(match);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void InitItemDatabase(TPItemHolder[] itemHolders)
+        {
+            itemDatabase.InitDatabase(itemHolders);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitItemSlots(TPItemSlotHolder[] slotHolders)
@@ -25,7 +42,7 @@ namespace TPFramework.Unity
             itemSlotHolders = slotHolders;
             if (itemSlotHolders != null)
             {
-                itemSlotHolders = AddOnItemChangedAction(itemSlotHolders);
+                itemSlotHolders = InjectItemDatabase(itemSlotHolders);
                 ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
                 SetItemSlots(ItemSlots);
             }
@@ -37,27 +54,21 @@ namespace TPFramework.Unity
             equipSlotsHolders = slotHolders;
             if (equipSlotsHolders != null)
             {
-                equipSlotsHolders = AddOnItemChangedAction(equipSlotsHolders);
+                equipSlotsHolders = InjectItemDatabase(equipSlotsHolders);
                 EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
                 SetEquipSlots(EquipSlots);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T[] AddOnItemChangedAction<T>(T[] holder)
-            where T : TPItemSlotHolder
+        private T[] InjectItemDatabase<T>(T[] holders) where T : TPItemSlotHolder
         {
-            int length = holder.Length;
+            int length = holders.Length;
             for (int i = 0; i < length; i++)
             {
-                int index = i;
-                (holder[index] as ISerializationCallbackReceiver).OnAfterDeserialize();
-                holder[index].Slot.OnItemChanged += () => {
-                    holder[index].itemHolder = holder[index].Slot.HasItem() ? ItemDatabase.GetItemHolder(holder[index].Slot.StoredItem.ID) : null;
-                    holder[index].RefreshUI();
-                };
+                holders[i].itemDatabase = itemDatabase;
             }
-            return holder;
+            return holders;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

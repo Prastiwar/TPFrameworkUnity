@@ -19,7 +19,8 @@ namespace TPFramework.Unity
         protected Canvas itemCanvas;
 
         [SerializeField] protected int type;
-        [SerializeField] internal TPItemHolder itemHolder;
+        [SerializeField, InspectorReadOnly] internal TPItemHolder itemHolder;
+        [SerializeField, HideInInspector] internal TPItemDatabase itemDatabase;
 
         [NonSerialized] public TPItemSlot Slot;
 
@@ -47,13 +48,6 @@ namespace TPFramework.Unity
             itemCanvas.overrideSorting = false;
             if (Slot.MoveItem(slotholder.Slot))
             {
-                //TPItemHolder slotHolderShuffle = slotholder.itemHolder;
-                //slotholder.itemHolder = itemHolder;
-                //itemHolder = slotHolderShuffle;
-                Debug.Log(Slot.OnItemChanged);
-                Debug.Log(slotholder.Slot.OnItemChanged);
-                Slot.OnItemChanged();
-                slotholder.Slot.OnItemChanged();
                 slotholder.RefreshUI();
                 RefreshUI();
             }
@@ -90,13 +84,19 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            type = Slot != null ? Slot.Type : 0;
+            type = Slot.Type;
+            (itemHolder as ISerializationCallbackReceiver)?.OnBeforeSerialize();
         }
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             (itemHolder as ISerializationCallbackReceiver)?.OnAfterDeserialize();
-            Slot = new TPItemSlot(type, itemHolder?.Item);
+            Slot = new TPItemSlot(type, itemHolder?.Item) {
+                OnItemChanged = () => {
+                    itemHolder = Slot.HasItem() ? itemDatabase.GetItemHolder(Slot.StoredItem.ID) : null;
+                    RefreshUI();
+                }
+            };
         }
     }
 }

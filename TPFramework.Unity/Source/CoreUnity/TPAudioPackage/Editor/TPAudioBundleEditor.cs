@@ -4,7 +4,6 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity 
 */
 
-#if UNITY_EDITOR
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +11,7 @@ using UnityEngine;
 namespace TPFramework.Unity
 {
     [CustomEditor(typeof(TPAudioBundle))]
-    internal class TPAudioBundleEditor : UnityEditor.Editor
+    public class TPAudioBundleEditor : UnityEditor.Editor
     {
         private UnityEditorInternal.ReorderableList list;
         private bool isValid;
@@ -89,4 +88,3 @@ namespace TPFramework.Unity
         }
     }
 }
-#endif

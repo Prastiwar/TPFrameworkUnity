@@ -32,12 +32,12 @@ public class InventoryExample : MonoBehaviour
 
     public void InitializeDatabase(TPItemHolder[] itemHolders)
     {
-        inventory.ItemDatabase.InitDatabase(itemHolders);
+        inventory.InitItemDatabase(itemHolders);
     }
 
     // Use this for initialization
     private void Start()
     {
-        inventory.AddItem(inventory.ItemDatabase.GetItemHolder(0).Item);
+        inventory.AddItem(inventory.GetItemHolder(0).Item);
     }
 }

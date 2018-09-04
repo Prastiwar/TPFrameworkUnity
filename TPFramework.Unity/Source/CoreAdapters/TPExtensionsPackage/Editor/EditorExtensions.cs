@@ -4,12 +4,11 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 using System;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 
-namespace TPFramework.Unity
+namespace TPFramework.Unity.Editor
 {
     public static partial class TPExtensions
     {
@@ -107,4 +106,3 @@ namespace TPFramework.Unity
         }
     }
 }
-#endif

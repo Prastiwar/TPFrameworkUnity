@@ -6,7 +6,7 @@
 
 using System;
 using System.Reflection;
-using TPFramework.Unity;
+using TPFramework.Unity.Editor;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;

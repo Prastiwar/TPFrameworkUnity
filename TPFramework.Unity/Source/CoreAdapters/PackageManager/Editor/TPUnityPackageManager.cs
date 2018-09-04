@@ -4,7 +4,6 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -115,4 +114,3 @@ namespace TPFramework.Internal
         private static void ToggleSafeChecks() { TPUnityPackageManager.Manager.DefineManager.ToggleDefine(TPDefineInfo.TPUISafety); }
     }
 }
-#endif

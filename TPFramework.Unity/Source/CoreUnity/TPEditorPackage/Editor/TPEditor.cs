@@ -4,12 +4,11 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 using UnityEngine;
 
 namespace TPFramework.Unity.Editor
 {
-    public class TPEditor<T> : UnityEditor.Editor where T : MonoBehaviour
+    public class TPEditor<T> : UnityEditor.Editor where T : Object
     {
         private GUIContent tempContent = new GUIContent();
 
@@ -61,4 +60,3 @@ namespace TPFramework.Unity.Editor
         public override void OnInspectorGUI() { base.OnInspectorGUI(); }
     }
 }
-#endif

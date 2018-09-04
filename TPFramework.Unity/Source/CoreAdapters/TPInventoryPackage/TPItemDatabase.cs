@@ -11,13 +11,13 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
-    [Serializable]
-    public class TPItemDatabase : ISerializationCallbackReceiver
+    [CreateAssetMenu(menuName = "TP/TPInventory/TPItemDatabase", fileName = "TPItemDatabase")]
+    public class TPItemDatabase : ScriptableObject, ISerializationCallbackReceiver
     {
         private Dictionary<int, TPItemHolder> itemDatabaseMap;
 
         [SerializeField] private TPItemHolder[] itemDatabase;
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitDatabase(TPItemHolder[] itemHolders)
         {
@@ -29,6 +29,20 @@ namespace TPFramework.Unity
         public TPItemHolder GetItemHolder(int id)
         {
             return itemDatabaseMap[id];
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public TPItemHolder GetItemHolder(Predicate<TPItemHolder> match)
+        {
+            foreach (var kvp in itemDatabaseMap)
+            {
+                TPItemHolder holder = kvp.Value;
+                if (match(holder))
+                {
+                    return holder;
+                }
+            }
+            return null;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -44,11 +58,12 @@ namespace TPFramework.Unity
                     itemDatabaseMap.Add(itemDatabase[i].Item.ID, itemDatabase[i]);
                 }
             }
+            itemDatabase = null;
         }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (itemDatabaseMap != null && itemDatabase == null)
+            if (itemDatabaseMap != null && (itemDatabase == null || itemDatabase.Length > itemDatabaseMap.Count))
             {
                 int i = 0;
                 int length = itemDatabaseMap.Count;

@@ -65,7 +65,13 @@ namespace TPFramework.Unity
             return true;
         }
 
-        private void Awake()
+        protected virtual void Awake()
+        {
+            Cache();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        protected void Cache()
         {
             DragTransform = GetDragTransform();
             cachedPosition = DragTransform.position;

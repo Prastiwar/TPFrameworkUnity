@@ -4,15 +4,13 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-#if UNITY_EDITOR
 using System;
-using UnityEngine;
 using UnityEditor;
 using System.Runtime.CompilerServices;
 
 namespace TPFramework.Unity.Editor
 {
-    public class TPScriptlessEditor<T> : TPEditor<T> where T : MonoBehaviour
+    public class TPScriptlessEditor<T> : TPEditor<T> where T : UnityEngine.Object
     {
         private string[] excluders = new string[] { TPEditorHelper.InspectorScriptField };
 
@@ -49,4 +47,3 @@ namespace TPFramework.Unity.Editor
         }
     }
 }
-#endif
