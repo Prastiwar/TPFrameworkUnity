@@ -39,5 +39,6 @@ public class InventoryExample : MonoBehaviour
     private void Start()
     {
         inventory.AddItem(inventory.GetItemHolder(0).Item);
+        inventory.AddItem(inventory.GetItemHolder(1).Item);
     }
 }

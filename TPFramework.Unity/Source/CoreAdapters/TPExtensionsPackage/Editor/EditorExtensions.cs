@@ -35,6 +35,26 @@ namespace TPFramework.Unity.Editor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasAnyElementSameValue(this SerializedProperty array, SerializedProperty key1, int skipIndex)
+        {
+            int length = array.arraySize;
+            for (int i = 0; i < length; i++)
+            {
+                if (i == skipIndex)
+                {
+                    continue;
+                }
+
+                SerializedProperty key2 = array.GetArrayElementAtIndex(i);
+                if (key1.GetValue().Equals(key2.GetValue()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object GetValue(this SerializedProperty prop)
         {
             switch (prop.propertyType)
