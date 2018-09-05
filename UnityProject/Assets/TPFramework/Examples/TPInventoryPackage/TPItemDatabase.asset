@@ -11,11 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: -689838236, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
   m_Name: TPItemDatabase
   m_EditorClassIdentifier: 
-  itemDatabaseMap:
-    m_keys: 0000000001000000
-    m_values:
-    - {fileID: 11400000, guid: 73e162c76596f2d43bdf9b5001ec885e, type: 2}
-    - {fileID: 11400000, guid: cb1fbfcca2ff5fb4eb983912749f5921, type: 2}
   itemDatabase:
   - {fileID: 11400000, guid: 73e162c76596f2d43bdf9b5001ec885e, type: 2}
   - {fileID: 11400000, guid: cb1fbfcca2ff5fb4eb983912749f5921, type: 2}

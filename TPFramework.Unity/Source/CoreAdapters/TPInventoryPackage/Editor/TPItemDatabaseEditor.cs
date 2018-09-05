@@ -5,6 +5,7 @@
 */
 
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace TPFramework.Unity.Editor
@@ -12,15 +13,51 @@ namespace TPFramework.Unity.Editor
     [CustomEditor(typeof(TPItemDatabase))]
     public class TPItemDatabaseEditor : TPScriptlessEditor<TPItemDatabase>
     {
-        private readonly Vector2 errLineOffset = new Vector2(7, 0);
+        private readonly Vector2 errLineOffset = new Vector2(20, 0);
         private readonly Vector2 errSize = new Vector2(7, 15);
         private GUIStyle redBoxStyle;
         private bool showError;
         private SerializedProperty databaseArray;
+        private ReorderableList rList;
 
         private void OnEnable()
         {
             databaseArray = serializedObject.FindProperty("itemDatabase");
+            rList = new ReorderableList(serializedObject, databaseArray, true, true, true, true) {
+                drawHeaderCallback = OnDrawHeader,
+                drawElementCallback = DrawElement,
+                onAddCallback = OnAdd
+            };
+        }
+
+        private void OnAdd(ReorderableList list)
+        {
+            int lastIndex = databaseArray.arraySize;
+            databaseArray.arraySize = lastIndex + 1;
+            databaseArray.GetArrayElementAtIndex(lastIndex).objectReferenceValue = null;
+        }
+
+        private void OnDrawHeader(Rect rect)
+        {
+            EditorGUI.LabelField(rect, $"Item exists in database: ({databaseArray.arraySize} count)");
+            rect.position = new Vector2(rect.position.x + 235, rect.position.y);
+            rect.size = new Vector2(rect.size.x - 235, rect.size.y - 1);
+            TPEditorGUI.OnButton(rect, "Load From Project", LoadItemDatabase);
+        }
+
+        private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            rect.position = new Vector2(rect.position.x, rect.position.y + 2);
+            SerializedProperty arrayElement = databaseArray.GetArrayElementAtIndex(index);
+            string itemID = arrayElement.objectReferenceValue != null ? (arrayElement.objectReferenceValue as TPItemHolder).Item.ID.ToString() : "-";
+            EditorGUI.LabelField(new Rect(rect.position, new Vector2(110, rect.size.y)), GUIContent($"ItemID: {itemID}"));
+            EditorGUI.PropertyField(new Rect(rect.position - new Vector2(-115, 0), rect.size - new Vector2(115, 4)), arrayElement, UnityEngine.GUIContent.none);
+
+            if (databaseArray.HasAnyElementSameValue(arrayElement, index))
+            {
+                DrawRedBox(new Rect(rect.position - new Vector2(5, 0), rect.size - new Vector2(0, 0)));
+                showError = true;
+            }
         }
 
         public override void OnInspectorGUI()
@@ -30,35 +67,14 @@ namespace TPFramework.Unity.Editor
                 redBoxStyle = new GUIStyle(GUI.skin.box);
                 redBoxStyle.normal.background = TPEditorTextures.RedTexture;
             }
-            serializedObject.UpdateIfRequiredOrScript();
-
-            TPEditorGUI.OnButton("Load All TPItems", LoadItemDatabase);
-            TPEditorGUI.OnButton("Add new TPItem", AddNewItem);
-
-            if (showError)
+            else if (showError)
             {
-                DrawErrorMessage(GUILayoutUtility.GetLastRect(), 1);
+                DrawErrorMessage(new Rect(new Vector2(29, 25), new Vector2(335, 20)), 1);
                 showError = false;
             }
-            int length = databaseArray.arraySize;
-            for (int i = 0; i < length; i++)
-            {
-                SerializedProperty arrayElement = databaseArray.GetArrayElementAtIndex(i);
-                EditorGUILayout.PropertyField(arrayElement);
-                if (arrayElement != null && HasAnySameKeyValue(arrayElement, i))
-                {
-                    DrawRedBox(GUILayoutUtility.GetLastRect());
-                    showError = true;
-                }
-            }
+            serializedObject.UpdateIfRequiredOrScript();
+            rList.DoLayoutList();
             serializedObject.ApplyModifiedProperties();
-        }
-
-        private void AddNewItem()
-        {
-            int lastIndex = databaseArray.arraySize;
-            databaseArray.arraySize = lastIndex + 1;
-            databaseArray.GetArrayElementAtIndex(lastIndex).objectReferenceValue = null;
         }
 
         private void DrawRedBox(Rect position)
@@ -74,28 +90,7 @@ namespace TPFramework.Unity.Editor
         private void DrawErrorMessage(Rect rect, int nameLength)
         {
             Vector2 offsetByName = new Vector2(nameLength * 8.25f, 0);
-            Vector2 size = new Vector2(rect.size.x, 17);
-            EditorGUI.HelpBox(new Rect(rect.position + offsetByName, size), "You have duplicated TPItem IDs, some changes can be lost!", MessageType.Error);
-        }
-
-        private bool HasAnySameKeyValue(SerializedProperty key1, int actualIndex)
-        {
-            return true; // FIXME: fix null exception 
-            int length = databaseArray.arraySize;
-            for (int i = 0; i < length; i++)
-            {
-                if (i == actualIndex)
-                {
-                    continue;
-                }
-
-                SerializedProperty key2 = databaseArray.GetArrayElementAtIndex(i);
-                if (key2 != null && key1.GetValue().Equals(key2.GetValue()))
-                {
-                    return true;
-                }
-            }
-            return false;
+            EditorGUI.HelpBox(new Rect(rect.position + offsetByName, rect.size), "You have duplicated TPItem IDs, some changes can be lost!", MessageType.Error);
         }
 
         private void LoadItemDatabase()

@@ -5,7 +5,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -14,38 +13,14 @@ namespace TPFramework.Unity
     [CreateAssetMenu(menuName = "TP/TPInventory/TPItemDatabase", fileName = "TPItemDatabase")]
     public class TPItemDatabase : ScriptableObject
     {
-        [SerializeField] private UDictionaryIntTPItemHolder itemDatabaseMap;
+        private UDictionaryIntTPItemHolder itemDatabaseMap;
         [SerializeField] private TPItemHolder[] itemDatabase;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitDatabase(TPItemHolder[] itemHolders)
         {
             itemDatabase = itemHolders;
-            itemDatabaseMap = new UDictionaryIntTPItemHolder();
-        }
-
-        public void OnValidate()
-        {
-            if (itemDatabase != null)
-            {
-                int length = itemDatabase.Length;
-                itemDatabaseMap = new UDictionaryIntTPItemHolder();
-                for (int i = 0; i < length; i++)
-                {
-                    if (itemDatabase[i] != null)
-                    {
-                        int key = itemDatabase[i].Item.ID;
-                        if (!itemDatabaseMap.ContainsKey(key))
-                        {
-                            itemDatabaseMap.Add(key, itemDatabase[i]);
-                        }
-                        else
-                        {
-                            throw new Exception("The item ID is duplicated: " + key);
-                        }
-                    }
-                }
-            }
+            OnValidate();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -66,6 +41,37 @@ namespace TPFramework.Unity
                 }
             }
             return null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void OnEnable()
+        {
+            if (itemDatabaseMap == null)
+            {
+                itemDatabaseMap = new UDictionaryIntTPItemHolder();
+            }
+            OnValidate();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void OnValidate()
+        {
+            if (itemDatabase != null)
+            {
+                int length = itemDatabase.Length;
+                itemDatabaseMap = new UDictionaryIntTPItemHolder();
+                for (int i = 0; i < length; i++)
+                {
+                    if (itemDatabase[i] != null)
+                    {
+                        int key = itemDatabase[i].Item.ID;
+                        if (!itemDatabaseMap.ContainsKey(key))
+                        {
+                            itemDatabaseMap.Add(key, itemDatabase[i]);
+                        }
+                    }
+                }
+            }
         }
     }
 }

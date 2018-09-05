@@ -11,7 +11,7 @@ using UnityEngine;
 namespace TPFramework.Unity
 {
     [CreateAssetMenu(menuName = "TP/TPInventory/TPItem", fileName = "TPItem")]
-    public class TPItemHolder : ScriptableObject, ISerializationCallbackReceiver, IEquatable<TPItemHolder>
+    public class TPItemHolder : ScriptableObject, ISerializationCallbackReceiver
     {
         public Sprite Icon;
         [NonSerialized] public TPItem Item;
@@ -38,9 +38,14 @@ namespace TPFramework.Unity
             }
         }
 
-        public bool Equals(TPItemHolder other)
+        public override bool Equals(object other)
         {
-            return Item.ID == other.Item.ID;
+            TPItemHolder otherHolder = other as TPItemHolder;
+            if (otherHolder != null)
+            {
+                return Item.ID == otherHolder.Item.ID;
+            }
+            return this == null;
         }
     }
 }
