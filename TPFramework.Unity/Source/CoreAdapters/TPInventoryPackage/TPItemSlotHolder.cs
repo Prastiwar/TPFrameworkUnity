@@ -19,7 +19,7 @@ namespace TPFramework.Unity
         protected Canvas itemCanvas;
 
         [SerializeField] protected int type;
-        [SerializeField, InspectorReadOnly] internal TPItemHolder itemHolder;
+        [SerializeField, HideInInspector] internal TPItemHolder itemHolder;
         [SerializeField, HideInInspector] internal TPItemDatabase itemDatabase;
 
         [NonSerialized] public TPItemSlot Slot;

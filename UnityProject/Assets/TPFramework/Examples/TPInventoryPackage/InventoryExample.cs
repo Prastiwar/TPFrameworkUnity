@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using TPFramework.Unity;
 using UnityEngine;
 
@@ -6,33 +6,25 @@ public class InventoryExample : MonoBehaviour
 {
     [SerializeField] private TPInventory inventory;
 
+    public void SpawnSlots()
+    {
+        TPSlotsSpawner spawner = GetComponent<TPSlotsSpawner>();
+        if (spawner != null)
+        {
+            spawner.Clear();
+            inventory.InitEquipSlots(spawner.SpawnEquipSlots());
+            inventory.InitItemSlots(spawner.SpawnItemSlots());
+        }
+        else
+        {
+            throw new ArgumentNullException("There is no SlotsSpawner component attached to gameObject " + gameObject);
+        }
+    }
+
     private void Reset()
     {
         inventory = new TPInventory();
         SpawnSlots();
-    }
-
-    public void SpawnSlots()
-    {
-        SlotsSpawner spawner = GetComponent<SlotsSpawner>();
-        if (spawner != null)
-        {
-            List<TPEquipSlotHolder> equipSlotsList = new List<TPEquipSlotHolder>(4);
-            List<TPItemSlotHolder> itemSlotsList = new List<TPItemSlotHolder>(8);
-
-            spawner.Spawn(equipSlotsList, itemSlotsList);
-            inventory.InitEquipSlots(equipSlotsList.ToArray());
-            inventory.InitItemSlots(itemSlotsList.ToArray());
-        }
-        else
-        {
-            throw new System.ArgumentNullException("There is no SlotsSpawner component attached to gameObject " + gameObject);
-        }
-    }
-
-    public void InitializeDatabase(TPItemHolder[] itemHolders)
-    {
-        inventory.InitItemDatabase(itemHolders);
     }
 
     // Use this for initialization

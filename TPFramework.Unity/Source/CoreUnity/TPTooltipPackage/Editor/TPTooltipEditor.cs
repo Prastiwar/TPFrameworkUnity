@@ -13,7 +13,7 @@ namespace TPFramework.Unity.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(TPTooltip))]
-    public class TPTooltipEditor : TPEditor<TPTooltip>
+    public class TPTooltipEditor : TPScriptlessEditor<TPTooltip>
     {
         private bool foldoutLayout = true;
 

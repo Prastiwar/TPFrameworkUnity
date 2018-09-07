@@ -41,11 +41,9 @@ namespace TPFramework.Unity
         public override bool Equals(object other)
         {
             TPItemHolder otherHolder = other as TPItemHolder;
-            if (otherHolder != null)
-            {
-                return Item.ID == otherHolder.Item.ID;
-            }
-            return this == null;
+            return otherHolder != null 
+                ? Item.ID == otherHolder.Item.ID 
+                : this == null;
         }
     }
 }

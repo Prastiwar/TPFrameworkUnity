@@ -42,6 +42,7 @@ namespace TPFramework.Unity
             itemSlotHolders = slotHolders;
             if (itemSlotHolders != null)
             {
+                CheckNull(itemSlotHolders);
                 itemSlotHolders = InjectItemDatabase(itemSlotHolders);
                 ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
                 SetItemSlots(ItemSlots);
@@ -54,6 +55,7 @@ namespace TPFramework.Unity
             equipSlotsHolders = slotHolders;
             if (equipSlotsHolders != null)
             {
+                CheckNull(equipSlotsHolders);
                 equipSlotsHolders = InjectItemDatabase(equipSlotsHolders);
                 EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
                 SetEquipSlots(EquipSlots);
@@ -83,6 +85,19 @@ namespace TPFramework.Unity
                 slots[i] = holder[i].Slot as T;
             }
             return slots;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void CheckNull<T>(T[] array)
+        {
+            int length = array.Length;
+            for (int i = 0; i < length; i++)
+            {
+                if (array[i] == null)
+                {
+                    throw new ArgumentNullException("TPItemHolder", "TPItemHolder can't be null!");
+                }
+            }
         }
 
         void ISerializationCallbackReceiver.OnBeforeSerialize() { }

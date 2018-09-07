@@ -17,7 +17,7 @@ namespace TPFramework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToStringWithoutHZ(this Resolution resolution)
         {
-            return resolution.width + " x " + resolution.height;
+            return $"{resolution.width} x {resolution.height}";
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

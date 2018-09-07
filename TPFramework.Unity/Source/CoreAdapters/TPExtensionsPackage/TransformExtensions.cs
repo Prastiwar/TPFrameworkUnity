@@ -40,6 +40,16 @@ namespace TPFramework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void DestroyChildren(this Transform transform)
+        {
+            int length = transform.childCount;
+            for (int i = 0; i < length; i++)
+            {
+                Object.DestroyImmediate(transform.GetChild(0).gameObject);
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetPosX(this Transform transform, float x)
         {
             transform.position.Set(x, transform.position.y, transform.position.z);

@@ -4,6 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ namespace TPFramework.Unity
         private static GameObject dispatcher = null;
         private static TPFadeLayout fadeLayout;
         private static bool isFading;
+        private static Action StartFadeState = ()=> ChangeFadeState(true);
+        private static Action EndFadeState = ()=> ChangeFadeState(false);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Fade<T>(TPFader<T> fader) where T : ITPFade
@@ -28,11 +31,11 @@ namespace TPFramework.Unity
             {
                 fader.Fader.InitializeFade(fader.Info, fadeLayout);
                 TPAnim.Animate(fader.Info.FadeAnim,
-                    (time) => fader.Fader.Fade(time, fader.Info, fadeLayout),
-                    () => ChangeFadeState(true),
+                    (time) => fader.Fader.Fade(time, fader.Info, fadeLayout), 
+                    StartFadeState,
                     () => {
                         fader.Fader.CleanUp(fader.Info, fadeLayout);
-                        ChangeFadeState(false);
+                        EndFadeState();
                     });
             }
         }
@@ -93,7 +96,7 @@ namespace TPFramework.Unity
             {
                 canvas.sortingOrder = 16;
             }
-            Object.DontDestroyOnLoad(dispatcher);
+            UnityEngine.Object.DontDestroyOnLoad(dispatcher);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

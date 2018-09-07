@@ -4,7 +4,6 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-using TPFramework.Core;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
