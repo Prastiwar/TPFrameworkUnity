@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
+    /// <summary> ScriptableObject to hold TPItem </summary>
     [CreateAssetMenu(menuName = "TP/TPInventory/TPItem", fileName = "TPItem")]
     public class TPItemHolder : ScriptableObject, ISerializationCallbackReceiver
     {

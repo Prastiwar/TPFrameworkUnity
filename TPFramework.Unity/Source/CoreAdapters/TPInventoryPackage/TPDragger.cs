@@ -77,6 +77,7 @@ namespace TPFramework.Unity
             cachedPosition = DragTransform.position;
         }
 
+        /// <summary> Returns DragTransform to its cached position </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void DisableDrag()
         {

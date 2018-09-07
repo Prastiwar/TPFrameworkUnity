@@ -18,7 +18,7 @@ MonoBehaviour:
     itemName: Item
     description: Desc of Item
     worth: 100
-    amountStack: 1
+    amountStack: 0
     maxStack: 1
     weight: 10
     modifiers: []

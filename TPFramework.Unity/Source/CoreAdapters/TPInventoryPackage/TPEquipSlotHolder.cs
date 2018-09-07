@@ -8,6 +8,7 @@ using System;
 
 namespace TPFramework.Unity
 {
+    /// <summary> Draggable Monobehaviour to hold TPEquipSlot </summary>
     [Serializable]
     public class TPEquipSlotHolder : TPItemSlotHolder { }
 }

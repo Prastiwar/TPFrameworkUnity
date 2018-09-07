@@ -12,6 +12,7 @@ using UnityEngine.UI;
 
 namespace TPFramework.Unity
 {
+    /// <summary> Draggable Monobehaviour to hold TPItemSlot </summary>
     [Serializable]
     public class TPItemSlotHolder : TPDragger<TPItemSlotHolder>, ISerializationCallbackReceiver
     {

@@ -36,6 +36,7 @@ namespace TPFramework.Unity
             itemDatabase.InitDatabase(itemHolders);
         }
 
+        /// <summary> Sets item slots from their holders and inject ItemDatabase info to it </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitItemSlots(TPItemSlotHolder[] slotHolders)
         {
@@ -45,10 +46,10 @@ namespace TPFramework.Unity
                 CheckNull(itemSlotHolders);
                 itemSlotHolders = InjectItemDatabase(itemSlotHolders);
                 ItemSlots = LoadSlots(ItemSlots, itemSlotHolders);
-                SetItemSlots(ItemSlots);
             }
         }
 
+        /// <summary> Sets equip slots from their holders and inject ItemDatabase info to it </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void InitEquipSlots(TPEquipSlotHolder[] slotHolders)
         {
@@ -58,7 +59,6 @@ namespace TPFramework.Unity
                 CheckNull(equipSlotsHolders);
                 equipSlotsHolders = InjectItemDatabase(equipSlotsHolders);
                 EquipSlots = LoadSlots(EquipSlots, equipSlotsHolders);
-                SetEquipSlots(EquipSlots);
             }
         }
 
@@ -95,7 +95,7 @@ namespace TPFramework.Unity
             {
                 if (array[i] == null)
                 {
-                    throw new ArgumentNullException("TPItemHolder", "TPItemHolder can't be null!");
+                    throw new ArgumentNullException("TPItemHolder", "Array Element of type TPItemHolder can't be null!");
                 }
             }
         }

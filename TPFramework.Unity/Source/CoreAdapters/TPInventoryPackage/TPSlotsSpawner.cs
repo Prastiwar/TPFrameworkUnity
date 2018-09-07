@@ -18,26 +18,28 @@ public class TPSlotsSpawner : MonoBehaviour
     [SerializeField] private Transform equipSlotsPanel;
     [SerializeField] private Transform itemslotsPanel;
 
-    /// <summary> Spawns inventory slots layout and add slots to list </summary>
+    /// <summary> Returns array of spawned slots layout </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public TPEquipSlotHolder[] SpawnEquipSlots()
     {
         return Spawn<TPEquipSlotHolder>(equipSlotsCount, equipSlotPrefab, equipSlotsPanel);
     }
 
-    /// <summary> Spawns inventory slots layout and add slots to list </summary>
+    /// <summary> Returns array of spawned slots layout </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public TPItemSlotHolder[] SpawnItemSlots()
     {
         return Spawn<TPItemSlotHolder>(itemSlotsCount, itemSlotPrefab, itemslotsPanel);
     }
 
+    /// <summary> Destroys all item slots in itemslotsPanel </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void ClearItemSlots()
     {
         itemslotsPanel.DestroyChildren();
     }
-    
+
+    /// <summary> Destroys all equip slots in equipSlotsPanel </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void ClearEquipSlots()
     {

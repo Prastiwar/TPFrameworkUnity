@@ -18,8 +18,8 @@ MonoBehaviour:
     itemName: Other Item
     description: Some short description
     worth: 111
-    amountStack: 1
-    maxStack: 1
+    amountStack: 0
+    maxStack: 2
     weight: 1
     modifiers:
     - value: 0.5

@@ -11,6 +11,7 @@ using UnityEngine;
 
 namespace TPFramework.Unity
 {
+    /// <summary> TPItem used for serialization </summary>
     [Serializable]
     public class TPSerializedItem
     {
