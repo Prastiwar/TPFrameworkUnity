@@ -6,10 +6,10 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using TP.Framework.Unity.UI;
 using UnityEngine;
-using TPFramework.Core;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /* ---------------------------------------------------------------------- Achievement ---------------------------------------------------------------------- */
 

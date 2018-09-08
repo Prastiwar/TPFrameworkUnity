@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static class TPFade
     {

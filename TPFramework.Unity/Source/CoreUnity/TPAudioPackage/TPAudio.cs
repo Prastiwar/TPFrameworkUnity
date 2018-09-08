@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [Serializable]
     public struct TPAudioObject
@@ -148,7 +148,7 @@ namespace TPFramework.Unity
         {
             AudioClip clip = GetClip(bundle, audioName);
             SFXSource.PlayOneShot(clip, volumeScale);
-            Core.TPExtensions.DelayAction(clip.length, onAudioEnd);
+            Framework.TPExtensions.DelayAction(clip.length, onAudioEnd);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -163,7 +163,7 @@ namespace TPFramework.Unity
             AudioClip clip = GetClip(bundle, audioName);
             GetSource(source).clip = clip;
             GetSource(source).Play(delay);
-            Core.TPExtensions.DelayAction(clip.length + delay, onAudioEnd);
+            Framework.TPExtensions.DelayAction(clip.length + delay, onAudioEnd);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

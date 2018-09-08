@@ -7,10 +7,9 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public class TPPersistPrefs : TPPersistSystem<TPPersistPrefs>
     {

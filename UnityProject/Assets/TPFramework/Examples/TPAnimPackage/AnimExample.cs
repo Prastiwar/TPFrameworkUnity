@@ -1,5 +1,4 @@
-﻿using TPFramework.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AnimExample : MonoBehaviour
 {

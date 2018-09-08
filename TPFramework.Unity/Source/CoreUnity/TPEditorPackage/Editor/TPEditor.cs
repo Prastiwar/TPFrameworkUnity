@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     public class TPEditor<T> : UnityEditor.Editor where T : Object
     {

@@ -6,9 +6,11 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TP.Framework.Collections.Unity;
+using TP.Framework.Unity.UI;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static class TPAchievementSystem
     {

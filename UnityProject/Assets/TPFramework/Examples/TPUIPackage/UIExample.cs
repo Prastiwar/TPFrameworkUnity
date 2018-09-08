@@ -1,4 +1,5 @@
-﻿using TPFramework.Unity;
+﻿using TP.Framework.Unity;
+using TP.Framework.Unity.UI;
 using UnityEngine;
 using UnityEngine.UI;
 

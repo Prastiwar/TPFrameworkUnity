@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public abstract class TPDragger<TTarget> : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler
         where TTarget : MonoBehaviour

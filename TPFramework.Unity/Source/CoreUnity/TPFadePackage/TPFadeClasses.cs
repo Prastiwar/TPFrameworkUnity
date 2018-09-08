@@ -8,7 +8,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public interface ITPFade
     {

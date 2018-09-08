@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Collections.Unity
 {
     [Serializable]
     public class SharedGameObjectCollection

@@ -6,10 +6,9 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [Serializable]
     public class TPInventory : TPInventory<TPItemSlot, TPEquipSlot, TPItem>, ISerializationCallbackReceiver

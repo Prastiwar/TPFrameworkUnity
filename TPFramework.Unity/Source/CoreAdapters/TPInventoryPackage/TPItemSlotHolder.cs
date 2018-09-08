@@ -6,11 +6,10 @@
 
 using System;
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /// <summary> Draggable Monobehaviour to hold TPItemSlot </summary>
     [Serializable]
@@ -85,7 +84,7 @@ namespace TPFramework.Unity
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            type = Slot.Type;
+            type = Slot != null ? Slot.Type : 0;
             (itemHolder as ISerializationCallbackReceiver)?.OnBeforeSerialize();
         }
 

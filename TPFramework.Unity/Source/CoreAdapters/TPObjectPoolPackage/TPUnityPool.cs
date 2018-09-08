@@ -5,10 +5,9 @@
 */
 
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public class TPUnityPool<TObject> : TPObjectPool<TObject>
         where TObject : Object

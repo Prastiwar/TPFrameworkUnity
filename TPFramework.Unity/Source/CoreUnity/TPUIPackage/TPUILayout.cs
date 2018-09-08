@@ -11,7 +11,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity.UI
 {
     /// <summary>
     /// Layout Hierarchy:

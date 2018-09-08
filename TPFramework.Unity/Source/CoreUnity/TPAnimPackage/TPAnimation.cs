@@ -9,6 +9,11 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    [AttributeUsage(AttributeTargets.Field, Inherited = true)]
-    public class InspectorReadOnlyAttribute : PropertyAttribute { }
+    [Serializable]
+    public class TPAnimation
+    {
+        public AnimationCurve Curve;
+        public float Speed = 1;
+        public bool AllowBreak = true;
+    }
 }

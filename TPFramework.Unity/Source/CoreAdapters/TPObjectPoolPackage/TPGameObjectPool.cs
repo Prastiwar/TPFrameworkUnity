@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public class TPGameObjectPool : TPUnityPool<GameObject>
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     using System.Runtime.CompilerServices;
 
@@ -95,21 +95,4 @@ namespace TPFramework.Unity
             layout.SetActive(false);
         }
     }
-
-
-    //IEnumerator FadeProgress()    
-    //    StartCoroutine(Fade(false, ProgressAlpha, ProgressFader.ProgressFadeSpeed));
-    //    AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(FadeScene);
-    //    asyncLoad.allowSceneActivation = false;
-
-    //    while (!asyncLoad.isDone) {
-    //        SetProgress(asyncLoad);
-    //        if (asyncLoad.progress >= 0.9f) {
-    //            SetFullProgress();
-    //            ReadKey(asyncLoad);
-    //        }
-    //        yield return null;
-    //    }
-    //    StartCoroutine(FadeOut(false, ProgressAlpha, ProgressFader.ProgressFadeSpeed));
-    //    yield return new WaitWhile(() => ProgressAlpha.alpha > 0);
 }

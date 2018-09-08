@@ -8,7 +8,7 @@ using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public sealed class TPCoroutine : MonoBehaviour
     {

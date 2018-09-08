@@ -6,10 +6,9 @@
 
 using System;
 using System.Linq;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /// <summary> TPItem used for serialization </summary>
     [Serializable]

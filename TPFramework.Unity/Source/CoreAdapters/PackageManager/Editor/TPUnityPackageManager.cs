@@ -7,11 +7,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TPFramework.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Internal
+namespace TP.Framework.Internal
 {
     internal interface IOverridePackage
     {

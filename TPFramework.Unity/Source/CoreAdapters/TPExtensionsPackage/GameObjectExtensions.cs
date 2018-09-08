@@ -7,7 +7,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static partial class TPExtensions
     {

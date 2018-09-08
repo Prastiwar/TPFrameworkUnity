@@ -5,10 +5,9 @@
 */
 
 using System;
-using UnityEditor;
 using System.Runtime.CompilerServices;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     public class TPScriptlessEditor<T> : TPEditor<T> where T : UnityEngine.Object
     {

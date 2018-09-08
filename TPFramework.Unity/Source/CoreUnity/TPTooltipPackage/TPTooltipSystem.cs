@@ -7,21 +7,21 @@
 using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
+using TP.Framework.Collections.Unity;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static class TPTooltipSystem
     {
         private static TPTooltip observer;
         private static PointerEventData _eventData;
         private static readonly SharedGameObjectCollection sharedLayouts = new SharedGameObjectCollection(2);
-        
+
         public static Action<TPTooltip> OnObserverEnter = delegate { observer.TooltipLayout.SetActive(true); };
         public static Action<TPTooltip> OnObserverExit = delegate { observer.TooltipLayout.SetActive(false); };
-        
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static GameObject ShareLayout(GameObject layout, Transform parent = null)
         {

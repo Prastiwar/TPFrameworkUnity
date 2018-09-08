@@ -7,7 +7,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     [CustomPropertyDrawer(typeof(InspectorReadOnlyAttribute))]
     public class InspectorReadOnlyPropertyDrawer : PropertyDrawer

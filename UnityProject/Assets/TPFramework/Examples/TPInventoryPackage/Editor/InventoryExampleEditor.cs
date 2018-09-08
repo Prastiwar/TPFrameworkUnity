@@ -1,4 +1,4 @@
-﻿using TPFramework.Unity.Editor;
+﻿using TP.Framework.Unity.Editor;
 using UnityEditor;
 
 [CustomEditor(typeof(InventoryExample))]

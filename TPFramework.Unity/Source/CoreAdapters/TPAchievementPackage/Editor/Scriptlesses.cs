@@ -6,7 +6,7 @@
 
 using UnityEditor;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(TPAchievement))]

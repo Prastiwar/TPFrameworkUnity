@@ -7,7 +7,7 @@
 using System;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /// <summary> Struct holds all settings that can be changed </summary>
     [Serializable]

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using TPFramework.Unity;
+using TP.Framework.Unity;
 using UnityEngine;
 
 public class TPTooltipExample : MonoBehaviour

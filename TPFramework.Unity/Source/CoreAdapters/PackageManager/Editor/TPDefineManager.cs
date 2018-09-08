@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace TPFramework.Internal
+namespace TP.Framework.Internal
 {
     internal struct TPDefineInfo
     {

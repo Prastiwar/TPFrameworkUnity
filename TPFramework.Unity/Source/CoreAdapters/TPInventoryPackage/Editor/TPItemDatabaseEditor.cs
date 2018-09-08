@@ -4,11 +4,12 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     [CustomEditor(typeof(TPItemDatabase))]
     public class TPItemDatabaseEditor : TPScriptlessEditor<TPItemDatabase>
@@ -26,8 +27,16 @@ namespace TPFramework.Unity.Editor
             rList = new ReorderableList(serializedObject, databaseArray, true, true, true, true) {
                 drawHeaderCallback = OnDrawHeader,
                 drawElementCallback = DrawElement,
-                onAddCallback = OnAdd
+                onAddCallback = OnAdd,
+                onRemoveCallback = OnRemove
             };
+        }
+
+        private void OnRemove(ReorderableList list)
+        {
+            int index = list.index;
+            list.serializedProperty.DeleteArrayElementAtIndex(index); // sets element to null
+            list.serializedProperty.DeleteArrayElementAtIndex(index); // removes element
         }
 
         private void OnAdd(ReorderableList list)

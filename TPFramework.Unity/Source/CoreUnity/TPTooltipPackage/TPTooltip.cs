@@ -5,10 +5,11 @@
 */
 
 using System.Runtime.CompilerServices;
+using TP.Framework.Unity.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public enum TPTooltipType
     {

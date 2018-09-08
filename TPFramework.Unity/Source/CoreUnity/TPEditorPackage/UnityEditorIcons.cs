@@ -4,9 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-using TPFramework.Core;
-
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     public enum UnityEditorIcons
     {

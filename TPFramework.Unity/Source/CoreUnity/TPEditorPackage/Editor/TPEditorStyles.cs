@@ -5,11 +5,10 @@
 */
 
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     public static class TPEditorStyles
     {
@@ -116,7 +115,7 @@ namespace TPFramework.Unity.Editor
         public static GUIContent GetIcon(UnityEditorIcons icon)
         {
             string iconText = icon.ToString();
-            bool hasAtt = Core.TPExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
+            bool hasAtt = Framework.TPExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
             return EditorGUIUtility.IconContent(hasAtt ? att.StringValue : iconText);
         }
     }

@@ -8,7 +8,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 
-namespace TPFramework.Unity.Editor
+namespace TP.Framework.Unity.Editor
 {
     public static partial class TPExtensions
     {
@@ -24,11 +24,11 @@ namespace TPFramework.Unity.Editor
                 {
                     string elementName = elements[i].Substring(0, elements[i].IndexOf("["));
                     int index = Convert.ToInt32(elements[i].Substring(elements[i].IndexOf("[")).Replace("[", "").Replace("]", ""));
-                    targetObj = Core.TPExtensions.GetValue(targetObj, elementName, index);
+                    targetObj = Framework.TPExtensions.GetValue(targetObj, elementName, index);
                 }
                 else
                 {
-                    targetObj = Core.TPExtensions.GetValue(targetObj, elements[i]);
+                    targetObj = Framework.TPExtensions.GetValue(targetObj, elements[i]);
                 }
             }
             return targetObj;

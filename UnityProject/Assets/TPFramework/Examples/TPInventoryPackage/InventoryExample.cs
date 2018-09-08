@@ -1,5 +1,5 @@
 ﻿using System;
-using TPFramework.Unity;
+using TP.Framework.Unity;
 using UnityEngine;
 
 public class InventoryExample : MonoBehaviour

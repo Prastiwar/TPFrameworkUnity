@@ -6,10 +6,9 @@
 
 using System;
 using System.Collections.Generic;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [Serializable]
     public class TPModifierList : TPModifierList<TPModifier>, ISerializationCallbackReceiver

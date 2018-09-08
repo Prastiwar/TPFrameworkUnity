@@ -7,10 +7,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using TPFramework.Core;
+using TP.Framework.Collections;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static partial class TPExtensions
     {

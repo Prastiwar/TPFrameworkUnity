@@ -10,7 +10,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity.UI
 {
     [Serializable]
     public class TPModalWindow : TPUILayout

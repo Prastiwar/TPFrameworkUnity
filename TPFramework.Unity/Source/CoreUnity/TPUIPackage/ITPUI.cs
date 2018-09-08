@@ -4,7 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity.UI
 {
     public interface ITPUI
     {

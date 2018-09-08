@@ -5,10 +5,9 @@
 */
 
 using System;
-using TPFramework.Core;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [Serializable]
     public class TPAttribute : TPAttribute<TPModifierList, TPModifier>, ISerializationCallbackReceiver

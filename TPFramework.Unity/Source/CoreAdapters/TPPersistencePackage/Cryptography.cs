@@ -4,9 +4,9 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
-    internal static class Cryptography
+    public static class Cryptography
     {
         private static readonly int iterations = 2;
         private static readonly int keySize = 256;

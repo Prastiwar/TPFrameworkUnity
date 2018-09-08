@@ -4,7 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-namespace TPFramework.Internal
+namespace TP.Framework.Internal
 {
     public struct TPUnityFrameworkInfo
     {

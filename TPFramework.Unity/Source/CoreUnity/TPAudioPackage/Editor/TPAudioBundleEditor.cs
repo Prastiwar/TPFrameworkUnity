@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity.Editor
 {
     [CustomEditor(typeof(TPAudioBundle))]
     public class TPAudioBundleEditor : UnityEditor.Editor

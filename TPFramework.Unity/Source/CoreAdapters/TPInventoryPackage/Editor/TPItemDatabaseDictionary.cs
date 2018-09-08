@@ -6,7 +6,7 @@
 
 using System;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [Serializable]
     internal class UDictionaryIntTPItemHolder : UDictionary<int, TPItemHolder>

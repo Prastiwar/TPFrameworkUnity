@@ -8,7 +8,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     [CreateAssetMenu(menuName = "TP/TPInventory/TPItemDatabase", fileName = "TPItemDatabase")]
     public class TPItemDatabase : ScriptableObject
@@ -64,6 +64,7 @@ namespace TPFramework.Unity
                 {
                     if (itemDatabase[i] != null)
                     {
+                        (itemDatabase[i] as ISerializationCallbackReceiver).OnAfterDeserialize();
                         int key = itemDatabase[i].Item.ID;
                         if (!itemDatabaseMap.ContainsKey(key))
                         {

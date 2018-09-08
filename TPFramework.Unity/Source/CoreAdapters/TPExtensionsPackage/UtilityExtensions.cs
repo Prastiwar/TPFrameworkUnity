@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     public static partial class TPExtensions
     {

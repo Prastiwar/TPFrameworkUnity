@@ -5,10 +5,10 @@
 */
 
 using System;
-using TPFramework.Core;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /// <summary> ScriptableObject to hold TPItem </summary>
     [CreateAssetMenu(menuName = "TP/TPInventory/TPItem", fileName = "TPItem")]
@@ -45,6 +45,15 @@ namespace TPFramework.Unity
             return otherHolder != null 
                 ? Item.ID == otherHolder.Item.ID 
                 : this == null;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1816100322;
+            hashCode = hashCode * -1521134295 + EqualityComparer<Sprite>.Default.GetHashCode(Icon);
+            hashCode = hashCode * -1521134295 + EqualityComparer<TPItem>.Default.GetHashCode(Item);
+            hashCode = hashCode * -1521134295 + EqualityComparer<TPSerializedItem>.Default.GetHashCode(item);
+            return hashCode;
         }
     }
 }

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace TPFramework.Unity
+namespace TP.Framework.Unity
 {
     /// <summary> Draggable Monobehaviour to hold TPEquipSlot </summary>
     [Serializable]

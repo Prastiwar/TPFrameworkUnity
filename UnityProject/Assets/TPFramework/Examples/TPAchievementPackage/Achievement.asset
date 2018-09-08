@@ -8,15 +8,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1160778776, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: 149203211, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
   m_Name: Achievement
   m_EditorClassIdentifier: 
   data:
-    title: Some Title
-    description: Some descriptive description
-    points: 0
+    title: Your achievement
+    description: Congratulations!
+    points: 5
     reachPoints: 5
-    isCompleted: 0
+    isCompleted: 1
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   ShowNotifyOnComplete: 1
   ShowNotifyOnProgress: 1
@@ -30,23 +30,17 @@ MonoBehaviour:
         - serializedVersion: 2
           time: 0
           value: 0
-          inSlope: 2
-          outSlope: 2
+          inSlope: 1
+          outSlope: 1
           tangentMode: 0
         - serializedVersion: 2
-          time: 0.8065463
-          value: 0.8832605
-          inSlope: -1.555141
-          outSlope: -1.555141
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1.0000098
-          value: -0.0019097384
-          inSlope: -13.983503
-          outSlope: -13.983503
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 0
-      Speed: 0.5
+      Speed: 1
       AllowBreak: 1
