@@ -476,6 +476,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -649,7 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   refreshButton: {fileID: 879126601}
-  audioBundle: {fileID: 11400000, guid: 6cfd7175df000a245b4d3b197237d087, type: 2}
+  audioBundle: {fileID: 11400000, guid: f99b0046a5bf3bf4cb07dc6721172110, type: 2}
   repeatCount: 5
 --- !u!4 &1817255676
 Transform:

@@ -8,7 +8,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -2085673019, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -2085673019, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: TPItem
   m_EditorClassIdentifier: 
   Icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

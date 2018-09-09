@@ -215,6 +215,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -419,8 +420,8 @@ GameObject:
   - component: {fileID: 937858703}
   - component: {fileID: 937858706}
   - component: {fileID: 937858705}
-  - component: {fileID: 937858704}
   - component: {fileID: 937858707}
+  - component: {fileID: 937858704}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -455,7 +456,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 937858702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1090421639, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -1090421639, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipType: 2
@@ -614,6 +615,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -675,8 +677,8 @@ GameObject:
   - component: {fileID: 1145800194}
   - component: {fileID: 1145800197}
   - component: {fileID: 1145800196}
-  - component: {fileID: 1145800195}
   - component: {fileID: 1145800198}
+  - component: {fileID: 1145800195}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -711,7 +713,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1145800193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1090421639, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -1090421639, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipType: 3
@@ -870,6 +872,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
@@ -1004,8 +1007,8 @@ GameObject:
   - component: {fileID: 1631833271}
   - component: {fileID: 1631833273}
   - component: {fileID: 1631833272}
-  - component: {fileID: 1631833274}
   - component: {fileID: 1631833275}
+  - component: {fileID: 1631833274}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1073,7 +1076,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1631833270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1090421639, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -1090421639, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipType: 0
@@ -1107,8 +1110,8 @@ GameObject:
   - component: {fileID: 1669686008}
   - component: {fileID: 1669686011}
   - component: {fileID: 1669686010}
-  - component: {fileID: 1669686009}
   - component: {fileID: 1669686012}
+  - component: {fileID: 1669686009}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -1143,7 +1146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1669686007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1090421639, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -1090421639, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipType: 1
@@ -1470,6 +1473,7 @@ MonoBehaviour:
   m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
+  m_isTextTruncated: 0
   m_enableKerning: 1
   m_enableExtraPadding: 0
   checkPaddingRequired: 0

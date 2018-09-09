@@ -8,9 +8,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1883614439, guid: 1928bca76e248e8488b10cd678abbe62, type: 3}
+  m_Script: {fileID: -1883614439, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
   m_Name: TPItemDatabase
   m_EditorClassIdentifier: 
   itemDatabase:
-  - {fileID: 11400000, guid: 56b3776d2b7f22a41a58e23f958f0909, type: 2}
-  - {fileID: 11400000, guid: 78ae769a1d86caf4681e9316b2177e8a, type: 2}
+  - {fileID: 11400000, guid: 5146228747b797b41a1c1624b1a0f57c, type: 2}
+  - {fileID: 11400000, guid: b0434c90b56e0214aa880a72468d8304, type: 2}
