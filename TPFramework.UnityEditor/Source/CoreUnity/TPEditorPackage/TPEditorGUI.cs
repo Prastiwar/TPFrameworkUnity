@@ -15,18 +15,23 @@ namespace TP.Framework.Unity.Editor
     {
         public static readonly float fieldHeight = 18;
         public static readonly Vector2 Space  = new Vector2(10, 20);
+
         public static readonly GUILayoutOption[] Fixed150Width = new GUILayoutOption[] { GUILayout.Width(150), GUILayout.MaxWidth(150), GUILayout.MinWidth(150) };
+
+        public static readonly GUILayoutOption[] Expandable = new GUILayoutOption[] { GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true) };
+        public static readonly GUILayoutOption[] ExpandableWidth = new GUILayoutOption[] { GUILayout.ExpandWidth(true) };
+        public static readonly GUILayoutOption[] ExpandableHeight = new GUILayoutOption[] { GUILayout.ExpandHeight(true) };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string SearchField(string searchString)
         {
-            GUILayout.BeginHorizontal(TPEditorStyles.Toolbar);
+            GUILayout.BeginHorizontal(TPEditorStyles.Toolbar, null);
             {
-                searchString = GUILayout.TextField(searchString, TPEditorStyles.ToolbarSerachField, GUILayout.ExpandWidth(true));
+                searchString = GUILayout.TextField(searchString, TPEditorStyles.ToolbarSerachField, ExpandableWidth);
                 OnButton("", () => {
                     searchString = "";
                     GUI.FocusControl(null);
-                }, TPEditorStyles.ToolbarSearchCancel);
+                }, TPEditorStyles.ToolbarSearchCancel, null);
             }
             GUILayout.EndHorizontal();
             return searchString;
@@ -35,7 +40,7 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool OnButton(string buttonText, Action onClick, GUIStyle buttonStyle = null, params GUILayoutOption[] buttonOptions)
         {
-            buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
+            buttonStyle = buttonStyle ?? GUI.skin.button;
             if (GUILayout.Button(buttonText, buttonStyle, buttonOptions))
             {
                 onClick();
@@ -87,15 +92,24 @@ namespace TP.Framework.Unity.Editor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void DrawField(this SerializedObject serializedObject, string fieldName, bool includeChildren = true)
+        public static void DrawField(this SerializedObject serializedObject, string fieldName, bool includeChildren = true, params GUILayoutOption[] options)
         {
-            EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), includeChildren);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), includeChildren, options);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void DrawField(this SerializedObject serializedObject, string fieldName, GUIContent guiContent, bool includeChildren = true)
+        public static void DrawField(this SerializedObject serializedObject, string fieldName, GUIContent guiContent, bool includeChildren = true, params GUILayoutOption[] options)
         {
-            EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), guiContent, includeChildren);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), guiContent, includeChildren, options);
+        }
+
+        public static void ScrollView(ref Vector2 scrollPos, Action onScroll, bool alwaysShowHorizontal = false, bool alwaysShowVertical = false, params GUILayoutOption[] options)
+        {
+            scrollPos = EditorGUILayout.BeginScrollView(scrollPos, alwaysShowHorizontal, alwaysShowVertical, options);
+            {
+                onScroll();
+            }
+            EditorGUILayout.EndScrollView();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -103,14 +117,14 @@ namespace TP.Framework.Unity.Editor
         {
             var existing = GUI.color;
             GUI.color = c;
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical(GUI.skin.box, null);
             GUI.color = existing;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void StartBox()
         {
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            EditorGUILayout.BeginVertical(GUI.skin.box, null);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

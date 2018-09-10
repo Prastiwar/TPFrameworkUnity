@@ -15,6 +15,58 @@ namespace TP.Framework.Unity.Editor
         public static GUIStyle Toolbar { get { return GUI.skin.FindStyle("Toolbar"); } }
         public static GUIStyle ToolbarSerachField { get { return GUI.skin.FindStyle("ToolbarSeachTextField"); } }
         public static GUIStyle ToolbarSearchCancel { get { return GUI.skin.FindStyle("ToolbarSeachCancelButton"); } }
+        
+        private static GUIStyle boldText;
+        public static GUIStyle BoldText {
+            get {
+                if (boldText == null)
+                {
+                    boldText = new GUIStyle(GUI.skin.textField) {
+                        fontStyle = FontStyle.Bold,
+                    };
+                }
+                return boldText;
+            }
+        }
+
+        private static GUIStyle boldCenterText;
+        public static GUIStyle BoldCenterText {
+            get {
+                if (boldCenterText == null)
+                {
+                    boldCenterText = new GUIStyle(BoldText) {
+                        alignment = TextAnchor.MiddleCenter
+                    };
+                }
+                return boldCenterText;
+            }
+        }
+
+        private static GUIStyle boldLeftText;
+        public static GUIStyle BoldLeftText {
+            get {
+                if (boldLeftText == null)
+                {
+                    boldLeftText = new GUIStyle(BoldText) {
+                        alignment = TextAnchor.MiddleLeft
+                    };
+                }
+                return boldLeftText;
+            }
+        }
+
+        private static GUIStyle boldRightText;
+        public static GUIStyle BoldRightText {
+            get {
+                if (boldRightText == null)
+                {
+                    boldRightText = new GUIStyle(BoldText) {
+                        alignment = TextAnchor.MiddleRight
+                    };
+                }
+                return boldRightText;
+            }
+        }
 
         private static GUIStyle textWrap;
         public static GUIStyle TextWrap {
@@ -34,9 +86,8 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richTextWrap == null)
                 {
-                    richTextWrap = new GUIStyle(EditorStyles.textField) {
-                        richText = true,
-                        wordWrap = true
+                    richTextWrap = new GUIStyle(TextWrap) {
+                        richText = true
                     };
                 }
                 return richTextWrap;

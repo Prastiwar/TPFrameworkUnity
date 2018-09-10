@@ -60,6 +60,20 @@ namespace TP.Framework.Unity
             return builder.ToString();
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is TPModifier mod ? mod == this : false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 328636640;
+            hashCode = hashCode * -1521134295 + System.Collections.Generic.EqualityComparer<object>.Default.GetHashCode(Source);
+            hashCode = hashCode * -1521134295 + Value.GetHashCode();
+            hashCode = hashCode * -1521134295 + Priority.GetHashCode();
+            return hashCode;
+        }
+
         public static bool operator ==(TPModifier c1, TPModifier c2)
         {
             return c1.Value == c2.Value && c1.Type == c2.Type && c1.Priority == c2.Priority && c1.Source == c2.Source;
@@ -70,14 +84,14 @@ namespace TP.Framework.Unity
             return !(c1 == c2);
         }
 
-        public override bool Equals(object obj)
+        public static implicit operator Framework.TPModifier(TPModifier mod)
         {
-            return base.Equals(obj);
+            return new Framework.TPModifier(mod.type, mod.value, mod.priority, mod.Source);
         }
 
-        public override int GetHashCode()
+        public static implicit operator TPModifier(Framework.TPModifier coreMod)
         {
-            return base.GetHashCode();
+            return new TPModifier(coreMod.Type, coreMod.Value, coreMod.Priority, coreMod.Source);
         }
     }
 }

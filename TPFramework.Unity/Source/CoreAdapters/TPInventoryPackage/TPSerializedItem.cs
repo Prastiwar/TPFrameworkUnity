@@ -33,7 +33,7 @@ namespace TP.Framework.Unity
                 AmountStack = load.amountStack,
                 MaxStack = load.maxStack,
                 Weight = load.weight,
-                Modifiers = load.modifiers?.Cast<ITPModifier>().ToArray()
+                Modifiers = load.modifiers.Cast<Framework.TPModifier>().ToArray()
             };
         }
 
@@ -48,7 +48,7 @@ namespace TP.Framework.Unity
                 amountStack = save.AmountStack,
                 maxStack = save.MaxStack,
                 weight = save.Weight,
-                modifiers = save.Modifiers?.Cast<TPModifier>().ToArray()
+                modifiers = save.Modifiers.Cast<TPModifier>().ToArray()
             };
         }
     }
