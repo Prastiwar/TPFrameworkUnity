@@ -55,7 +55,6 @@ namespace TP.Framework.Internal
             Manager.InitializePackages(GetAllTPPackageNames, false);
             OverridePackages();
             Reload();
-            ((TPDefineManager)Manager.DefineManager).OnLoad();
         }
 
         [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReloadPackages, priority = 0)]
@@ -105,11 +104,5 @@ namespace TP.Framework.Internal
             }
             return IsLoaded;
         }
-    }
-
-    internal class TPUIPackage
-    {
-        [MenuItem(TPUnityPackageManager.MENU + TPDefineInfo.MenuMessage.TPUISafeChecks, priority = 160)]
-        private static void ToggleSafeChecks() { TPUnityPackageManager.Manager.DefineManager.ToggleDefine(TPDefineInfo.TPUISafety); }
     }
 }

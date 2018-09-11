@@ -12,17 +12,17 @@ namespace TP.Framework.Unity
     public class TPUnityPool<TObject> : TPObjectPool<TObject>
         where TObject : Object
     {
-        private readonly TObject prefab;
+        protected readonly TObject Prefab;
 
         public TPUnityPool(TObject prefab, int capacity = 4) : base(capacity)
         {
-            this.prefab = prefab;
+            Prefab = prefab;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override TObject CreateNewObject()
         {
-            return Object.Instantiate(prefab);
+            return Object.Instantiate(Prefab);
         }
     }
 }

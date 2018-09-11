@@ -4,8 +4,8 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using TP.Framework.Collections;
 using UnityEngine;
@@ -17,26 +17,68 @@ namespace TP.Framework.Unity
         private static readonly ReusableList<Transform> reusableTransform = new ReusableList<Transform>();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T[] GetComponentsOnlyInChildren<T>(this GameObject gameObject)
+        public static bool AnyChildMatch(this Transform transform, Predicate<Transform> match)
         {
-            var components = new HashSet<T>(gameObject.GetComponentsInChildren<T>());
-            components.Remove(gameObject.GetComponent<T>());
-            return components.ToArray();
+            int length = transform.childCount;
+            for (int i = 0; i < length; i++)
+            {
+                if (match(transform.GetChild(i)))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T GetComponentOnlyInChildren<T>(this GameObject gameObject)
+        public static Transform GetChildWithLayer(this Transform parent, int layerIndex)
         {
-            int length = gameObject.transform.childCount;
+            int length = parent.childCount;
             for (int i = 0; i < length; i++)
             {
-                T comp = gameObject.transform.GetChild(i).GetComponent<T>();
-                if (comp != null)
+                Transform child = parent.GetChild(i);
+                if (child.gameObject.layer == layerIndex)
                 {
-                    return comp;
+                    return child;
                 }
             }
-            return default(T);
+            return null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform GetChildWithLayer(this Transform parent, string layerName)
+        {
+            return GetChildWithLayer(parent, LayerMask.NameToLayer(layerName));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform GetChildWithLayer(this Transform parent, LayerMask layerMask)
+        {
+            int length = parent.childCount;
+            for (int i = 0; i < length; i++)
+            {
+                Transform child = parent.GetChild(i);
+                if (child.gameObject.IsInLayerMask(layerMask))
+                {
+                    return child;
+                }
+            }
+            return null;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Transform GetChildWithTag(this Transform parent, string tag)
+        {
+            int length = parent.childCount;
+            for (int i = 0; i < length; i++)
+            {
+                Transform child = parent.GetChild(i);
+                if (child.CompareTag(tag))
+                {
+                    return child;
+                }
+            }
+            return null;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -45,7 +87,7 @@ namespace TP.Framework.Unity
             int length = transform.childCount;
             for (int i = 0; i < length; i++)
             {
-                Object.DestroyImmediate(transform.GetChild(0).gameObject);
+                UnityEngine.Object.DestroyImmediate(transform.GetChild(0).gameObject);
             }
         }
 

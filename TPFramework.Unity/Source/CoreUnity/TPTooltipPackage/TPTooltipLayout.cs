@@ -24,9 +24,8 @@ namespace TP.Framework.Unity.UI
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override void OnInitialized()
         {
-#if TPUISafeChecks
             SafeCheck(UIWindow);
-#endif
+
             CanvasGroup.alpha = 0;
             CanvasGroup.blocksRaycasts = false;
 
@@ -66,8 +65,7 @@ namespace TP.Framework.Unity.UI
             }
 
         }
-
-#if TPUISafeChecks
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SafeCheck(GameObject layout)
         {
@@ -76,7 +74,6 @@ namespace TP.Framework.Unity.UI
             else if (!LayoutTransform.GetComponent<Image>())
                 throw new Exception("Invalid Tooltip Layout! LayoutTransform(child of canvas) needs to have Image component");
         }
-#endif
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void SetPosition(Vector2 position, bool clampToScreen = true)

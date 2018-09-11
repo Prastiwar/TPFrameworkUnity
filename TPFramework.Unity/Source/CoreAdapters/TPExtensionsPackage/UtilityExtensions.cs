@@ -54,11 +54,14 @@ namespace TP.Framework.Unity
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float GetFloat(this AudioMixer audioMixer, string paramName)
         {
-            bool result = audioMixer.GetFloat(paramName, out float value);
-            if (result)
-                return value;
-            else
-                return 0f;
+            bool gotResult = audioMixer.GetFloat(paramName, out float value);
+            return gotResult ? value : 0f;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasLayer(this LayerMask mask, int layer)
+        {
+            return ((mask.value & (1 << layer)) > 0);
         }
     }
 }

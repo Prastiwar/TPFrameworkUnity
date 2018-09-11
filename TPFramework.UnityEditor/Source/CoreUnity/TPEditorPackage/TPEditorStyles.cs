@@ -68,6 +68,58 @@ namespace TP.Framework.Unity.Editor
             }
         }
 
+        private static GUIStyle boldLabel;
+        public static GUIStyle BoldLabel {
+            get {
+                if (boldLabel == null)
+                {
+                    boldLabel = new GUIStyle(GUI.skin.label) {
+                        fontStyle = FontStyle.Bold,
+                    };
+                }
+                return boldLabel;
+            }
+        }
+
+        private static GUIStyle boldCenterLabel;
+        public static GUIStyle BoldCenterLabel {
+            get {
+                if (boldCenterLabel == null)
+                {
+                    boldCenterLabel = new GUIStyle(BoldLabel) {
+                        alignment = TextAnchor.MiddleCenter
+                    };
+                }
+                return boldCenterLabel;
+            }
+        }
+
+        private static GUIStyle boldLeftLabel;
+        public static GUIStyle BoldLeftLabel {
+            get {
+                if (boldLeftLabel == null)
+                {
+                    boldLeftLabel = new GUIStyle(BoldLabel) {
+                        alignment = TextAnchor.MiddleLeft
+                    };
+                }
+                return boldLeftLabel;
+            }
+        }
+
+        private static GUIStyle boldRightLabel;
+        public static GUIStyle BoldRightLabel {
+            get {
+                if (boldRightLabel == null)
+                {
+                    boldRightLabel = new GUIStyle(BoldLabel) {
+                        alignment = TextAnchor.MiddleRight
+                    };
+                }
+                return boldRightLabel;
+            }
+        }
+
         private static GUIStyle textWrap;
         public static GUIStyle TextWrap {
             get {

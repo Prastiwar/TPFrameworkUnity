@@ -5,7 +5,6 @@
 */
 
 using System;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
@@ -150,7 +149,6 @@ namespace TP.Framework.Unity.UI
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void InitializeLayout()
         {
-#if TPUISafeChecks
             try
             {
                 LayoutTransform = UIWindow.transform.GetChild(0);
@@ -160,9 +158,7 @@ namespace TP.Framework.Unity.UI
                 Debug.LogError("You should have child transform on your prefab!");
             }
             SafeCheck(LayoutTransform);
-#else
-            LayoutTransform = UIWindow.transform.GetChild(0);
-#endif
+
             LayoutRectTransform = LayoutTransform.GetComponent<RectTransform>();
             UIWindowRectTransform = UIWindow.GetComponent<RectTransform>();
             CanvasGroup = UIWindow.GetComponent<CanvasGroup>();
@@ -171,23 +167,20 @@ namespace TP.Framework.Unity.UI
             Texts = Initialize(LayoutTransform.GetChild(2), Texts);
         }
 
-#if TPUISafeChecks
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void SafeCheck(Transform transform)
         {
             if (transform.childCount < 3)
                 throw new Exception("Invalid TPUILayout! LayoutTransform needs to have Child 0: Parent of Images, Child 1: Parent of Buttons, Child 2: Parent of Texts");
             else if (transform.parent.GetComponent<CanvasGroup>() == null)
                 throw new Exception("Invalid TPUILayout! UIWindow needs CanvasGroup component");
-            else if (transform.GetChild(0).GetChilds().Any(x => x.GetComponent<Image>() == null))
+            else if (transform.GetChild(0).AnyChildMatch(x => x.GetComponent<Image>() == null))
                 throw new Exception("Invalid TPUILayout! Child 0: Parent of Images must contain only Images as childs");
-            else if (transform.GetChild(1).GetChilds().Any(x => x.GetComponent<Button>() == null))
+            else if (transform.GetChild(1).AnyChildMatch(x => x.GetComponent<Button>() == null))
                 throw new Exception("Invalid TPUILayout! Child 1: Parent of Buttons must contain only Buttons as childs");
-            else if (transform.GetChild(2).GetChilds().Any(x => x.GetComponent<TextMeshProUGUI>() == null))
+            else if (transform.GetChild(2).AnyChildMatch(x => x.GetComponent<TextMeshProUGUI>() == null))
                 throw new Exception("Invalid TPUILayout! Child 2: Parent of Texts must contain only TextMeshProUGUIs as childs");
         }
-
-#endif
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private T[] Initialize<T>(Transform child, T[] array)

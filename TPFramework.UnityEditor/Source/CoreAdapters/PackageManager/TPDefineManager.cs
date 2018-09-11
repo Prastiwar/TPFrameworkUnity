@@ -12,41 +12,25 @@ namespace TP.Framework.Internal
 {
     internal struct TPDefineInfo
     {
-        public const string TPUISafety = "TPUISafeChecks";
-
         internal struct MenuMessage
         {
             public const string TPReloadManager = "Reload Framework Manager";
             public const string TPReloadPackages = "Reload Packages";
-#if TPUISafeChecks
-            public const string TPUISafeChecks = "Disable TPUI Safe Checks";
-#else
-            public const string TPUISafeChecks = "Enable TPUI Safe Checks";
-#endif
         }
     }
 
-    internal struct TPDefineManager : ITPDefineManager
+    public struct TPDefineManager : ITPDefineManager
     {
         private static BuildTargetGroup _TargetGroup { get { return EditorUserBuildSettings.selectedBuildTargetGroup; } }
 
-        public void OnLoad()
-        {
-            if (EditorPrefs.GetBool("TP_IsFirstRun", true))
-            {
-                SetDefine(TPDefineInfo.TPUISafety, true);
-                EditorPrefs.SetBool("TP_IsFirstRun", false);
-            }
-        }
-
-        public void ToggleDefine(string define)
+        public static void ToggleDefine(string define)
         {
             bool enabled = !EditorPrefs.GetBool(define, false);
             EditorPrefs.SetBool(define, enabled);
             SetDefine(define, enabled);
         }
 
-        public void SetDefine(string define, bool enabled)
+        public static void SetDefine(string define, bool enabled)
         {
             if (enabled)
             {
@@ -58,12 +42,27 @@ namespace TP.Framework.Internal
             }
         }
 
-        public bool IsDefined(string define)
+        public static bool IsDefined(string define)
         {
             return GetDefines().Contains(define);
         }
 
-        private bool TryAddDefine(string define)
+        void ITPDefineManager.ToggleDefine(string define)
+        {
+            ToggleDefine(define);
+        }
+
+        void ITPDefineManager.SetDefine(string define, bool enabled)
+        {
+            SetDefine(define, enabled);
+        }
+
+        bool ITPDefineManager.IsDefined(string define)
+        {
+            return IsDefined(define);
+        }
+
+        private static bool TryAddDefine(string define)
         {
             List<string> allDefines = GetDefines();
             if (!allDefines.Contains(define))
@@ -75,7 +74,7 @@ namespace TP.Framework.Internal
             return false;
         }
 
-        private bool TryRemoveDefine(string define)
+        private static bool TryRemoveDefine(string define)
         {
             List<string> allDefines = GetDefines();
             if (allDefines.Contains(define))
@@ -86,12 +85,12 @@ namespace TP.Framework.Internal
             return false;
         }
 
-        private void SetDefines(List<string> allDefines)
+        private static void SetDefines(List<string> allDefines)
         {
             PlayerSettings.SetScriptingDefineSymbolsForGroup(_TargetGroup, string.Join(";", allDefines.ToArray()));
         }
 
-        private List<string> GetDefines()
+        private static List<string> GetDefines()
         {
             string defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(_TargetGroup);
             return defines.Split(';').ToList();

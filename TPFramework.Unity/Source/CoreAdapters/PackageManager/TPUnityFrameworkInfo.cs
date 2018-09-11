@@ -9,7 +9,7 @@ namespace TP.Framework.Internal
     public struct TPUnityFrameworkInfo
     {
         public const int PackagesLength = 7;
-        public const string TPCoreNamespace = "TPFramework.Unity";
+        public const string TPCoreNamespace = "TP.Framework.Unity";
 
         public static string[] GetTPPackageNames {
             get {

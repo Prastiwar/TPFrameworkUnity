@@ -42,7 +42,7 @@ namespace TP.Framework.Internal.Editor
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("How should be your project folder named?", TPEditorStyles.BoldCenterText, null);
+            EditorGUILayout.LabelField("How should be your project folder named?", TPEditorStyles.BoldCenterLabel, null);
             projectGameName = EditorGUILayout.TextField(projectGameName, options: null);
 
             EditorGUILayout.Space();

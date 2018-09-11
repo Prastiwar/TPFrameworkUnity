@@ -19,12 +19,12 @@ namespace TP.Framework.Unity
         [SerializeField] private TPAchievementData data;
 
         public Sprite Icon;
-        public Action OnCompleted { get; set; }
-        public TPAchievementData Data { get { return data; } private set { data = value; } }
-
         public bool ShowNotifyOnComplete;
         public bool ShowNotifyOnProgress;
         public TPAchievementNotify TPNotify;
+
+        public Action OnCompleted { get; set; }
+        public TPAchievementData Data { get { return data; } private set { data = value; } }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void AddPoints(float points = 1)
