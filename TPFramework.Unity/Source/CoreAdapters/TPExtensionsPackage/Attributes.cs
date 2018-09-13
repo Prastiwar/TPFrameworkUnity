@@ -10,11 +10,59 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    [AttributeUsage(AttributeTargets.Field, Inherited = true)]
-    public class InspectorReadOnlyAttribute : PropertyAttribute { }
+    public class TPEditorAttribute : PropertyAttribute { }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = true)]
-    public class InspectorHideAttribute : PropertyAttribute
+    public class InspectorReadOnlyAttribute : TPEditorAttribute { }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class RequiredAttribute : TPEditorAttribute
+    {
+        public string Message { get; }
+
+        public RequiredAttribute(string message = null)
+        {
+            Message = message;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class OnValueChangedAttribute : TPEditorAttribute
+    {
+        public string CallbackName { get; }
+
+        public OnValueChangedAttribute(string callbackName)
+        {
+            CallbackName = callbackName;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class InspectorValidateAttribute : TPEditorAttribute
+    {
+        public string CallbackName { get; }
+        public string Message { get; }
+
+        public InspectorValidateAttribute(string callbackName, string message = null)
+        {
+            Message = message;
+            CallbackName = callbackName;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
+    public class InspectorButtonAttribute : TPEditorAttribute
+    {
+        public string ButtonName { get; }
+
+        public InspectorButtonAttribute(string buttonName = null)
+        {
+            ButtonName = buttonName;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class InspectorHideAttribute : TPEditorAttribute
     {
         public bool DisableOnly { get; }
 

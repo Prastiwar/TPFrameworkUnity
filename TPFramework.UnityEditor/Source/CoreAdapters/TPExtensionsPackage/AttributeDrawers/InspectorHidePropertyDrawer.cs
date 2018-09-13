@@ -13,44 +13,27 @@ using UnityEngine;
 namespace TP.Framework.Unity.Editor
 {
     [CustomPropertyDrawer(typeof(InspectorHideAttribute))]
-    public class InspectorHidePropertyDrawer : PropertyDrawer
+    public class InspectorHidePropertyDrawer : AttributePropertyDrawer<InspectorHideAttribute>
     {
         private readonly BindingFlags findValueFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
-        private bool isDrawerEnabled = false;
-
-        private SerializedObject serializedObject;
-        private InspectorHideAttribute hideAtt;
-        private Action<Rect, GUIContent> OnGUIActive;
         private bool propEnabled = false;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (hideAtt.DisableOnly || propEnabled)
+            if (Attribute.DisableOnly || propEnabled)
             {
                 TPEditorGUI.DrawField(position, property, label, true, propEnabled);
             }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        public override float GetPropHeight(SerializedProperty property, GUIContent label)
         {
-            if (!isDrawerEnabled)
-            {
-                isDrawerEnabled = true;
-                OnEnable(property);
-            }
-            propEnabled = GetResultFromAttribute(hideAtt, property);
-            return hideAtt.DisableOnly || propEnabled
+            propEnabled = GetResultFromAttribute(Attribute, property);
+            return Attribute.DisableOnly || propEnabled
                 ? EditorGUI.GetPropertyHeight(property, label)
                 : -EditorGUIUtility.standardVerticalSpacing;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void OnEnable(SerializedProperty property)
-        {
-            serializedObject = property.serializedObject;
-            hideAtt = (InspectorHideAttribute)attribute;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -78,9 +61,9 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool GetBool(string condition)
         {
-            Type classType = serializedObject.targetObject.GetType();
+            Type classType = SerializedObject.targetObject.GetType();
 
-            SerializedProperty property = serializedObject.FindProperty(condition);
+            SerializedProperty property = SerializedObject.FindProperty(condition);
             if (property != null)
             {
                 return GetBool(property);
@@ -89,14 +72,14 @@ namespace TP.Framework.Unity.Editor
             MethodInfo method = classType.GetMethod(condition, findValueFlags);
             if (method != null)
             {
-                object methodValue = method.Invoke(serializedObject.targetObject, null);
+                object methodValue = method.Invoke(SerializedObject.targetObject, null);
                 return GetBool(methodValue);
             }
 
             FieldInfo field = classType.GetField(condition, findValueFlags);
             if (field != null)
             {
-                object fieldValue = field.GetValue(serializedObject.targetObject);
+                object fieldValue = field.GetValue(SerializedObject.targetObject);
                 return GetBool(fieldValue);
             }
 
