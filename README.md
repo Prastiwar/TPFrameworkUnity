@@ -46,8 +46,10 @@
 
 ## Before start
 
-- [x] Make sure you have **Unity 2017+** (Lower versions weren't tested)
+- [x] Make sure you have **Unity 2017** (Lower versions weren't tested)
 - [x] Make sure you use **.NET 4.x** (Core is built in .Net Framework 4.6)
+
+- [x] If you want to use DLL - Make sure to use TextMesh Pro exactly - Release 1.2.2-2017.3. If you want it work in Unity 2018 you need to manually change reference of Framework.Unity VS solution to proper TextMeshPro version
 
 
 ## Getting Started

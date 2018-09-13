@@ -92,6 +92,24 @@ namespace TP.Framework.Unity.Editor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void OnEnabledGUI(bool enabled, Action onGuiActive)
+        {
+            bool wasEnabled = GUI.enabled;
+            GUI.enabled = enabled;
+            onGuiActive();
+            GUI.enabled = wasEnabled;
+        }
+        
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void DrawField(Rect position, SerializedProperty property, GUIContent label, bool includeChildren = true, bool enabledGui = true)
+        {
+            bool wasEnabled = GUI.enabled;
+            GUI.enabled = enabledGui;
+            EditorGUI.PropertyField(position, property, label, includeChildren);
+            GUI.enabled = wasEnabled;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DrawField(this SerializedObject serializedObject, string fieldName, bool includeChildren = true, params GUILayoutOption[] options)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty(fieldName), includeChildren, options);

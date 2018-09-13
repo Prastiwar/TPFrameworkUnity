@@ -14,10 +14,7 @@ namespace TP.Framework.Unity.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            bool wasEnabled = GUI.enabled;
-            GUI.enabled = false;
-            EditorGUI.PropertyField(position, property, label, true);
-            GUI.enabled = wasEnabled;
+            TPEditorGUI.DrawField(position, property, label, true, false);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

@@ -20,8 +20,8 @@ public class TPTooltipExample : MonoBehaviour
     private void FillTexts(TPTooltip tooltip)
     {
         DummyItem item = tooltip.GetComponent<DummyItem>();
-        //tooltip.TooltipLayout.GetText(0).SetText(item.Header);
-        //tooltip.TooltipLayout.GetText(1).SetText(item.Description);
+        tooltip.TooltipLayout.GetText(0).SetText(item.Header);
+        tooltip.TooltipLayout.GetText(1).SetText(item.Description);
         tooltip.TooltipLayout.GetButton(0).onClick.RemoveAllListeners();
         tooltip.TooltipLayout.GetButton(0).onClick.AddListener(() => Debug.Log("Click"));
     }
