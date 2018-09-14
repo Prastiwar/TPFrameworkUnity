@@ -15,7 +15,6 @@ namespace TP.Framework.Unity.Editor
     [CustomPropertyDrawer(typeof(InspectorHideAttribute))]
     public class InspectorHidePropertyDrawer : AttributePropertyDrawer<InspectorHideAttribute>
     {
-        private readonly BindingFlags findValueFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
         private bool propEnabled = false;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -28,11 +27,11 @@ namespace TP.Framework.Unity.Editor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override float GetPropHeight(SerializedProperty property, GUIContent label)
+        public override float GetPropHeight()
         {
-            propEnabled = GetResultFromAttribute(Attribute, property);
+            propEnabled = GetResultFromAttribute(Attribute, Property);
             return Attribute.DisableOnly || propEnabled
-                ? EditorGUI.GetPropertyHeight(property, label)
+                ? EditorGUI.GetPropertyHeight(Property, PropertyLabel)
                 : -EditorGUIUtility.standardVerticalSpacing;
         }
 
@@ -61,7 +60,7 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool GetBool(string condition)
         {
-            Type classType = SerializedObject.targetObject.GetType();
+            Type classType = TargetObject.GetType();
 
             SerializedProperty property = SerializedObject.FindProperty(condition);
             if (property != null)
@@ -72,15 +71,15 @@ namespace TP.Framework.Unity.Editor
             MethodInfo method = classType.GetMethod(condition, findValueFlags);
             if (method != null)
             {
-                object methodValue = method.Invoke(SerializedObject.targetObject, null);
-                return GetBool(methodValue);
+                object methodValue = method.Invoke(TargetObject, null);
+                return methodValue.GetBool();
             }
 
             FieldInfo field = classType.GetField(condition, findValueFlags);
             if (field != null)
             {
-                object fieldValue = field.GetValue(SerializedObject.targetObject);
-                return GetBool(fieldValue);
+                object fieldValue = field.GetValue(TargetObject);
+                return fieldValue.GetBool();
             }
 
             Debug.LogError($"Your condition in InspectorHideAttribute is invalid! Class: {classType}");
@@ -100,14 +99,6 @@ namespace TP.Framework.Unity.Editor
                     Debug.LogError("Data type of the property used for InspectorHide (" + property.propertyType + ") is currently not supported");
                     return true;
             }
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private bool GetBool(object value)
-        {
-            return value is bool
-                ? (bool)value
-                : value as UnityEngine.Object != null;
         }
     }
 }

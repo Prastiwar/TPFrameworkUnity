@@ -12,6 +12,15 @@ namespace TP.Framework.Unity.Editor
 {
     public static partial class TPExtensions
     {
+        /// <summary> Safe cast to bool or check if UnityEngine.Object is not null </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool GetBool(this object value)
+        {
+            return value is bool
+                ? (bool)value
+                : value as UnityEngine.Object != null;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static object GetTargetObject(this SerializedProperty prop)
         {

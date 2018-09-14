@@ -4,40 +4,25 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-using System.Collections.Generic;
-using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
     [CustomPropertyDrawer(typeof(RequiredAttribute))]
-    public class RequiredPropertyDrawer : AttributePropertyDrawer<RequiredAttribute>
+    public class RequiredPropertyDrawer : ValidatePropertyDrawer<RequiredAttribute>
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void Validate()
         {
-            base.OnGUI(position, property, label);
-            RequiredAttribute requiredAttribute = (RequiredAttribute)attribute;
-
-            if (property.propertyType == SerializedPropertyType.ObjectReference)
+            if (Property.propertyType == SerializedPropertyType.ObjectReference)
             {
-                if (property.objectReferenceValue == null)
+                if (Property.objectReferenceValue == null)
                 {
-                    string errorMessage = property.name + " is required";
-                    if (!string.IsNullOrEmpty(requiredAttribute.Message))
-                    {
-                        errorMessage = requiredAttribute.Message;
-                    }
-
-                    EditorGUILayout.HelpBox(errorMessage, MessageType.Error);
-                    //Debug.LogError(errorMessage, PropertyUtility.GetTargetObject(property));
+                    ShowError(Attribute.Message ?? Property.name + " is required");
                 }
             }
             else
             {
-                string warning = requiredAttribute.GetType().Name + " works only on reference types";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                //Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                ShowWarning(Attribute.GetType().Name + " works only on reference types");
             }
         }
     }

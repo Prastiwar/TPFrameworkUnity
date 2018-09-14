@@ -12,8 +12,29 @@ namespace TP.Framework.Unity
 {
     public class TPEditorAttribute : PropertyAttribute { }
 
-    [AttributeUsage(AttributeTargets.Field, Inherited = true)]
+    public class TPCallbackAttribute : TPEditorAttribute
+    {
+        public string CallbackName { get; }
+
+        public TPCallbackAttribute(string callbackName)
+        {
+            CallbackName = callbackName;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class InspectorReadOnlyAttribute : TPEditorAttribute { }
+
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class InspectorBackgroundAttribute : TPEditorAttribute
+    {
+        public Color Color { get; }
+
+        public InspectorBackgroundAttribute(float r, float g, float b, float a = 1)
+        {
+            Color = new Color(r, g, b, a);
+        }
+    }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class RequiredAttribute : TPEditorAttribute
@@ -27,26 +48,19 @@ namespace TP.Framework.Unity
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class OnValueChangedAttribute : TPEditorAttribute
+    public class OnValueChangedAttribute : TPCallbackAttribute
     {
-        public string CallbackName { get; }
-
-        public OnValueChangedAttribute(string callbackName)
-        {
-            CallbackName = callbackName;
-        }
+        public OnValueChangedAttribute(string callbackName) : base(callbackName) { }
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InspectorValidateAttribute : TPEditorAttribute
+    public class InspectorValidateAttribute : TPCallbackAttribute
     {
-        public string CallbackName { get; }
         public string Message { get; }
 
-        public InspectorValidateAttribute(string callbackName, string message = null)
+        public InspectorValidateAttribute(string callbackName, string message = null) : base(callbackName)
         {
             Message = message;
-            CallbackName = callbackName;
         }
     }
 

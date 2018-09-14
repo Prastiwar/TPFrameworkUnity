@@ -131,18 +131,18 @@ namespace TP.Framework.Unity.Editor
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void StartBox(Color c)
+        public static void StartBox(Color c, params GUILayoutOption[] options)
         {
             var existing = GUI.color;
             GUI.color = c;
-            EditorGUILayout.BeginVertical(GUI.skin.box, null);
+            EditorGUILayout.BeginVertical(GUI.skin.box, options);
             GUI.color = existing;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void StartBox()
+        public static void StartBox(params GUILayoutOption[] options)
         {
-            EditorGUILayout.BeginVertical(GUI.skin.box, null);
+            EditorGUILayout.BeginVertical(GUI.skin.box, options);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -4,15 +4,26 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
     [CustomPropertyDrawer(typeof(InspectorValidateAttribute))]
-    public class InspectorValidatePropertyDrawer : PropertyDrawer
+    public class InspectorValidatePropertyDrawer : ValidateCallbackPropertyDrawer<InspectorValidateAttribute>
     {
+        protected override void OnValidation(MethodInfo callback, object[] parameters, object fieldValue)
+        {
+            bool isValid = callback.Invoke(TargetObject, parameters).GetBool();
+            if (!isValid)
+            {
+                ShowError(Attribute.Message ?? $"{Property.name} is not valid");
+            }
+        }
+
+        protected override string GetCallbackRequirement()
+        {
+            return base.GetCallbackRequirement() + ", return bool";
+        }
     }
 }

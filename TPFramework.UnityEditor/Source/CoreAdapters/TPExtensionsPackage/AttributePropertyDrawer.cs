@@ -4,6 +4,7 @@
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
 
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,31 +15,39 @@ namespace TP.Framework.Unity.Editor
     {
         private bool isEnabled;
 
+        protected readonly BindingFlags findValueFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static;
+
         protected TAttribute Attribute { get; private set; }
+        protected SerializedProperty Property { get; private set; }
         protected SerializedObject SerializedObject { get; private set; }
+        protected Object TargetObject { get; private set; }
+        protected GUIContent PropertyLabel { get; private set; }
 
         public sealed override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             if (!isEnabled)
             {
-                OnEnable(property);
+                OnEnable(property, label);
             }
-            return GetPropHeight(property, label);
+            return GetPropHeight();
         }
 
-        public virtual float GetPropHeight(SerializedProperty property, GUIContent label)
-        {
-            return base.GetPropertyHeight(property, label);
-        }
-
-        protected void OnEnable(SerializedProperty property)
+        protected void OnEnable(SerializedProperty property, GUIContent label)
         {
             isEnabled = true;
             Attribute = (TAttribute)attribute;
+            Property = property;
+            PropertyLabel = label;
             SerializedObject = property.serializedObject;
-            OnEnabled(property);
+            TargetObject = SerializedObject.targetObject;
+            OnEnabled();
         }
 
-        protected virtual void OnEnabled(SerializedProperty property) { }
+        public virtual float GetPropHeight()
+        {
+            return base.GetPropertyHeight(Property, PropertyLabel);
+        }
+
+        protected virtual void OnEnabled() { }
     }
 }

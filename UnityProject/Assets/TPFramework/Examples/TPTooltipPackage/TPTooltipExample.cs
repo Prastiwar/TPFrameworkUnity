@@ -6,7 +6,7 @@ public class TPTooltipExample : MonoBehaviour
 {
     private bool isFading;
     private Coroutine fadeCor;
-    [Required] public GameObject obj;
+    
     [SerializeField] private float fadeSpeed;
 
     // Use this for initialization
