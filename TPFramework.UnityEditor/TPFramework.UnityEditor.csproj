@@ -1,0 +1,96 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5DAC3FFD-E4B3-40FA-B79D-BD2988EFC793}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <NoStandardLibraries>false</NoStandardLibraries>
+    <AssemblyName>TPFramework.Editor</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RootNamespace>TPFramework.Unity.Editor</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="TPFramework.Core">
+      <HintPath>..\..\TPFramework\TPFramework.Core\bin\Release\TPFramework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="TPFramework.Unity">
+      <HintPath>..\TPFramework.Unity\bin\Release\TPFramework.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>..\..\..\..\..\Program Files\Unity\2017.4.11f1\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\Program Files\Unity\2017.4.11f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\CoreAdapters\PackageManager\EditorProjectFolder.cs" />
+    <Compile Include="Source\CoreAdapters\PackageManager\TPDefineManager.cs" />
+    <Compile Include="Source\CoreAdapters\PackageManager\TPProjectManager.cs" />
+    <Compile Include="Source\CoreAdapters\PackageManager\TPUnityPackageManager.cs" />
+    <Compile Include="Source\CoreAdapters\TPAchievementPackage\Scriptlesses.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\BackgroundPropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\Editor\InspectorButtonDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\InspectorHidePropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\InspectorReadOnlyPropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\InspectorValidatePropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\OnValueChangedPropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributeDrawers\RequiredPropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\AttributePropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\EditorExtensions.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\ValidateCallbackPropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPExtensionsPackage\ValidatePropertyDrawer.cs" />
+    <Compile Include="Source\CoreAdapters\TPInventoryPackage\Scriptlesses.cs" />
+    <Compile Include="Source\CoreAdapters\TPInventoryPackage\TPItemDatabaseDictionary.cs" />
+    <Compile Include="Source\CoreAdapters\TPInventoryPackage\TPItemDatabaseEditor.cs" />
+    <Compile Include="Source\CoreUnity\TPAudioPackage\TPAudioBundleEditor.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditor.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditorGizmo.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditorGUI.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditorHelper.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditorStyles.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPEditorTextures.cs" />
+    <Compile Include="Source\CoreUnity\TPEditorPackage\TPScriptlessEditor.cs" />
+    <Compile Include="Source\CoreUnity\TPTooltipPackage\TPTooltipEditor.cs" />
+    <Compile Include="Source\CoreUnity\UnitySerializedDictionary\CommonUDictionaries.cs" />
+    <Compile Include="Source\CoreUnity\UnitySerializedDictionary\UDictionaryDrawer.cs" />
+    <Compile Include="Source\CoreUnity\UnitySerializedDictionary\UDictionaryExtensions.cs" />
+    <Compile Include="Source\CoreUnity\UnitySerializedDictionary\UDictionaryReadKeyDrawer.cs" />
+    <Compile Include="Source\CoreUnity\UnitySerializedDictionary\UDictionaryReadOnlyDrawer.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
+  <ProjectExtensions>
+    <VisualStudio AllowExistingFolder="true" />
+  </ProjectExtensions>
+</Project>
