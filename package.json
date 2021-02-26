@@ -7,6 +7,7 @@
     "keywords": ["Framework", "Utility", "Features" ],
     "license": "MIT",
     "dependencies": {
-		"com.unity.textmeshpro": "2.1.1"
+		  "com.unity.textmeshpro": "2.1.1",
+		  "com.prastiwar.unityserializeddictionary": "ssh://git@github.com/Prastiwar/UnitySerializedDictionary.git"
 	}
 }

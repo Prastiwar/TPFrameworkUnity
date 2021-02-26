@@ -5,6 +5,7 @@
 */
 
 using System;
+using UnityEngine.Collections.Generic;
 
 namespace TP.Framework.Unity
 {

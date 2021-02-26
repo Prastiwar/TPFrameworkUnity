@@ -12,12 +12,6 @@ using UnityEngine;
 
 namespace TP.Framework.Internal
 {
-    internal interface IOverridePackage
-    {
-        string Name { get; }
-        Func<bool> OnReload { get; }
-    }
-
     [InitializeOnLoad]
     internal class TPUnityPackageManager : TPPackageManager
     {
@@ -85,24 +79,6 @@ namespace TP.Framework.Internal
                 }
             }
             Manager.SetPackages(packagesList.ToArray());
-        }
-    }
-
-
-
-    internal class TPSettingsPackage : IOverridePackage
-    {
-        public string Name { get { return "TPSettingsPackage"; } }
-        public Func<bool> OnReload { get { return Reload; } }
-
-        private bool Reload()
-        {
-            bool IsLoaded = true;
-            if (!QualitySettings.names.Any(x => x == "Custom"))
-            {
-                Debug.LogError("No 'Custom' quality level found. Create one in Edit -> Project Settings -> Quality -> Add Quality Level");
-            }
-            return IsLoaded;
         }
     }
 }

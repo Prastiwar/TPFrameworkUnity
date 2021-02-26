@@ -3,7 +3,7 @@
 *   MIT LICENSE: https://github.com/Prastiwar/TPFrameworkUnity/blob/master/LICENSE
 *   Repository: https://github.com/Prastiwar/TPFrameworkUnity
 */
-
+using UnityEngine.Collections.Generic;
 
 namespace TP.Framework.Unity
 {
