@@ -12,12 +12,12 @@ public class TPTooltipExample : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        TPTooltipSystem.OnObserverEnter = FillTexts;
-        TPTooltipSystem.OnObserverEnter += (tooltip) => ChangeState(tooltip, true);
-        TPTooltipSystem.OnObserverExit = (tooltip) => ChangeState(tooltip, false);
+        TooltipSystem.OnObserverEnter = FillTexts;
+        TooltipSystem.OnObserverEnter += (tooltip) => ChangeState(tooltip, true);
+        TooltipSystem.OnObserverExit = (tooltip) => ChangeState(tooltip, false);
     }
 
-    private void FillTexts(TPTooltip tooltip)
+    private void FillTexts(TooltipBehaviour tooltip)
     {
         DummyItem item = tooltip.GetComponent<DummyItem>();
         tooltip.TooltipLayout.GetText(0).SetText(item.Header);
@@ -26,7 +26,7 @@ public class TPTooltipExample : MonoBehaviour
         tooltip.TooltipLayout.GetButton(0).onClick.AddListener(() => Debug.Log("Click"));
     }
 
-    private void ChangeState(TPTooltip tooltip, bool enter)
+    private void ChangeState(TooltipBehaviour tooltip, bool enter)
     {
         if (isFading)
         {
@@ -36,7 +36,7 @@ public class TPTooltipExample : MonoBehaviour
         fadeCor = StartCoroutine(Fade(tooltip, enter));
     }
 
-    private IEnumerator Fade(TPTooltip tooltip, bool active)
+    private IEnumerator Fade(TooltipBehaviour tooltip, bool active)
     {
         isFading = true;
         tooltip.TooltipLayout.SetAlpha(active ? 0 : 1);

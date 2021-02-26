@@ -30,21 +30,21 @@ public class SettingsExample : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        TPSettings.SetAnisotropicToggler(aniosotropicToggler);
-        TPSettings.SetFullScreenToggler(fullScreenToggler);
-        TPSettings.SetVSyncToggler(vsyncToggler);
+        SettingsSystem.SetAnisotropicToggler(aniosotropicToggler);
+        SettingsSystem.SetFullScreenToggler(fullScreenToggler);
+        SettingsSystem.SetVSyncToggler(vsyncToggler);
 
-        TPSettings.SetMusicToggler(musicToggler, mixer, musicFloat);
-        TPSettings.SetSoundFXToggler(sfxToggler, mixer, sfxFloat);
-        TPSettings.SetMusicVolumeSlider(musicSlider, mixer, musicFloat);
-        TPSettings.SetSoundFXVolumeSlider(sfxSlider, mixer, sfxFloat);
+        SettingsSystem.SetMusicToggler(musicToggler, mixer, musicFloat);
+        SettingsSystem.SetSoundFXToggler(sfxToggler, mixer, sfxFloat);
+        SettingsSystem.SetMusicVolumeSlider(musicSlider, mixer, musicFloat);
+        SettingsSystem.SetSoundFXVolumeSlider(sfxSlider, mixer, sfxFloat);
 
-        TPSettings.SetAntialiasingDropdown(antialiasing);
-        TPSettings.SetResolutionDropdown(resolution);
-        TPSettings.SetShadowQualityDropdown(shadowQuality);
-        TPSettings.SetShadowResolutionDropdown(shadowResolution);
-        TPSettings.SetTextureDropdown(texture);
-        TPSettings.SetQualityDropdown(quality, QualitySettings.GetQualityLevel());
-        TPSettings.Refresh();
+        SettingsSystem.SetAntialiasingDropdown(antialiasing);
+        SettingsSystem.SetResolutionDropdown(resolution);
+        SettingsSystem.SetShadowQualityDropdown(shadowQuality);
+        SettingsSystem.SetShadowResolutionDropdown(shadowResolution);
+        SettingsSystem.SetTextureDropdown(texture);
+        SettingsSystem.SetQualityDropdown(quality, QualitySettings.GetQualityLevel());
+        SettingsSystem.Refresh();
     }
 }

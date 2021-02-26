@@ -9,18 +9,18 @@ using UnityEditor;
 namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPItemHolder))]
-    public class TPItemHolderEditor : TPScriptlessEditor<TPItemHolder> { }
+    [CustomEditor(typeof(ItemScriptable))]
+    public class TPItemHolderEditor : TPScriptlessEditor<ItemScriptable> { }
 
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPItemSlotHolder))]
-    public class TPItemSlotHolderEditor : TPScriptlessEditor<TPItemSlotHolder> { }
+    [CustomEditor(typeof(ItemSlotHoldBehaviour))]
+    public class TPItemSlotHolderEditor : TPScriptlessEditor<ItemSlotHoldBehaviour> { }
 
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPEquipSlotHolder))]
-    public class TPEquipSlotHolderEditor : TPScriptlessEditor<TPEquipSlotHolder> { }
+    [CustomEditor(typeof(EquipSlotHoldBehaviour))]
+    public class TPEquipSlotHolderEditor : TPScriptlessEditor<EquipSlotHoldBehaviour> { }
 
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPSlotsSpawner))]
-    public class TPSlotsSpawnerHolderEditor : TPScriptlessEditor<TPSlotsSpawner> { }
+    [CustomEditor(typeof(SlotsSpawnBehaviour))]
+    public class TPSlotsSpawnerHolderEditor : TPScriptlessEditor<SlotsSpawnBehaviour> { }
 }

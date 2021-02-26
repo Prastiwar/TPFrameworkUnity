@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class InventoryExample : MonoBehaviour
 {
-    [SerializeField] private TPInventory inventory;
+    [SerializeField] private Inventory inventory;
 
     public void SpawnSlots()
     {
-        TPSlotsSpawner spawner = GetComponent<TPSlotsSpawner>();
+        SlotsSpawnBehaviour spawner = GetComponent<SlotsSpawnBehaviour>();
         if (spawner != null)
         {
             spawner.Clear();
@@ -23,7 +23,7 @@ public class InventoryExample : MonoBehaviour
 
     private void Reset()
     {
-        inventory = new TPInventory();
+        inventory = new Inventory();
         SpawnSlots();
     }
 

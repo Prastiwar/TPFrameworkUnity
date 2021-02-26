@@ -10,7 +10,7 @@ using UnityEngine.Audio;
 
 namespace TP.Framework.Unity
 {
-    public static partial class TPExtensions
+    public static partial class Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsFrame(this int frameModulo)

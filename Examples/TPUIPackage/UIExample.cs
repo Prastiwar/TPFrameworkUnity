@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIExample : MonoBehaviour
 {
     [SerializeField] private Button toggleWindowBtn;
-    [SerializeField] private TPModalWindow modalWindow;
+    [SerializeField] private ModalWindow modalWindow;
 
     // Use this for initialization
     private void Start()

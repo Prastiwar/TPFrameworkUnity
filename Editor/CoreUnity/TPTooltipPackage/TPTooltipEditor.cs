@@ -11,8 +11,8 @@ using UnityEngine;
 namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPTooltip))]
-    public class TPTooltipEditor : TPScriptlessEditor<TPTooltip>
+    [CustomEditor(typeof(TooltipBehaviour))]
+    public class TPTooltipEditor : TPScriptlessEditor<TooltipBehaviour>
     {
         private bool foldoutLayout = true;
 
@@ -33,7 +33,7 @@ namespace TP.Framework.Unity.Editor
 
         private void DrawSingle()
         {
-            Target.TooltipType = (TPTooltipType)EditorGUILayout.EnumPopup(GUIContent("Tooltip Type"), Target.TooltipType);
+            Target.TooltipType = (TooltipType)EditorGUILayout.EnumPopup(GUIContent("Tooltip Type"), Target.TooltipType);
             Target.IsObserving = EditorGUILayout.Toggle(GUIContent("Is Observing?"), Target.IsObserving);
 
             foldoutLayout = EditorGUILayout.Foldout(foldoutLayout, "Layout Settings");

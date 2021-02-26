@@ -29,7 +29,7 @@ public class PersistenceExample : MonoBehaviour
 
     private void Load()
     {
-        TPPersistPrefs.Load(this);
+        PersistPrefs.Load(this);
         ExampleHelper.DrawLine();
         Debug.Log("Values Loaded");
         someString.ToLog("SomeString: ");
@@ -41,7 +41,7 @@ public class PersistenceExample : MonoBehaviour
 
     private void Save()
     {
-        TPPersistPrefs.Save(this);
+        PersistPrefs.Save(this);
         ExampleHelper.DrawLine();
         Debug.Log("Values Saved");
         someString.ToLog("SomeString: ");

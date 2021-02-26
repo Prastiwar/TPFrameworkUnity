@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace TP.Framework.Unity
 {
-    public static partial class TPExtensions
+    public static partial class Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetSprite(this Image image, Sprite sprite)

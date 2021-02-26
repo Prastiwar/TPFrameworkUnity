@@ -20,7 +20,7 @@ public class RandomExample : MonoBehaviour
         for (int i = 0; i < elLength; i++)
         {
             probabilityElements[i] = new ProbabilityElementInt<GameObject>(
-                Instantiate(gameObjects[i], TP.Framework.Unity.TPRandom.InsideUnitSquare() * 5, Quaternion.identity),
+                Instantiate(gameObjects[i], TP.Framework.Unity.RandomSystem.InsideUnitSquare() * 5, Quaternion.identity),
                 randomProbabilities[i]);
             Debug.Log("Random probability of object: " + probabilityElements[i].Probability);
         }

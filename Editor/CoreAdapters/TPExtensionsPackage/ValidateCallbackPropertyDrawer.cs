@@ -10,7 +10,7 @@ using System.Reflection;
 namespace TP.Framework.Unity.Editor
 {
     public class ValidateCallbackPropertyDrawer<TAttribute> : ValidatePropertyDrawer<TAttribute>
-        where TAttribute : TPCallbackAttribute
+        where TAttribute : CallbackAttribute
     {
         protected MethodInfo Callback { get; private set; }
         protected object[] CallbackParameters { get; private set; }

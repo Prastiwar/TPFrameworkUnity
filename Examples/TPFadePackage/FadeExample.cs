@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 /// <summary> Wrapper to serialize interface </summary>
 [System.Serializable]
-public class AlphaFader : TPFader<TPAlphaFade> { }
+public class AlphaFader : Fader<AlphaFadeActivator> { }
 
 public class FadeExample : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class FadeExample : MonoBehaviour
     private void Awake()
     {
         fadeButton.onClick.AddListener(() => {
-            TPFade.Fade(fader);
+            FadeSystem.Fade(fader);
         });
     }
 }

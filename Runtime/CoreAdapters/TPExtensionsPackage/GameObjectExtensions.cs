@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public static partial class TPExtensions
+    public static partial class Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInLayerMask(this GameObject gameObject, LayerMask layerMask)

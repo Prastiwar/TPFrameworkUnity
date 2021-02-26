@@ -3,16 +3,15 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 2049245708, guid: 1f5a0c0ac25ccdc4684178a02f1caeeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 79700a3b375dacf40b2f91d93c560570, type: 3}
   m_Name: AudioBundle
   m_EditorClassIdentifier: 
   AudioObjects:
   - Name: Door
-    Clip: {fileID: 8300000, guid: 17231284c453c01468a6c9d59cf83bd1, type: 3}
-  - Name: Door2
     Clip: {fileID: 8300000, guid: 17231284c453c01468a6c9d59cf83bd1, type: 3}

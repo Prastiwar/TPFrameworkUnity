@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AchievementExample : MonoBehaviour
 {
-    [SerializeField] private TPAchievement Achievement;
+    [SerializeField] private AchievementScriptable Achievement;
 
     // Use this for initialization
     private void Start()
@@ -12,7 +12,7 @@ public class AchievementExample : MonoBehaviour
             Debug.Log("Achievement completed!");
         };
 
-        TPAchievementSystem.OnNotifyActivation = CustomNotifyActive;
+        AchievementSystem.OnNotifyActivation = CustomNotifyActive;
 
         for (int i = 0; i < Achievement.Data.ReachPoints; i++)
         {

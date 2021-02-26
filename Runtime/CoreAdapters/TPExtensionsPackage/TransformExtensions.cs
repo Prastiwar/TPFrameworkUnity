@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public static partial class TPExtensions
+    public static partial class Extensions
     {
         private static readonly ReusableList<Transform> reusableTransform = new ReusableList<Transform>();
 

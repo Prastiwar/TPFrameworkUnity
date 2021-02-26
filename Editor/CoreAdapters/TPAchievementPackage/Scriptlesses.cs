@@ -9,6 +9,6 @@ using UnityEditor;
 namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(TPAchievement))]
-    public class TPAchievementEditor : TPScriptlessEditor<TPAchievement> { }
+    [CustomEditor(typeof(AchievementScriptable))]
+    public class TPAchievementEditor : TPScriptlessEditor<AchievementScriptable> { }
 }

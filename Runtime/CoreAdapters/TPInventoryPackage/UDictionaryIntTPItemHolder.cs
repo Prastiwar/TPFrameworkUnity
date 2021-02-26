@@ -7,7 +7,7 @@ using UnityEngine.Collections.Generic;
 
 namespace TP.Framework.Unity
 {
-    public class UDictionaryIntTPItemHolder : UDictionary<int, TPItemHolder>
+    public class UDictionaryIntTPItemHolder : UDictionary<int, ItemScriptable>
     {
         public UDictionaryIntTPItemHolder() { }
         public UDictionaryIntTPItemHolder(int capacity) : base(capacity) { }

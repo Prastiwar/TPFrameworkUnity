@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectPoolExample : MonoBehaviour
 {
-    private TPGameObjectPool gameObjectPool;
+    private GameObjectPool gameObjectPool;
     private bool isRunning;
 
     [SerializeField] private GameObject prefab;
@@ -14,7 +14,7 @@ public class ObjectPoolExample : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
-        gameObjectPool = new TPGameObjectPool(prefab, poolCount);
+        gameObjectPool = new GameObjectPool(prefab, poolCount);
         gameObjectPool.Grow(poolCount);
     }
 
@@ -26,18 +26,18 @@ public class ObjectPoolExample : MonoBehaviour
         }
     }
 
-    private IEnumerator TPObjectPoolSpawnObjects(TPUnityPool<GameObject> pool)
+    private IEnumerator TPObjectPoolSpawnObjects(UnityPool<GameObject> pool)
     {
         isRunning = true;
         GameObject prevObj = pool.Get();
-        prevObj.transform.position = TPRandom.InsideUnitSquare() * 5;
+        prevObj.transform.position = RandomSystem.InsideUnitSquare() * 5;
         while (run)
         {
             yield return ExampleHelper.WaitSecond;
             pool.Push(prevObj);
 
             prevObj = pool.Get();
-            prevObj.transform.position = TPRandom.InsideUnitSquare() * 5;
+            prevObj.transform.position = RandomSystem.InsideUnitSquare() * 5;
             prevObj.SetActive(true);
         }
         isRunning = false;

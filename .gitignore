@@ -6,7 +6,6 @@
 TPFramework.Unity/bin/Debug/
 TPFramework.Editor/bin/Debug/
 Assets/AssetStoreTools*
-*.meta
 
 # Visual Studio cache directory
 .vs/

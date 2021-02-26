@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    [CustomEditor(typeof(TPAudioBundle))]
+    [CustomEditor(typeof(AudioBundle))]
     public class TPAudioBundleEditor : UnityEditor.Editor
     {
         private UnityEditorInternal.ReorderableList list;

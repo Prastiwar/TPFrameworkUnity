@@ -30,6 +30,10 @@ namespace TP.Framework.Unity.Editor
 
         private void OnEnable()
         {
+            if (Target == null)
+            {
+                return;
+            }
             var methodsList = new List<InspectorMethodButton>();
             MethodInfo[] allMethods = Target.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
             int length = allMethods.Length;
@@ -47,7 +51,10 @@ namespace TP.Framework.Unity.Editor
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
+            if (Target == null)
+            {
+                return;
+            }
             int length = kvpMethods.Length;
             for (int i = 0; i < length; i++)
             {

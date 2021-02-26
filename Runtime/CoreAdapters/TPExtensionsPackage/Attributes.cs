@@ -10,23 +10,23 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public class TPEditorAttribute : PropertyAttribute { }
+    public class EditorAttribute : PropertyAttribute { }
 
-    public class TPCallbackAttribute : TPEditorAttribute
+    public class CallbackAttribute : EditorAttribute
     {
         public string CallbackName { get; }
 
-        public TPCallbackAttribute(string callbackName)
+        public CallbackAttribute(string callbackName)
         {
             CallbackName = callbackName;
         }
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InspectorReadOnlyAttribute : TPEditorAttribute { }
+    public class InspectorReadOnlyAttribute : EditorAttribute { }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InspectorBackgroundAttribute : TPEditorAttribute
+    public class InspectorBackgroundAttribute : EditorAttribute
     {
         public Color Color { get; }
 
@@ -37,7 +37,7 @@ namespace TP.Framework.Unity
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class RequiredAttribute : TPEditorAttribute
+    public class RequiredAttribute : EditorAttribute
     {
         public string Message { get; }
 
@@ -48,13 +48,13 @@ namespace TP.Framework.Unity
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class OnValueChangedAttribute : TPCallbackAttribute
+    public class OnValueChangedAttribute : CallbackAttribute
     {
         public OnValueChangedAttribute(string callbackName) : base(callbackName) { }
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InspectorValidateAttribute : TPCallbackAttribute
+    public class InspectorValidateAttribute : CallbackAttribute
     {
         public string Message { get; }
 
@@ -65,7 +65,7 @@ namespace TP.Framework.Unity
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
-    public class InspectorButtonAttribute : TPEditorAttribute
+    public class InspectorButtonAttribute : EditorAttribute
     {
         public string ButtonName { get; }
 
@@ -76,7 +76,7 @@ namespace TP.Framework.Unity
     }
 
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class InspectorHideAttribute : TPEditorAttribute
+    public class InspectorHideAttribute : EditorAttribute
     {
         public bool DisableOnly { get; }
 

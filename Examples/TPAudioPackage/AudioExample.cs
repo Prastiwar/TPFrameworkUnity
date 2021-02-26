@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AudioExample : MonoBehaviour
 {
     [SerializeField] private Button refreshButton;
-    [SerializeField] private TPAudioBundle audioBundle;
+    [SerializeField] private AudioBundle audioBundle;
     [SerializeField] private int repeatCount = 5;
 
     private void Reset()
@@ -16,13 +16,16 @@ public class AudioExample : MonoBehaviour
 
     private void Awake()
     {
-        refreshButton.onClick.AddListener(Refresh);
+        if (refreshButton != null)
+        {
+            refreshButton.onClick.AddListener(Refresh);
+        }
     }
 
     // Use this for initialization
     private void Start()
     {
-        TPAudio.AddToPool("MyBundle", audioBundle);
+        AudioSystem.AddToPool("MyBundle", audioBundle);
         StartCoroutine(TPAudioPoolRepeatPlaying(repeatCount));
     }
 
@@ -35,7 +38,7 @@ public class AudioExample : MonoBehaviour
     {
         while (repeat >= 0)
         {
-            TPAudio.Play("MyBundle", "Door", () => {
+            AudioSystem.Play("MyBundle", "Door", () => {
                 ExampleHelper.MessageWithLines("TPAudioPool Sound 'Door' was played by MyBundle");
             });
             repeat--;

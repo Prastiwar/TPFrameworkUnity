@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public static partial class TPExtensions
+    public static partial class Extensions
     {
         private static readonly char[] resolutionSeparators = new char[] { ' ', 'x', '@', 'H', 'z' };
 

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 public class AttributeExample : MonoBehaviour
 {
     [SerializeField] private Button refreshButton;
-    [SerializeField] private TPAttribute health;
-    [SerializeField] private TPModifier healthIncreaser;
+    [SerializeField] private ModifiableAttribute health;
+    [SerializeField] private AttributeModifier healthIncreaser;
 
     private void Awake()
     {
-        refreshButton.onClick.AddListener(Refresh);
+        if (refreshButton != null)
+        {
+            refreshButton.onClick.AddListener(Refresh);
+        }
     }
 
     // Use this for initialization

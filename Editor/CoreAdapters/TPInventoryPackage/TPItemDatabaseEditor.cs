@@ -11,8 +11,8 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    [CustomEditor(typeof(TPItemDatabase))]
-    public class TPItemDatabaseEditor : TPScriptlessEditor<TPItemDatabase>
+    [CustomEditor(typeof(ItemDatabaseScriptable))]
+    public class TPItemDatabaseEditor : TPScriptlessEditor<ItemDatabaseScriptable>
     {
         private readonly Vector2 errLineOffset = new Vector2(20, 0);
         private readonly Vector2 errSize = new Vector2(7, 15);
@@ -58,7 +58,7 @@ namespace TP.Framework.Unity.Editor
         {
             rect.position = new Vector2(rect.position.x, rect.position.y + 2);
             SerializedProperty arrayElement = databaseArray.GetArrayElementAtIndex(index);
-            string itemID = arrayElement.objectReferenceValue != null ? (arrayElement.objectReferenceValue as TPItemHolder).Item.ID.ToString() : "-";
+            string itemID = arrayElement.objectReferenceValue != null ? (arrayElement.objectReferenceValue as ItemScriptable).Item.ID.ToString() : "-";
             EditorGUI.LabelField(new Rect(rect.position, new Vector2(110, rect.size.y)), GUIContent($"ItemID: {itemID}"));
             EditorGUI.PropertyField(new Rect(rect.position - new Vector2(-115, 0), rect.size - new Vector2(115, 4)), arrayElement, UnityEngine.GUIContent.none);
 
@@ -104,7 +104,7 @@ namespace TP.Framework.Unity.Editor
 
         private void LoadItemDatabase()
         {
-            TPItemHolder[] holders = TPEditorHelper.FindAssetsByType<TPItemHolder>();
+            ItemScriptable[] holders = TPEditorHelper.FindAssetsByType<ItemScriptable>();
             Target.InitDatabase(holders);
             EditorUtility.SetDirty(Target);
         }
