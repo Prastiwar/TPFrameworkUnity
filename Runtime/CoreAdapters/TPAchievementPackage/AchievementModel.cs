@@ -10,7 +10,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     [Serializable]
-    public struct AchievementModel : ITPAchievementData
+    public struct AchievementModel : IAchievementData
     {
         [SerializeField] private string title;
         [SerializeField] private string description;

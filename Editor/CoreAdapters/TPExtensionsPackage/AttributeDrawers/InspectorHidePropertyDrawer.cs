@@ -22,7 +22,7 @@ namespace TP.Framework.Unity.Editor
         {
             if (Attribute.DisableOnly || propEnabled)
             {
-                TPEditorGUI.DrawField(position, property, label, true, propEnabled);
+                EditorGUI.DrawField(position, property, label, true, propEnabled);
             }
         }
 
@@ -31,7 +31,7 @@ namespace TP.Framework.Unity.Editor
         {
             propEnabled = GetResultFromAttribute(Attribute, Property);
             return Attribute.DisableOnly || propEnabled
-                ? EditorGUI.GetPropertyHeight(Property, PropertyLabel)
+                ? UnityEditor.EditorGUI.GetPropertyHeight(Property, PropertyLabel)
                 : -EditorGUIUtility.standardVerticalSpacing;
         }
 

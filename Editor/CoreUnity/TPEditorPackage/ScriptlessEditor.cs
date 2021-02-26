@@ -9,9 +9,9 @@ using System.Runtime.CompilerServices;
 
 namespace TP.Framework.Unity.Editor
 {
-    public class TPScriptlessEditor<T> : TPEditor<T> where T : UnityEngine.Object
+    public class ScriptlessEditor<T> : TPEditor<T> where T : UnityEngine.Object
     {
-        private string[] excluders = new string[] { TPEditorHelper.InspectorScriptField };
+        private string[] excluders = new string[] { EditorHelper.InspectorScriptField };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void ExcludeProperty(string property)

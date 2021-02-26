@@ -10,5 +10,5 @@ namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(AchievementScriptable))]
-    public class TPAchievementEditor : TPScriptlessEditor<AchievementScriptable> { }
+    public class TPAchievementEditor : ScriptlessEditor<AchievementScriptable> { }
 }

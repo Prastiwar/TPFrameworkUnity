@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    public static class TPEditorTextures
+    public static class EditorTextures
     {
         private static Texture2D whiteTexture;
         public static Texture2D WhiteTexture {

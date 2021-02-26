@@ -11,7 +11,7 @@ using UnityEngine;
 namespace TP.Framework.Unity.Editor
 {
     [CustomEditor(typeof(AudioBundle))]
-    public class TPAudioBundleEditor : UnityEditor.Editor
+    public class AudioBundleEditor : UnityEditor.Editor
     {
         private UnityEditorInternal.ReorderableList list;
         private bool isValid;
@@ -22,7 +22,7 @@ namespace TP.Framework.Unity.Editor
             list = new UnityEditorInternal.ReorderableList(serializedObject, serializedObject.FindProperty("AudioObjects"), true, true, true, true) {
                 drawElementCallback = DrawElement,
                 onAddCallback = OnAdd,
-                drawHeaderCallback = (Rect rect) => { EditorGUI.LabelField(rect, "Audio Objects in this bundle"); }
+                drawHeaderCallback = (Rect rect) => { UnityEditor.EditorGUI.LabelField(rect, "Audio Objects in this bundle"); }
             };
         }
 
@@ -45,11 +45,11 @@ namespace TP.Framework.Unity.Editor
             float halfWidth = rect.width / 2;
             int length = list.serializedProperty.arraySize;
 
-            EditorGUI.PropertyField(
+            UnityEditor.EditorGUI.PropertyField(
                 new Rect(rect.x, rect.y, halfWidth, EditorGUIUtility.singleLineHeight),
                 element.FindPropertyRelative("Name"), GUIContent.none);
 
-            EditorGUI.PropertyField(
+            UnityEditor.EditorGUI.PropertyField(
                 new Rect(rect.x + halfWidth, rect.y, halfWidth, EditorGUIUtility.singleLineHeight),
                 element.FindPropertyRelative("Clip"), GUIContent.none);
 
@@ -64,7 +64,7 @@ namespace TP.Framework.Unity.Editor
                 if (otherElement.FindPropertyRelative("Name").stringValue == element.FindPropertyRelative("Name").stringValue)
                 {
                     isValid = false;
-                    EditorGUI.DrawRect(new Rect(rect.x - 16, rect.y, 15, EditorGUIUtility.singleLineHeight), Color.red);
+                    UnityEditor.EditorGUI.DrawRect(new Rect(rect.x - 16, rect.y, 15, EditorGUIUtility.singleLineHeight), Color.red);
                     return;
                 }
             }

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    public static class TPEditorGizmo
+    public static class EditorGizmo
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void DrawCube(Vector3 position, Quaternion rotation, Vector3 scale)

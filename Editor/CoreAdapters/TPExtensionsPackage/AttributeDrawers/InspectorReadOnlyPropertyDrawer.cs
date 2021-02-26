@@ -14,12 +14,12 @@ namespace TP.Framework.Unity.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            TPEditorGUI.DrawField(position, property, label, true, false);
+            EditorGUI.DrawField(position, property, label, true, false);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return EditorGUI.GetPropertyHeight(property, label, true);
+            return UnityEditor.EditorGUI.GetPropertyHeight(property, label, true);
         }
     }
 }

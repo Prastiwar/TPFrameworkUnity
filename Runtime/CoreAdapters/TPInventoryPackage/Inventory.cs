@@ -11,7 +11,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     [Serializable]
-    public class Inventory : TPInventory<TPItemSlot, TPEquipSlot, TPItem>, ISerializationCallbackReceiver
+    public class Inventory : Framework.Inventory<ItemSlot, EquipSlot, ItemModel>, ISerializationCallbackReceiver
     {
         [SerializeField] private ItemDatabaseScriptable itemDatabase;
         [SerializeField] private ItemSlotHoldBehaviour[] itemSlotHolders;
@@ -74,7 +74,7 @@ namespace TP.Framework.Unity
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private T[] LoadSlots<T, U>(T[] slots, U[] holder)
-            where T : TPItemSlot
+            where T : ItemSlot
             where U : ItemSlotHoldBehaviour
         {
             int length = holder.Length;

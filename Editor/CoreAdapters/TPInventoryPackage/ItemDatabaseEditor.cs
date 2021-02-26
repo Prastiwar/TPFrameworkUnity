@@ -12,7 +12,7 @@ using UnityEngine;
 namespace TP.Framework.Unity.Editor
 {
     [CustomEditor(typeof(ItemDatabaseScriptable))]
-    public class TPItemDatabaseEditor : TPScriptlessEditor<ItemDatabaseScriptable>
+    public class ItemDatabaseEditor : ScriptlessEditor<ItemDatabaseScriptable>
     {
         private readonly Vector2 errLineOffset = new Vector2(20, 0);
         private readonly Vector2 errSize = new Vector2(7, 15);
@@ -48,10 +48,10 @@ namespace TP.Framework.Unity.Editor
 
         private void OnDrawHeader(Rect rect)
         {
-            EditorGUI.LabelField(rect, $"Item exists in database: ({databaseArray.arraySize} count)");
+            UnityEditor.EditorGUI.LabelField(rect, $"Item exists in database: ({databaseArray.arraySize} count)");
             rect.position = new Vector2(rect.position.x + 235, rect.position.y);
             rect.size = new Vector2(rect.size.x - 235, rect.size.y - 1);
-            TPEditorGUI.OnButton(rect, "Load From Project", LoadItemDatabase);
+            EditorGUI.OnButton(rect, "Load From Project", LoadItemDatabase);
         }
 
         private void DrawElement(Rect rect, int index, bool isActive, bool isFocused)
@@ -59,8 +59,8 @@ namespace TP.Framework.Unity.Editor
             rect.position = new Vector2(rect.position.x, rect.position.y + 2);
             SerializedProperty arrayElement = databaseArray.GetArrayElementAtIndex(index);
             string itemID = arrayElement.objectReferenceValue != null ? (arrayElement.objectReferenceValue as ItemScriptable).Item.ID.ToString() : "-";
-            EditorGUI.LabelField(new Rect(rect.position, new Vector2(110, rect.size.y)), GUIContent($"ItemID: {itemID}"));
-            EditorGUI.PropertyField(new Rect(rect.position - new Vector2(-115, 0), rect.size - new Vector2(115, 4)), arrayElement, UnityEngine.GUIContent.none);
+            UnityEditor.EditorGUI.LabelField(new Rect(rect.position, new Vector2(110, rect.size.y)), GUIContent($"ItemID: {itemID}"));
+            UnityEditor.EditorGUI.PropertyField(new Rect(rect.position - new Vector2(-115, 0), rect.size - new Vector2(115, 4)), arrayElement, UnityEngine.GUIContent.none);
 
             if (databaseArray.HasAnyElementSameValue(arrayElement, index))
             {
@@ -74,7 +74,7 @@ namespace TP.Framework.Unity.Editor
             if (redBoxStyle == null)
             {
                 redBoxStyle = new GUIStyle(GUI.skin.box);
-                redBoxStyle.normal.background = TPEditorTextures.RedTexture;
+                redBoxStyle.normal.background = EditorTextures.RedTexture;
             }
             else if (showError)
             {
@@ -99,12 +99,12 @@ namespace TP.Framework.Unity.Editor
         private void DrawErrorMessage(Rect rect, int nameLength)
         {
             Vector2 offsetByName = new Vector2(nameLength * 8.25f, 0);
-            EditorGUI.HelpBox(new Rect(rect.position + offsetByName, rect.size), "You have duplicated TPItem IDs, some changes can be lost!", MessageType.Error);
+            UnityEditor.EditorGUI.HelpBox(new Rect(rect.position + offsetByName, rect.size), "You have duplicated TPItem IDs, some changes can be lost!", MessageType.Error);
         }
 
         private void LoadItemDatabase()
         {
-            ItemScriptable[] holders = TPEditorHelper.FindAssetsByType<ItemScriptable>();
+            ItemScriptable[] holders = EditorHelper.FindAssetsByType<ItemScriptable>();
             Target.InitDatabase(holders);
             EditorUtility.SetDirty(Target);
         }

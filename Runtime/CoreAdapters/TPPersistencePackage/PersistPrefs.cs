@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public class PersistPrefs : TPPersistSystem<PersistPrefs>
+    public class PersistPrefs : PersistSystem<PersistPrefs>
     {
         private static readonly string cryptKey = "80D30A1C969CB772B1FDF7F077304D486AEE15541CA78DF7E7DE24F412FBB97C"; // this should be changed
 

@@ -14,7 +14,7 @@ namespace TP.Framework.Unity.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.PropertyField(position, property, label, true);
+            UnityEditor.EditorGUI.PropertyField(position, property, label, true);
             Validate();
         }
 

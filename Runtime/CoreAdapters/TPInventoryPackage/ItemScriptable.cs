@@ -15,7 +15,7 @@ namespace TP.Framework.Unity
     public class ItemScriptable : ScriptableObject, ISerializationCallbackReceiver
     {
         public Sprite Icon;
-        [NonSerialized] public TPItem Item;
+        [NonSerialized] public ItemModel Item;
 
         [SerializeField] private SerializedItem item;
 
@@ -35,7 +35,7 @@ namespace TP.Framework.Unity
         {
             if (item == null)
             {
-                item = new TPItem(0, 0);
+                item = new ItemModel(0, 0);
             }
         }
 
@@ -51,7 +51,7 @@ namespace TP.Framework.Unity
         {
             var hashCode = 1816100322;
             hashCode = hashCode * -1521134295 + EqualityComparer<Sprite>.Default.GetHashCode(Icon);
-            hashCode = hashCode * -1521134295 + EqualityComparer<TPItem>.Default.GetHashCode(Item);
+            hashCode = hashCode * -1521134295 + EqualityComparer<ItemModel>.Default.GetHashCode(Item);
             hashCode = hashCode * -1521134295 + EqualityComparer<SerializedItem>.Default.GetHashCode(item);
             return hashCode;
         }

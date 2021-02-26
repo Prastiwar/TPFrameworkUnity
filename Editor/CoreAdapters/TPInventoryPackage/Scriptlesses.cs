@@ -10,17 +10,17 @@ namespace TP.Framework.Unity.Editor
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(ItemScriptable))]
-    public class TPItemHolderEditor : TPScriptlessEditor<ItemScriptable> { }
+    public class TPItemHolderEditor : ScriptlessEditor<ItemScriptable> { }
 
     [CanEditMultipleObjects]
     [CustomEditor(typeof(ItemSlotHoldBehaviour))]
-    public class TPItemSlotHolderEditor : TPScriptlessEditor<ItemSlotHoldBehaviour> { }
+    public class TPItemSlotHolderEditor : ScriptlessEditor<ItemSlotHoldBehaviour> { }
 
     [CanEditMultipleObjects]
     [CustomEditor(typeof(EquipSlotHoldBehaviour))]
-    public class TPEquipSlotHolderEditor : TPScriptlessEditor<EquipSlotHoldBehaviour> { }
+    public class TPEquipSlotHolderEditor : ScriptlessEditor<EquipSlotHoldBehaviour> { }
 
     [CanEditMultipleObjects]
     [CustomEditor(typeof(SlotsSpawnBehaviour))]
-    public class TPSlotsSpawnerHolderEditor : TPScriptlessEditor<SlotsSpawnBehaviour> { }
+    public class TPSlotsSpawnerHolderEditor : ScriptlessEditor<SlotsSpawnBehaviour> { }
 }

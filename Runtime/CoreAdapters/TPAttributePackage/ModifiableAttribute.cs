@@ -10,7 +10,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     [Serializable]
-    public class ModifiableAttribute : TPAttribute<ModifierList, AttributeModifier>, ISerializationCallbackReceiver
+    public class ModifiableAttribute : Framework.ModifiableAttribute<ModifierList, AttributeModifier>, ISerializationCallbackReceiver
     {
         [SerializeField] private float startValue;
         [SerializeField] private ModifierList modifiers;

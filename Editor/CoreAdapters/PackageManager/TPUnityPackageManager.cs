@@ -35,23 +35,23 @@ namespace TP.Framework.Internal
             }
         }
 
-        public TPUnityPackageManager(ITPDefineManager defineManager, TPPackage[] packages) : base(defineManager, packages) { }
+        public TPUnityPackageManager(IDefineManager defineManager, TPPackage[] packages) : base(defineManager, packages) { }
 
         static TPUnityPackageManager()
         {
             Init();
         }
 
-        [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReloadManager, priority = 0)]
+        [MenuItem(MENU + DefineInfo.MenuMessage.TPReloadManager, priority = 0)]
         private static void Init()
         {
-            Manager = new TPPackageManager(new TPDefineManager(), null);
+            Manager = new TPPackageManager(new DefineManager(), null);
             Manager.InitializePackages(GetAllTPPackageNames, false);
             OverridePackages();
             Reload();
         }
 
-        [MenuItem(MENU + TPDefineInfo.MenuMessage.TPReloadPackages, priority = 0)]
+        [MenuItem(MENU + DefineInfo.MenuMessage.TPReloadPackages, priority = 0)]
         private static void Reload()
         {
             if (!HasTMPro)

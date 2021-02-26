@@ -22,7 +22,7 @@ namespace TP.Framework.Unity
         [SerializeField, HideInInspector] internal ItemScriptable itemHolder;
         [SerializeField, HideInInspector] internal ItemDatabaseScriptable itemDatabase;
 
-        [NonSerialized] public TPItemSlot Slot;
+        [NonSerialized] public ItemSlot Slot;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         protected override Transform GetDragTransform()
@@ -95,7 +95,7 @@ namespace TP.Framework.Unity
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             (itemHolder as ISerializationCallbackReceiver)?.OnAfterDeserialize();
-            Slot = new TPItemSlot(type, itemHolder?.Item) {
+            Slot = new ItemSlot(type, itemHolder?.Item) {
                 OnItemChanged = () => {
                     itemHolder = Slot.HasItem() ? itemDatabase.GetItemHolder(Slot.StoredItem.ID) : null;
                     RefreshUI();

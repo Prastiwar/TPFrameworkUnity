@@ -33,11 +33,11 @@ namespace TP.Framework.Unity.Editor
                 {
                     string elementName = elements[i].Substring(0, elements[i].IndexOf("["));
                     int index = Convert.ToInt32(elements[i].Substring(elements[i].IndexOf("[")).Replace("[", "").Replace("]", ""));
-                    targetObj = Framework.TPExtensions.GetValue(targetObj, elementName, index);
+                    targetObj = Framework.Extensions.GetValue(targetObj, elementName, index);
                 }
                 else
                 {
-                    targetObj = Framework.TPExtensions.GetValue(targetObj, elements[i]);
+                    targetObj = Framework.Extensions.GetValue(targetObj, elements[i]);
                 }
             }
             return targetObj;

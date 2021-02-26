@@ -11,7 +11,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     [Serializable]
-    public class ModifierList : TPModifierList<AttributeModifier>, ISerializationCallbackReceiver
+    public class ModifierList : AttributeModifierList<AttributeModifier>, ISerializationCallbackReceiver
     {
         [SerializeField] private List<AttributeModifier> modifiers;
 

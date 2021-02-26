@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    public static class TPEditorHelper
+    public static class EditorHelper
     {
         public const string InspectorScriptField = "m_Script";
 

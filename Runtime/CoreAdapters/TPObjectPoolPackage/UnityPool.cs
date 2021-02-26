@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    public class UnityPool<TObject> : TPObjectPool<TObject>
+    public class UnityPool<TObject> : ObjectPool<TObject>
         where TObject : Object
     {
         protected readonly TObject Prefab;

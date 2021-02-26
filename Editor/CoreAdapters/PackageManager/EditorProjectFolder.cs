@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TP.Framework.Internal.Editor
 {
-    public class EditorProjectFolder : TPProjectFolder
+    public class EditorProjectFolder : ProjectFolder
     {
         public ReorderableList ReorderableChildNames;
 
@@ -45,7 +45,7 @@ namespace TP.Framework.Internal.Editor
             ChildNames.Add("New");
         }
 
-        public static EditorProjectFolder[] CastFromBase(TPProjectFolder[] baseFolders)
+        public static EditorProjectFolder[] CastFromBase(ProjectFolder[] baseFolders)
         {
             int length = baseFolders.Length;
             List<EditorProjectFolder> folders = new List<EditorProjectFolder>(length);

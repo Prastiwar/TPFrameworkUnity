@@ -14,7 +14,7 @@ public class RandomExample : MonoBehaviour
     {
         int elLength = gameObjects.Length;
         probabilityElements = new ProbabilityElementInt<GameObject>[elLength];
-        int[] randomProbabilities = TPRandom.RandomProbabilities(elLength, 20, 70);
+        int[] randomProbabilities = RandomSystem.RandomProbabilities(elLength, 20, 70);
 
         ExampleHelper.DrawLine();
         for (int i = 0; i < elLength; i++)
@@ -33,7 +33,7 @@ public class RandomExample : MonoBehaviour
     {
         while (repeat >= 0)
         {
-            GameObject selectedObject = TPRandom.PickObjectWithProbability(probabilityElements);
+            GameObject selectedObject = RandomSystem.PickObjectWithProbability(probabilityElements);
             selectedObject.SetActive(!selectedObject.activeSelf);
             repeat--;
             yield return ExampleHelper.WaitSecond;

@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace TP.Framework.Internal.Editor
 {
-    public class TPProjectManager : EditorWindow
+    public class TPProjectManagerWindow : EditorWindow
     {
         private string projectGameName = "GameName";
         private Vector2 scrollPos;
@@ -23,7 +23,7 @@ namespace TP.Framework.Internal.Editor
         [MenuItem(TPUnityPackageManager.MENU + "Open Project Structure Creator", priority = 0)]
         public static void OpenProjectStructureCreator()
         {
-            TPProjectManager window = GetWindow<TPProjectManager>();
+            TPProjectManagerWindow window = GetWindow<TPProjectManagerWindow>();
             Vector2 size = new Vector2(400, 250);
             window.minSize = size;
             window.Show();
@@ -36,26 +36,26 @@ namespace TP.Framework.Internal.Editor
                 drawElementCallback = DrawFolderElement,
                 elementHeightCallback = GetFolderElementHeight,
                 onAddCallback = (list) => folders.Add(new EditorProjectFolder("New", null)),
-                drawHeaderCallback = (rect) => { EditorGUI.LabelField(rect, "Folders structure: "); }
+                drawHeaderCallback = (rect) => { UnityEditor.EditorGUI.LabelField(rect, "Folders structure: "); }
             };
         }
 
         private void OnGUI()
         {
-            EditorGUILayout.LabelField("How should be your project folder named?", TPEditorStyles.BoldCenterLabel, null);
+            EditorGUILayout.LabelField("How should be your project folder named?", Unity.Editor.EditorStyles.BoldCenterLabel, null);
             projectGameName = EditorGUILayout.TextField(projectGameName, options: null);
 
             EditorGUILayout.Space();
 
-            TPEditorGUI.OnButton("Generate Folders", () => {
+            Unity.Editor.EditorGUI.OnButton("Generate Folders", () => {
                 Internal.TPProjectManager.CreateProjectStructure(folders.ToArray(), projectGameName, Application.dataPath);
                 AssetDatabase.Refresh();
             }, null, null);
-            TPEditorGUI.OnButton("Load default", OnEnable, null, null);
+            Unity.Editor.EditorGUI.OnButton("Load default", this.OnEnable, null, null);
 
             EditorGUILayout.Space();
 
-            TPEditorGUI.ScrollView(ref scrollPos, reorderableFolders.DoLayoutList, false, false, null);
+            Unity.Editor.EditorGUI.ScrollView(ref scrollPos, reorderableFolders.DoLayoutList, false, false, null);
         }
 
         private float GetFolderElementHeight(int index)
@@ -65,10 +65,10 @@ namespace TP.Framework.Internal.Editor
 
         private void DrawFolderElement(Rect rect, int index, bool isActive, bool isFocused)
         {
-            int prev = EditorGUI.indentLevel;
-            EditorGUI.indentLevel++;
+            int prev = UnityEditor.EditorGUI.indentLevel;
+            UnityEditor.EditorGUI.indentLevel++;
             folders[index].ReorderableChildNames.DoList(rect);
-            EditorGUI.indentLevel = prev;
+            UnityEditor.EditorGUI.indentLevel = prev;
         }
     }
 }

@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    public static class TPEditorGUI
+    public static class EditorGUI
     {
         public static readonly float fieldHeight = 18;
         public static readonly Vector2 Space  = new Vector2(10, 20);
@@ -25,13 +25,13 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string SearchField(string searchString)
         {
-            GUILayout.BeginHorizontal(TPEditorStyles.Toolbar, null);
+            GUILayout.BeginHorizontal(EditorStyles.Toolbar, null);
             {
-                searchString = GUILayout.TextField(searchString, TPEditorStyles.ToolbarSerachField, ExpandableWidth);
+                searchString = GUILayout.TextField(searchString, EditorStyles.ToolbarSerachField, ExpandableWidth);
                 OnButton("", () => {
                     searchString = "";
                     GUI.FocusControl(null);
-                }, TPEditorStyles.ToolbarSearchCancel, null);
+                }, EditorStyles.ToolbarSearchCancel, null);
             }
             GUILayout.EndHorizontal();
             return searchString;
@@ -52,7 +52,7 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool OnButton(Rect rect, string buttonText, Action onClick, GUIStyle buttonStyle = null)
         {
-            buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
+            buttonStyle = buttonStyle ?? UnityEditor.EditorStyles.miniButtonMid;
             if (GUI.Button(rect, buttonText, buttonStyle))
             {
                 onClick();
@@ -64,7 +64,7 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ToggleButton(string buttonText, bool value, Action onToggle, GUIStyle buttonStyle = null, params GUILayoutOption[] buttonOptions)
         {
-            buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
+            buttonStyle = buttonStyle ?? UnityEditor.EditorStyles.miniButtonMid;
             if (GUILayout.Button(buttonText, buttonStyle, buttonOptions))
             {
                 value = !value;
@@ -79,7 +79,7 @@ namespace TP.Framework.Unity.Editor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool ToggleButton(Rect rect, string buttonText, bool value, Action onToggle, GUIStyle buttonStyle = null)
         {
-            buttonStyle = buttonStyle ?? EditorStyles.miniButtonMid;
+            buttonStyle = buttonStyle ?? UnityEditor.EditorStyles.miniButtonMid;
             if (GUI.Button(rect, buttonText, buttonStyle))
             {
                 value = !value;
@@ -105,7 +105,7 @@ namespace TP.Framework.Unity.Editor
         {
             bool wasEnabled = GUI.enabled;
             GUI.enabled = enabledGui;
-            EditorGUI.PropertyField(position, property, label, includeChildren);
+            UnityEditor.EditorGUI.PropertyField(position, property, label, includeChildren);
             GUI.enabled = wasEnabled;
         }
 

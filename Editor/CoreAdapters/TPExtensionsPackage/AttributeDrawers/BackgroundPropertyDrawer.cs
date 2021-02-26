@@ -14,8 +14,8 @@ namespace TP.Framework.Unity.Editor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.DrawRect(position, Attribute.Color);
-            EditorGUI.PropertyField(position, property, label, true);
+            UnityEditor.EditorGUI.DrawRect(position, Attribute.Color);
+            UnityEditor.EditorGUI.PropertyField(position, property, label, true);
         }
     }
 }

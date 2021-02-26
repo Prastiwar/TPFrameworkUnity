@@ -10,7 +10,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     [Serializable]
-    public struct AttributeModifier : ITPModifier
+    public struct AttributeModifier : IAttributeModifier
     {
         [SerializeField] private float value;
         [SerializeField] private ModifierType type;
@@ -84,12 +84,12 @@ namespace TP.Framework.Unity
             return !(c1 == c2);
         }
 
-        public static implicit operator Framework.TPModifier(AttributeModifier mod)
+        public static implicit operator Framework.AttributeModifier(AttributeModifier mod)
         {
-            return new Framework.TPModifier(mod.type, mod.value, mod.priority, mod.Source);
+            return new Framework.AttributeModifier(mod.type, mod.value, mod.priority, mod.Source);
         }
 
-        public static implicit operator AttributeModifier(Framework.TPModifier coreMod)
+        public static implicit operator AttributeModifier(Framework.AttributeModifier coreMod)
         {
             return new AttributeModifier(coreMod.Type, coreMod.Value, coreMod.Priority, coreMod.Source);
         }

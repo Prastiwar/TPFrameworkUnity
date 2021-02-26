@@ -24,9 +24,9 @@ namespace TP.Framework.Unity
         [SerializeField] private float weight;
         [SerializeField] private AttributeModifier[] modifiers;
 
-        public static implicit operator TPItem(SerializedItem load)
+        public static implicit operator ItemModel(SerializedItem load)
         {
-            return load == null ? null : new TPItem(load.id, load.type) {
+            return load == null ? null : new ItemModel(load.id, load.type) {
                 Name = load.itemName,
                 Description = load.description,
                 Worth = load.worth,
@@ -37,7 +37,7 @@ namespace TP.Framework.Unity
             };
         }
 
-        public static implicit operator SerializedItem(TPItem save)
+        public static implicit operator SerializedItem(ItemModel save)
         {
             return save == null ? null : new SerializedItem {
                 id = save.ID,
@@ -52,18 +52,18 @@ namespace TP.Framework.Unity
             };
         }
 
-        private static TPModifier[] ToBaseModifiers(AttributeModifier[] modifiers)
+        private static Framework.AttributeModifier[] ToBaseModifiers(AttributeModifier[] modifiers)
         {
             int length = modifiers.Length;
-            TPModifier[] newModifiers = new TPModifier[length];
+            Framework.AttributeModifier[] newModifiers = new Framework.AttributeModifier[length];
             for (int i = 0; i < length; i++)
             {
-                newModifiers[i] = new TPModifier(modifiers[i].Type, modifiers[i].Value, modifiers[i].Priority, modifiers[i].Source);
+                newModifiers[i] = new Framework.AttributeModifier(modifiers[i].Type, modifiers[i].Value, modifiers[i].Priority, modifiers[i].Source);
             }
             return newModifiers;
         }
 
-        private static AttributeModifier[] ToModifiers(TPModifier[] modifiers)
+        private static AttributeModifier[] ToModifiers(Framework.AttributeModifier[] modifiers)
         {
             int length = modifiers.Length;
             AttributeModifier[] newModifiers = new AttributeModifier[length];

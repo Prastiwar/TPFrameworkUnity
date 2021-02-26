@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity.Editor
 {
-    public static class TPEditorStyles
+    public static class EditorStyles
     {
         public static GUIStyle Toolbar { get { return GUI.skin.FindStyle("Toolbar"); } }
         public static GUIStyle ToolbarSerachField { get { return GUI.skin.FindStyle("ToolbarSeachTextField"); } }
@@ -151,7 +151,7 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richText == null)
                 {
-                    richText = new GUIStyle(EditorStyles.textField) {
+                    richText = new GUIStyle(UnityEditor.EditorStyles.textField) {
                         richText = true
                     };
                 }
@@ -164,7 +164,7 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richLabel == null)
                 {
-                    richLabel = new GUIStyle(EditorStyles.label) {
+                    richLabel = new GUIStyle(UnityEditor.EditorStyles.label) {
                         richText = true
                     };
                 }
@@ -177,7 +177,7 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richLeftButton == null)
                 {
-                    richLeftButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                    richLeftButton = new GUIStyle(UnityEditor.EditorStyles.miniButtonLeft) {
                         alignment = TextAnchor.MiddleLeft,
                         richText = true
                     };
@@ -191,7 +191,7 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richMidButton == null)
                 {
-                    richMidButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                    richMidButton = new GUIStyle(UnityEditor.EditorStyles.miniButtonLeft) {
                         alignment = TextAnchor.MiddleCenter,
                         richText = true
                     };
@@ -205,7 +205,7 @@ namespace TP.Framework.Unity.Editor
             get {
                 if (richRightButton == null)
                 {
-                    richRightButton = new GUIStyle(EditorStyles.miniButtonLeft) {
+                    richRightButton = new GUIStyle(UnityEditor.EditorStyles.miniButtonLeft) {
                         alignment = TextAnchor.MiddleRight,
                         richText = true
                     };
@@ -218,7 +218,7 @@ namespace TP.Framework.Unity.Editor
         public static GUIContent GetIcon(UnityEditorIcons icon)
         {
             string iconText = icon.ToString();
-            bool hasAtt = Framework.TPExtensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
+            bool hasAtt = Framework.Extensions.TryGetCustomAttribute(icon.GetType().GetField(iconText), out StringValueAttribute att);
             return EditorGUIUtility.IconContent(hasAtt ? att.StringValue : iconText);
         }
     }

@@ -10,16 +10,7 @@ using UnityEditor;
 
 namespace TP.Framework.Internal
 {
-    internal struct TPDefineInfo
-    {
-        internal struct MenuMessage
-        {
-            public const string TPReloadManager = "Reload Framework Manager";
-            public const string TPReloadPackages = "Reload Packages";
-        }
-    }
-
-    public struct TPDefineManager : ITPDefineManager
+    public struct DefineManager : IDefineManager
     {
         private static BuildTargetGroup _TargetGroup { get { return EditorUserBuildSettings.selectedBuildTargetGroup; } }
 
@@ -47,17 +38,17 @@ namespace TP.Framework.Internal
             return GetDefines().Contains(define);
         }
 
-        void ITPDefineManager.ToggleDefine(string define)
+        void IDefineManager.ToggleDefine(string define)
         {
             ToggleDefine(define);
         }
 
-        void ITPDefineManager.SetDefine(string define, bool enabled)
+        void IDefineManager.SetDefine(string define, bool enabled)
         {
             SetDefine(define, enabled);
         }
 
-        bool ITPDefineManager.IsDefined(string define)
+        bool IDefineManager.IsDefined(string define)
         {
             return IsDefined(define);
         }
