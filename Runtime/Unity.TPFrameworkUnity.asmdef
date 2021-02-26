@@ -1,0 +1,16 @@
+{
+    "name": "Unity.TPFrameworkUnity",
+    "references": [
+        "Unity.TextMeshPro",
+        "Unity.SerializedDictionary"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

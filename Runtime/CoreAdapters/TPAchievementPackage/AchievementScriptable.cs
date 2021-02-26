@@ -13,7 +13,7 @@ namespace TP.Framework.Unity
 {
     /* ---------------------------------------------------------------------- Achievement ---------------------------------------------------------------------- */
 
-    [CreateAssetMenu(menuName = "TP/TPAchievement/Achievement", fileName = "Achievement")]
+    [CreateAssetMenu(menuName = "TPFramework/Achievement/Achievement", fileName = "Achievement")]
     public class AchievementScriptable : ScriptableObject, IAchievement<AchievementModel>
     {
         [SerializeField] private AchievementModel data;

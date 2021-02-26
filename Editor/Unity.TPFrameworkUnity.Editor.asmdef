@@ -1,0 +1,16 @@
+{
+    "name": "Unity.TPFrameworkUnity.Editor",
+    "references": [
+        "Unity.TPFrameworkUnity",
+        "Unity.SerializedDictionary"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace TP.Framework.Unity
 {
-    [CreateAssetMenu(menuName = "TP/TPInventory/TPItemDatabase", fileName = "TPItemDatabase")]
+    [CreateAssetMenu(menuName = "TPFramework/Inventory/ItemDatabase", fileName = "ItemDatabase")]
     public class ItemDatabaseScriptable : ScriptableObject
     {
         private UDictionaryIntTPItemHolder itemDatabaseMap;

@@ -11,7 +11,7 @@ using UnityEngine;
 namespace TP.Framework.Unity
 {
     /// <summary> ScriptableObject to hold TPItem </summary>
-    [CreateAssetMenu(menuName = "TP/TPInventory/TPItem", fileName = "TPItem")]
+    [CreateAssetMenu(menuName = "TPFramework/Inventory/Item", fileName = "Item")]
     public class ItemScriptable : ScriptableObject, ISerializationCallbackReceiver
     {
         public Sprite Icon;
