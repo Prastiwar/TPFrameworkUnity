@@ -37,11 +37,11 @@ namespace TP.Framework.Unity
         public static AudioParameters AudioSettings;
 
         private static readonly CustomQuality customQuality;
-        private static readonly List<string> textureOptions          = new List<string> { "Very High", "High", "Medium", "Low" };
-        private static readonly List<string> shadowQualityOptions    = new List<string> { "Disable", "HardOnly", "All" };
+        private static readonly List<string> textureOptions = new List<string> { "Very High", "High", "Medium", "Low" };
+        private static readonly List<string> shadowQualityOptions = new List<string> { "Disable", "HardOnly", "All" };
         private static readonly List<string> shadowResolutionOptions = new List<string> { "Low", "Medium", "High", "VeryHigh" };
-        private static readonly List<string> antialiasingOptions     = new List<string> { "Disabled", "2x Multi Sampling", "4x Multi Sampling", "8x Multi Sampling" };
-        private static readonly List<string> resolutionOptions       = new List<string>(Screen.resolutions.ToStringWithHZ());
+        private static readonly List<string> antialiasingOptions = new List<string> { "Disabled", "2x Multi Sampling", "4x Multi Sampling", "8x Multi Sampling" };
+        private static readonly List<string> resolutionOptions = new List<string>(Screen.resolutions.ToStringWithHZ());
 
         private static List<string> qualityOptions {
             get {
@@ -62,10 +62,7 @@ namespace TP.Framework.Unity
 
         /// <summary> Manually refreshes all UI settings values </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Refresh()
-        {
-            onRefreshSettings();
-        }
+        public static void Refresh() => onRefreshSettings();
 
         /// <summary> Adds listener to onValueChange that will change exposedParam in audioMixer to un-/mute </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -75,7 +72,9 @@ namespace TP.Framework.Unity
                 AudioSettings.IsMusicOn = value;
 
                 if (!AudioSettings.IsMusicOn) // cache float value before setting new value
+                {
                     AudioSettings.MusicMixerFloat = audioMixer.GetFloat(exposedParam);
+                }
 
                 audioMixer.SetFloat(exposedParam, AudioSettings.IsMusicOn ? AudioSettings.MusicMixerFloat : -80);
             });
@@ -90,7 +89,9 @@ namespace TP.Framework.Unity
                 AudioSettings.IsSfxOn = value;
 
                 if (!AudioSettings.IsSfxOn) // cache float value before setting new value
+                {
                     AudioSettings.SfxMixerFloat = audioMixer.GetFloat(exposedParam);
+                }
 
                 audioMixer.SetFloat(exposedParam, AudioSettings.IsSfxOn ? AudioSettings.SfxMixerFloat : -80);
             });
@@ -107,7 +108,9 @@ namespace TP.Framework.Unity
                 image.sprite = AudioSettings.IsMusicOn ? musicOn : musicOff;
 
                 if (!AudioSettings.IsMusicOn) // cache "old" float value before setting new value
+                {
                     AudioSettings.MusicMixerFloat = audioMixer.GetFloat(exposedParam);
+                }
 
                 audioMixer.SetFloat(exposedParam, AudioSettings.IsMusicOn ? AudioSettings.MusicMixerFloat : -80);
             });
@@ -123,7 +126,9 @@ namespace TP.Framework.Unity
                 image.sprite = AudioSettings.IsSfxOn ? sfxOn : sfxOff;
 
                 if (!AudioSettings.IsSfxOn) // cache "old" float value before setting new value
+                {
                     AudioSettings.SfxMixerFloat = audioMixer.GetFloat(exposedParam);
+                }
 
                 audioMixer.SetFloat(exposedParam, AudioSettings.IsSfxOn ? AudioSettings.SfxMixerFloat : -80);
             });
@@ -285,6 +290,26 @@ namespace TP.Framework.Unity
             onRefreshSettings();
         }
 
+        /// <summary> Adds listener to onValueChanged that will change Quality Level </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetQualityDropdown(TMP_Dropdown dropdown, int startIndex = 0)
+        {
+            AddDropdownOptions(dropdown, startIndex, qualityOptions);
+            dropdown.onValueChanged.AddListener((index) => {
+                SetQuality(index);
+                onRefreshSettings();
+            });
+
+            onCustomQualitySet = () => {
+                TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData(customQuality.CustomOption.text, customQuality.CustomOption.image);
+                dropdown.options.Add(data);
+                dropdown.value = customQuality.CustomQualityIndex;
+                dropdown.options.Remove(data);
+            };
+
+            onRefreshSettings();
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetDropdown(Dropdown dropdown, UnityAction<int> onValueChanged, Action onRefresh, List<string> options = null, int startIndex = 0)
         {
@@ -304,19 +329,16 @@ namespace TP.Framework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static QualityLevelModel GetCurrentQualityLevel()
-        {
-            return new QualityLevelModel() {
-                MasterTextureLimit = QualitySettings.masterTextureLimit,
-                ShadowQuality = QualitySettings.shadows,
-                ShadowResolution = QualitySettings.shadowResolution,
-                AnisotropicFiltering = QualitySettings.anisotropicFiltering,
-                Antialiasing = QualitySettings.antiAliasing,
-                Resolution = Screen.currentResolution,
-                VSync = QualitySettings.vSyncCount.ToBool(),
-                FullScreen = Screen.fullScreen
-            };
-        }
+        public static QualityLevelModel GetCurrentQualityLevel() => new QualityLevelModel() {
+            MasterTextureLimit = QualitySettings.masterTextureLimit,
+            ShadowQuality = QualitySettings.shadows,
+            ShadowResolution = QualitySettings.shadowResolution,
+            AnisotropicFiltering = QualitySettings.anisotropicFiltering,
+            Antialiasing = QualitySettings.antiAliasing,
+            Resolution = Screen.currentResolution,
+            VSync = QualitySettings.vSyncCount.ToBool(),
+            FullScreen = Screen.fullScreen
+        };
 
         /// <summary> Change Quality Level and refresh affected settings </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -346,57 +368,42 @@ namespace TP.Framework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetFullScreen(bool boolean)
-        {
-            Screen.fullScreen = boolean;
-        }
+        public static void SetFullScreen(bool boolean) => Screen.fullScreen = boolean;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetVSync(bool boolean)
-        {
-            QualitySettings.vSyncCount = boolean.ToInt();
-        }
+        public static void SetVSync(bool boolean) => QualitySettings.vSyncCount = boolean.ToInt();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAnisotropic(bool value)
-        {
-            QualitySettings.anisotropicFiltering = (AnisotropicFiltering)(value ? 2 : 0);
-        }
+        public static void SetAnisotropic(bool value) => QualitySettings.anisotropicFiltering = (AnisotropicFiltering)(value ? 2 : 0);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetTexture(int index)
-        {
-            QualitySettings.masterTextureLimit = index;
-        }
+        public static void SetTexture(int index) => QualitySettings.masterTextureLimit = index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetShadowQuality(int index)
-        {
-            QualitySettings.shadows = (ShadowQuality)index;
-        }
+        public static void SetShadowQuality(int index) => QualitySettings.shadows = (ShadowQuality)index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetShadowResolution(int index)
-        {
-            QualitySettings.shadowResolution = (ShadowResolution)index;
-        }
+        public static void SetShadowResolution(int index) => QualitySettings.shadowResolution = (ShadowResolution)index;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetAntialiasing(int index)
-        {
+        public static void SetAntialiasing(int index) =>
             // antiAliasing is 0, 2, 4, 8
             //        index is 0, 1, 2, 3
             QualitySettings.antiAliasing = index > 0 ? 1 << index : 0;
-        }
 
         /// <summary> Change to Custom Quality Level, changes Qualit yDropdown value and saves other setting values </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void SetToCustomLevel(int unusedParam)
         {
             if (customQuality.CustomQualityIndex < 0)
+            {
                 throw new Exception("No 'Custom' quality level found. Create one in Edit -> Project Settings -> Quality -> Add Quality Level");
+            }
+
             if (QualitySettings.GetQualityLevel() == customQuality.CustomQualityIndex)
+            {
                 return;
+            }
 
             QualityLevelModel savedLevel = GetCurrentQualityLevel();
             QualitySettings.SetQualityLevel(customQuality.CustomQualityIndex, true);
