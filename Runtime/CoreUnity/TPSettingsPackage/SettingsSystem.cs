@@ -8,8 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace TP.Framework.Unity
@@ -173,16 +175,26 @@ namespace TP.Framework.Unity
             toggle.isOn = startValue;
         }
 
-        /// <summary> Adds listener to onValueChanged that will change Screen Resolution  </summary>
+        /// <summary> Adds listener to onValueChanged that will change Screen Resolution </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetResolutionDropdown(TMP_Dropdown dropdown, int startIndex = 0, List<string> options = null)
+        {
+            AddDropdownOptions(dropdown, startIndex, options ?? resolutionOptions);
+            dropdown.onValueChanged.AddListener(GetResolutionDropdownCall(options));
+        }
+
+        /// <summary> Adds listener to onValueChanged that will change Screen Resolution </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetResolutionDropdown(Dropdown dropdown, int startIndex = 0, List<string> options = null)
         {
             AddDropdownOptions(dropdown, startIndex, options ?? resolutionOptions);
-            dropdown.onValueChanged.AddListener((index) => {
-                Resolution resolution = options != null ? options[index].ToResolution() : Screen.resolutions[index];
-                Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-            });
+            dropdown.onValueChanged.AddListener(GetResolutionDropdownCall(options));
         }
+
+        private static UnityEngine.Events.UnityAction<int> GetResolutionDropdownCall(List<string> options = null) => (index) => {
+            Resolution resolution = options != null ? options[index].ToResolution() : Screen.resolutions[index];
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        };
 
         /// <summary> Adds listener to onValueChanged that will change masterTextureLimit (sets quality to 'Custom') </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -192,6 +204,14 @@ namespace TP.Framework.Unity
             dropdown.onValueChanged.AddListener(SetToCustomLevel);
             dropdown.onValueChanged.AddListener(SetTexture);
             onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.masterTextureLimit);
+        }
+
+        /// <summary> Adds listener to onValueChanged that will change masterTextureLimit (sets quality to 'Custom') </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetTextureDropdown(TMP_Dropdown dropdown, int startIndex = 0, List<string> options = null)
+        {
+            void onRefresh() => dropdown.value = QualitySettings.masterTextureLimit;
+            SetDropdown(dropdown, SetTexture, onRefresh, options ?? textureOptions, startIndex);
         }
 
         /// <summary> Adds listener to onValueChanged that will change Shadow Quality (sets quality to 'Custom') </summary>
@@ -204,6 +224,14 @@ namespace TP.Framework.Unity
             onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadows);
         }
 
+        /// <summary> Adds listener to onValueChanged that will change Shadow Quality (sets quality to 'Custom') </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetShadowQualityDropdown(TMP_Dropdown dropdown, int startIndex = 0)
+        {
+            void onRefresh() => dropdown.value = (int)QualitySettings.shadows;
+            SetDropdown(dropdown, SetShadowQuality, onRefresh, shadowQualityOptions, startIndex);
+        }
+
         /// <summary> Adds listener to onValueChanged that will change Shadow Resolution (sets quality to 'Custom') </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetShadowResolutionDropdown(Dropdown dropdown, int startIndex = 0)
@@ -214,14 +242,28 @@ namespace TP.Framework.Unity
             onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = (int)QualitySettings.shadowResolution);
         }
 
+        /// <summary> Adds listener to onValueChanged that will change Shadow Resolution (sets quality to 'Custom') </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetShadowResolutionDropdown(TMP_Dropdown dropdown, int startIndex = 0)
+        {
+            void onRefresh() => dropdown.value = (int)QualitySettings.shadowResolution;
+            SetDropdown(dropdown, SetShadowResolution, onRefresh, shadowResolutionOptions, startIndex);
+        }
+
         /// <summary> Adds listener to onValueChanged that will change AntiAliasing (sets quality to 'Custom') </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetAntialiasingDropdown(Dropdown dropdown, int startIndex = 0)
         {
-            AddDropdownOptions(dropdown, startIndex, antialiasingOptions);
-            dropdown.onValueChanged.AddListener(SetToCustomLevel);
-            dropdown.onValueChanged.AddListener(SetAntialiasing);
-            onRefreshSettings += () => DropdownRefresher(dropdown, () => dropdown.value = QualitySettings.antiAliasing == 8 ? 3 : QualitySettings.antiAliasing >> 1);
+            void onRefresh() => dropdown.value = QualitySettings.antiAliasing == 8 ? 3 : QualitySettings.antiAliasing >> 1;
+            SetDropdown(dropdown, SetAntialiasing, onRefresh, antialiasingOptions, startIndex);
+        }
+
+        /// <summary> Adds listener to onValueChanged that will change AntiAliasing (sets quality to 'Custom') </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetAntialiasingDropdown(TMP_Dropdown dropdown, int startIndex = 0)
+        {
+            void onRefresh() => dropdown.value = QualitySettings.antiAliasing == 8 ? 3 : QualitySettings.antiAliasing >> 1;
+            SetDropdown(dropdown, SetAntialiasing, onRefresh, antialiasingOptions, startIndex);
         }
 
         /// <summary> Adds listener to onValueChanged that will change Quality Level </summary>
@@ -241,6 +283,24 @@ namespace TP.Framework.Unity
             };
 
             onRefreshSettings();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetDropdown(Dropdown dropdown, UnityAction<int> onValueChanged, Action onRefresh, List<string> options = null, int startIndex = 0)
+        {
+            AddDropdownOptions(dropdown, startIndex, options);
+            dropdown.onValueChanged.AddListener(SetToCustomLevel);
+            dropdown.onValueChanged.AddListener(onValueChanged);
+            onRefreshSettings += () => DropdownRefresher(dropdown, onRefresh);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetDropdown(TMP_Dropdown dropdown, UnityAction<int> onValueChanged, Action onRefresh, List<string> options = null, int startIndex = 0)
+        {
+            AddDropdownOptions(dropdown, startIndex, options);
+            dropdown.onValueChanged.AddListener(SetToCustomLevel);
+            dropdown.onValueChanged.AddListener(onValueChanged);
+            onRefreshSettings += () => DropdownRefresher(dropdown, onRefresh);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -354,7 +414,24 @@ namespace TP.Framework.Unity
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void AddDropdownOptions(TMP_Dropdown dropdown, int startIndex, List<string> options)
+        {
+            dropdown.ClearOptions();
+            dropdown.AddOptions(options);
+            dropdown.value = startIndex;
+            dropdown.RefreshShownValue();
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void DropdownRefresher(Dropdown dropdown, Action action)
+        {
+            dropdown.onValueChanged.RemoveListener(SetToCustomLevel);
+            action();
+            dropdown.onValueChanged.AddListener(SetToCustomLevel);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void DropdownRefresher(TMP_Dropdown dropdown, Action action)
         {
             dropdown.onValueChanged.RemoveListener(SetToCustomLevel);
             action();
