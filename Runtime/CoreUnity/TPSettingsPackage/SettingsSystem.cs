@@ -45,9 +45,7 @@ namespace TP.Framework.Unity
 
         private static List<string> qualityOptions {
             get {
-                List<string> list = QualitySettings.names.ToList();
-                list.Remove("Custom");
-                return list;
+                return QualitySettings.names.ToList();
             }
         }
 
@@ -282,9 +280,7 @@ namespace TP.Framework.Unity
             });
 
             onCustomQualitySet = () => {
-                dropdown.options.Add(customQuality.CustomOption);
                 dropdown.value = customQuality.CustomQualityIndex;
-                dropdown.options.Remove(customQuality.CustomOption);
             };
 
             onRefreshSettings();
@@ -301,10 +297,7 @@ namespace TP.Framework.Unity
             });
 
             onCustomQualitySet = () => {
-                TMP_Dropdown.OptionData data = new TMP_Dropdown.OptionData(customQuality.CustomOption.text, customQuality.CustomOption.image);
-                dropdown.options.Add(data);
                 dropdown.value = customQuality.CustomQualityIndex;
-                dropdown.options.Remove(data);
             };
 
             onRefreshSettings();
